@@ -1,0 +1,3 @@
+exec(open('.agf/tmp/rt/intents.py').read().split("I={}")[0])
+set_field(47,'intent',"BREATHER with the Wildcard, trimmed to one decision per ball (no stances): three of the Crew are bowlers who can't bat (Rabada, Naveen, Naseem Shaah), Naib and Hoppe are ordinary — and the trap is Buttler (Runs 3532, SR 147, Catches 86), who out-bats your whole hand. Aha: count Buttler out before you call batting stats, and use the Wildcard as a boundary-maker: swap de Villyers' Catches 65 or Phillips' Runs 1929 onto the card you call with so a second card clears the rope (the swap MOVES the number). Hasaan Ali's 73 wickets beat all six. 3 stars: win by 6+ with two boundaries.")
+open(p,'w').write(s); print('ok')

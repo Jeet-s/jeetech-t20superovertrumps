@@ -1,0 +1,23 @@
+UNIT L48 (playtest: casual 0.713, skilled 0.96, careless 0.467)
+CH5 TEACH · RIVAL Midnight Mist Parade (baiter AI, skill 0.80) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): BLUFFS in the fog: Aggressive on a weak number (bottom 60%), quiet (Normal) on a strong one
+RULES: plain T20 (no weights) · stances · BLUFF LEAD: the baiter's FIRST call of each over (its line) is its weakest card on that card's WEAKEST stat, swiped AGGRESSIVE (a pure bluff; the tracker under its card counts bluffs / loud calls) · FOG: rival's called card face-down · level totals after 6 balls → 3-ball Super Over · squad fixed
+OVER 1 [T20I]
+  RIVAL Matheesha Pathirane R6 A2.00 SR40.00 W24 E8.90 C3
+  RIVAL Sachinn Tendulkaar R10 A10.00 SR83.33 W1 E8.00 C1
+  RIVAL Rohith Sharma R4231 A32.05 SR140.89 W1 E9.26 C65
+  RIVAL Suryakumaar Yadav R2598 A38.20 SR167.07 W2 E6.25 C40
+  RIVAL Shakiib Al Hasan R2551 A23.19 SR121.19 W149 E6.81 C27
+  RIVAL Davvid Miller R2591 A33.21 SR140.66 W0 E— C82
+  YOU   Shubmaan Gill R578 A30.42 SR139.27 W0 E— C9
+  YOU   Ricki Ponting R401 A28.64 SR132.78 W0 E— C8
+  YOU   Shai Hoppe R1150 A28.75 SR129.50 W0 E— C18
+  YOU   Ravindre Jadeja R515 A21.45 SR127.16 W54 E7.13 C28
+  YOU   Shadaab Khan R735 A17.09 SR137.00 W112 E7.30 C45
+  YOU   Mutti-ah Muraali-tharan R1 A1.00 SR50.00 W13 E6.88 C1
+COACH (on-screen hint): New rival type: BLUFFERS. Watch the tracker under their card: how did their loud calls turn out?
+STARS: 1 win · 2 win by 6+ · 3 also win 4+ balls
+REWARD: 328 coins, 116 XP, Gully Pack · 3rd star: their star card Davvid Miller for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 26-10 and 12/12 re-deals; mid-skill bot wins 70%
+MECHANICS: bluffing rival, fog of war, bluff tracker
+CURRENT INTENT (may be STALE — written for an older deck): SPIKE fog + Mega Pot: dead heats stack (2 runs each, up to 8) and carry. Three of theirs never bowl (Gill, Klaassen, Gurbaz) and three of yours never bowl (Nissaanka, Zadran, Rizwaan) — once Adiil Rashid, Nabi and Muraali are spent, your non-bowler's Wickets call is a sure tie and the pot grows. Aha (a fair fog read): a fogged Wickets/Economy call can only be one of their three bowlers — Santner's 120 wickets beat Nabi and Muraali (not Rashid's 126) — and a fogged batting call is a keeper/opener, which Rizwaan's Runs 3414 / Average 47.4 beat. 3 stars: bank a pot.

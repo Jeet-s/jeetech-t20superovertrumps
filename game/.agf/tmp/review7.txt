@@ -1,0 +1,108 @@
+PASS level_intents: all 60 levels have a specific intent
+PASS no_filler_levels: no trivial filler levels after the tutorial
+FAIL level_design: level-design review 7.3/10 (bar 8), 0 level(s) below 6/10: This is a strong, unusually well-engineered puzzle ladder. Each unit has a stated "aha", a hand built to prove it, and a bot-validated win-rate spread (casual vs skilled) that shows real skill expression. Introducing one mechanic at a time, then combining, is mostly well done. The standout units are L34 (captain on the card that is "just short"), L36/L49 (blank format lines), L38/L39 (format flips), the L57 "unlearn the T20 chase" and the L9/L18 bluff reads.
+
+The set falls short of the EA FC Mobile / Top Eleven standard in six ways.
+1. Roughly 15 units are repeats in disguise. They are "locked Strike Rate double" (L11, L15, L17, L55), "sure ball plus a power card" (L22, L23, L27, L47) and "cautious or sandbag rival" (L16 vs L18). Their aha is solved on sight, so there is no real decision.
+2. Two breathers (L37, L47) are not breathers. L37 asks for 5 boundaries in 6 balls, and L47 sits on a 351-branch decision space.
+3. Several teach units are harsh for a first exposure. L24 loses 3 of 12 competent-bot re-deals, and L33, L41 and L43 sit at 63-69% casual or mid-skill win rates. The pre-validated "teach" promise is broken.
+4. The late game (L48-L60) drops to 54-58% mid-skill win rates while stacking 4-6 rules at once (fog + wildcard + mega pot + captain + powerplay + review). Difficulty comes from rule noise and fog-guessing rather than new decisions. That hurts a 2-minute casual audience.
+5. Retention rests almost entirely on a fixed-hand puzzle campaign. The 480-card collection, albums, form tiers and deck builder barely touch ladder play, because fixture squads are the "proven default" and only 2 swaps are allowed. Once a unit is solved it has no replay value beyond stars. "Trap rate" is unmeasured ("?") on 55 of 60 units, so uniqueness of the solution cannot be verified.
+6. The mid-game rule ramp is heavy. Plain T20 → weighted T20 → ODI → Test → captain lands in CH4 with three consecutive teaches. A bigger rule is also hidden: "plain T20 (no weights)" in CH1-3 versus "weights ON" later changes what the same stat is worth.
+
+Smaller issues:
+- The coin curve is erratic (L7 97, L8 148, L9 114, L10 200).
+- Rival AI skill is non-monotone (L60 final 0.88 < L59 0.94 and L58 0.92).
+- The L60 final omits Free Hit and Powerplay.
+- L59 claims a rival Review that the rules line does not list.
+- The L35 and L51 intent texts contain factual contradictions (details in those entries). Curve: Structure: 6 chapters of 10 nodes. Each has a TEACH opener, PRACTISE/COMBINE/TWIST middle, a SPIKE and a BOSS finale, with breathers near L7/L17/L27/L37/L47/L55. This is a clean, readable rhythm.
+
+Mechanic order:
+- CH1: stat pick, bands, answering, tie pot, counting, Super Over. Solid, with the Super Over taught alone at L5.
+- CH2: Aggressive (L11), Safe (L13), chase (L19), sandbag (L18). Fine.
+- CH3: Free Hit (L21), Review (L24), Powerplay (L27), then triple stacks (L29/L30). Each is taught alone first, so this is good.
+- CH4: format weights (L31-L33) and captain (L34-L35). Three format teaches in a row is a big ramp, and "weights" quietly changes the maths of the first 30 levels.
+- CH5: fog, wildcard, mega pot, which stack from L46 on. L45 (mega pot) and L48 (fog + mega pot) add rules whose payoff is rare because dead-heats only occur between non-bowlers or blank lines.
+- CH6: mixes, then three hard chases (L56-L58), a semi (L59) and a final (L60).
+
+Difficulty:
+- Casual win rate falls from ~89% to ~55%, and mid-skill bot win rate from ~91% to 54-58%.
+- Good: the casual-to-skilled gap widens (L60 54% vs 94%), so skill is visible.
+- Bad: CH5-6 for casuals is near coin-flip. Combined with no stated retry, energy or hint plan, it risks a wall at roughly L45+.
+- The L10 boss (79% casual) is easier than L8 (76%) and uses an untaught two-over rule.
+- The spikes (L8, L18, L28, ...) are well placed and pay more, but the reward curve is not smooth.
+
+Retention gaps:
+- Ladder hands are fixed, so collecting, form tiers and deck building are almost irrelevant to the 60-node path, which is solvable by lookup.
+- 3rd-star rewards give the rival star card (one of ~60 cards) plus cosmetics only.
+- The ladder needs a reason to replay: scaled rematches ("Elite" versions with swapped hands and your own deck allowed), a limited optimization/par-score star, and rival-captain card upgrades.
+- Daily Chase, Weekly Format Cup and Season Track are listed but unspecified here, so they must carry long-term retention.
+- The reuse of ~100 cards across 60 rivals will feel familiar by CH4; rotate the pool by country/era per chapter.
+- The finale should fully mirror the L30/L40 pattern (all power cards, a rival Powerplay) and have the highest AI skill.
+REDESIGN THESE LEVELS (keep the ones not listed):
+L7 (6/10): Effectively L1 again: soft cards, margin bands, win easily. The 4-boundary star is the only spice and is largely luck of the hand. → Add a distinct micro-puzzle: 4 boundaries are only reachable if the miser is saved for ball 5 (Economy call), so there's a sequencing decision.
+L10 (6/10): Introduces the two-over aggregate for the first time inside a boss with no teach, and is easier (79% casual) than L8/L9. Not a mastery test; 12 balls also breaks the 2-minute promise. → Teach two-over aggregate in a prior short unit (L9 or a new one), and make the boss test counting plus the L5 Super Over tiebreak with a level 12-ball finish.
+L15 (6/10): Dominant strategy: all four of your hitters beat their entire hand on SR. It is L11 again with weaker payoffs (they Safe) and no decision. → Let one hitter (e.g. Mitchell 138.3) lose to Shadaab 137.0 only if Hasaranga is spent, creating a count-dependent swipe.
+L16 (6/10): Same idea as L18 (cheap answers to Safe calls, save aces); bot wins 29-6 so hardly any tension. → Merge the cautious-rival concept into L18 and use L16 for something new (e.g. introduce the rival who switches from Safe to Aggressive on ball 5).
+L17 (6/10): Third 'locked double' unit (L11, L15, L17); 38-0 bot score. Nothing to decide. → Make the 14-run margin require sequencing: only one sure SR double per hitter, with the miser's Economy double available only after a rival miser is spent.
+L22 (6/10): The aha is the obvious stack and should have been L21's lesson; bot margin 36-26 with 71% casual means players just guess the ball. → Fold into L21, and use this slot to test choosing between Free Hit on a six-band ball vs saving it for a risky second call.
+L24 (6/10): Competent bot fails 3/12 re-deals (9/12), unacceptable for a teach unit; the 'save for boundary loss' lesson isn't guaranteed to be demonstrated. → Rebuild the fixed squad so a Review ball arises on any line of play (an unavoidable 4-run loss on ball 2) and raise re-deal success to 12/12.
+L25 (6/10): Competent bot only 14-9 and 9/12 re-deals; 69% casual. Review timing is heavily luck of the deal because rival aggression depends on AI draw. → Fix the gambler's order of aggressive calls in a seeded script, give your hand one more mid-card, and demand 12/12 re-deals.
+L27 (6/10): Powerplay's double-edged nature (doubles their ball too) is never felt; 96% mid-skill means a teach with no risk. → Put one rival threat on the next call so a careless Powerplay costs 6+ runs, then break out the safe path.
+L31 (6/10): Opens CH4 with a gambler AI teaching a major rule change; 'plain T20' in CH1-3 vs 'weights on' later is unexplained, and 71% casual win is harsh for a teach. → Use a balanced AI, add a Rules chip explaining x1.5, and relabel earlier units as 'basic' to make the shift intentional.
+L37 (6/10): Not a breather: five boundaries in six balls is a demanding star, and a Kallis trap plus captain maths adds complexity. → Lower the 3rd star to 3 boundaries, keep the captain-for-band idea, and cut the trap to a single visible one.
+L46 (6/10): Stacks two rules without a new insight; 59% casual and 363 choices make it noise rather than depth. → Make the aha concrete: the fog hides a rival with a decisive stat, and the wildcard fix turns a coin-flip into a sure answer.
+L47 (6/10): 351-branch decision space on a 'breather'; stars (2 boundaries + 10 run win) are trivial so the wildcard is unnecessary. → Make the 3rd star require a wildcard-created boundary so the new toy is the spectacle.
+L51 (6/10): Intent is factually off: 'one of their three ODI batters' ignores Omarzai (38.5) and Shakib (37.3) who also have high Average, and De Kock/Sharma beat all six anyway. Reads as a vanilla ODI unit. → Correct the hand: three clear batters vs three bowlers so Average = batter and Wickets = bowler, and make the answer non-trivial.
+L55 (6/10): Another locked-double breather (cf. L17); 91% mid-skill and Review rarely needed. → Use the breather for spectacle: a rival with one ace that makes the captain boost choice matter and the Review a real option.
+L1 (7/10): Pure win-more: bot wins 28-0, every batting stat wins, so the only 'decision' is picking the widest gap. Fine as a tutorial but no tension. → Keep one planted trap: one rival tail-ender with a surprisingly high Runs figure (e.g. Starc R99 vs your Runs) so a careless Runs call loses, proving 'pick the widest gap'.
+L2 (7/10): The cheapest-winner lesson is clear, but a 19-3 bot score means nearly any answer works; no real cost for misplaying. → Make one rival call a stat only your 'expensive' card can answer, so over-spending early visibly costs ball 5/6.
+L4 (7/10): Intent describes 'two mid hitters' but your hand has Marsh 133.8, Livingstone 145.4 and Shaanaka 123.1 (three), and Shaanaka loses to everyone; the counting story is muddy. → Rework the hand to exactly two big hitters, two mid hitters, two non-hitters, and mention which loses to whom on the coach banner.
+L6 (7/10): Overlaps L3 (tie pot) and L2 (answering); 'lose small' is the same lesson as L8/L9 a few nodes later. → Make the pot decisive: the over is level except for the pot, forcing the player to engineer the tie rather than merely discover it.
+L11 (7/10): Strike Rate is a locked double, so the only choice is 'swipe up'; the wicket-limit risk is never felt. → Give the rival one hitter at SR 125+ so one call is genuinely unsafe and the player must read the coach banner.
+L12 (7/10): Intent says exactly two 30+ Average anchors per family, but Inglys (30.16), Kohli and Amla make three. Counting rule is stated incorrectly. → Lower Inglys's Average family or change the intent to 'three 30+', and re-run the proof.
+L13 (7/10): Safe is introduced two units after Aggressive, so it feels like a footnote; the lesson depends on knowing exactly how Normal differs. → Show a side-by-side 'Normal / Safe / Aggressive' payoff preview on the shaky call, and teach Safe before or with Aggressive.
+L21 (7/10): Free Hit is a free win with no cost; the 'where to spend it' decision is real, but the 36-22 bot score shows low stakes. → Include a rival with a trap card (a mid hitter that beats your riskiest call), so the player must identify the one true risky ball.
+L23 (7/10): Same decision as L22 with a wicket twist; trap rate 0 so the optimal line is easy; 70% casual is a bit harsh for a practise unit. → Rival gambler swipes up on every card that beats a threshold; make the insurance ball visible in the deck preview.
+L28 (7/10): Competent bot wins 25-0, meaning the rival's Powerplay doesn't bite against competent play; the spike is only felt by casuals (65%). → Rebalance the hand so the rival Powerplay threatens a swing even against the competent bot (target 18-12 scoreline).
+
+level-design score 7.3/10 — This is a strong, unusually well-engineered puzzle ladder. Each unit has a stated "aha", a hand built to prove it, and a bot-validated win-rate spread (casual vs skilled) that shows real skill expression. Introducing one mechanic at a time, then combining, is mostly well done. The standout units are L34 (captain on the card that is "just short"), L36/L49 (blank format lines), L38/L39 (format flips), the L57 "unlearn the T20 chase" and the L9/L18 bluff reads.
+
+The set falls short of the EA FC Mobile / Top Eleven standard in six ways.
+1. Roughly 15 units are repeats in disguise. They are "locked Strike Rate double" (L11, L15, L17, L55), "sure ball plus a power card" (L22, L23, L27, L47) and "cautious or sandbag rival" (L16 vs L18). Their aha is solved on sight, so there is no real decision.
+2. Two breathers (L37, L47) are not breathers. L37 asks for 5 boundaries in 6 balls, and L47 sits on a 351-branch decision space.
+3. Several teach units are harsh for a first exposure. L24 loses 3 of 12 competent-bot re-deals, and L33, L41 and L43 sit at 63-69% casual or mid-skill win rates. The pre-validated "teach" promise is broken.
+4. The late game (L48-L60) drops to 54-58% mid-skill win rates while stacking 4-6 rules at once (fog + wildcard + mega pot + captain + powerplay + review). Difficulty comes from rule noise and fog-guessing rather than new decisions. That hurts a 2-minute casual audience.
+5. Retention rests almost entirely on a fixed-hand puzzle campaign. The 480-card collection, albums, form tiers and deck builder barely touch ladder play, because fixture squads are the "proven default" and only 2 swaps are allowed. Once a unit is solved it has no replay value beyond stars. "Trap rate" is unmeasured ("?") on 55 of 60 units, so uniqueness of the solution cannot be verified.
+6. The mid-game rule ramp is heavy. Plain T20 → weighted T20 → ODI → Test → captain lands in CH4 with three consecutive teaches. A bigger rule is also hidden: "plain T20 (no weights)" in CH1-3 versus "weights ON" later changes what the same stat is worth.
+
+Smaller issues:
+- The coin curve is erratic (L7 97, L8 148, L9 114, L10 200).
+- Rival AI skill is non-monotone (L60 final 0.88 < L59 0.94 and L58 0.92).
+- The L60 final omits Free Hit and Powerplay.
+- L59 claims a rival Review that the rules line does not list.
+- The L35 and L51 intent texts contain factual contradictions (details in those entries).
+curve: Structure: 6 chapters of 10 nodes. Each has a TEACH opener, PRACTISE/COMBINE/TWIST middle, a SPIKE and a BOSS finale, with breathers near L7/L17/L27/L37/L47/L55. This is a clean, readable rhythm.
+
+Mechanic order:
+- CH1: stat pick, bands, answering, tie pot, counting, Super Over. Solid, with the Super Over taught alone at L5.
+- CH2: Aggressive (L11), Safe (L13), chase (L19), sandbag (L18). Fine.
+- CH3: Free Hit (L21), Review (L24), Powerplay (L27), then triple stacks (L29/L30). Each is taught alone first, so this is good.
+- CH4: format weights (L31-L33) and captain (L34-L35). Three format teaches in a row is a big ramp, and "weights" quietly changes the maths of the first 30 levels.
+- CH5: fog, wildcard, mega pot, which stack from L46 on. L45 (mega pot) and L48 (fog + mega pot) add rules whose payoff is rare because dead-heats only occur between non-bowlers or blank lines.
+- CH6: mixes, then three hard chases (L56-L58), a semi (L59) and a final (L60).
+
+Difficulty:
+- Casual win rate falls from ~89% to ~55%, and mid-skill bot win rate from ~91% to 54-58%.
+- Good: the casual-to-skilled gap widens (L60 54% vs 94%), so skill is visible.
+- Bad: CH5-6 for casuals is near coin-flip. Combined with no stated retry, energy or hint plan, it risks a wall at roughly L45+.
+- The L10 boss (79% casual) is easier than L8 (76%) and uses an untaught two-over rule.
+- The spikes (L8, L18, L28, ...) are well placed and pay more, but the reward curve is not smooth.
+
+Retention gaps:
+- Ladder hands are fixed, so collecting, form tiers and deck building are almost irrelevant to the 60-node path, which is solvable by lookup.
+- 3rd-star rewards give the rival star card (one of ~60 cards) plus cosmetics only.
+- The ladder needs a reason to replay: scaled rematches ("Elite" versions with swapped hands and your own deck allowed), a limited optimization/par-score star, and rival-captain card upgrades.
+- Daily Chase, Weekly Format Cup and Season Track are listed but unspecified here, so they must carry long-term retention.
+- The reuse of ~100 cards across 60 rivals will feel familiar by CH4; rotate the pool by country/era per chapter.
+- The finale should fully mirror the L30/L40 pattern (all power cards, a rival Powerplay) and have the highest AI skill.

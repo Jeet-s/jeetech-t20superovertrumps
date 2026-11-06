@@ -1,0 +1,30 @@
+/// <reference types="node" />
+/** Applies the factory's playtest pacing gates (lib/qa/static.ts playtestChecks) to .agf/playtest.json. */
+import { readFileSync } from "fs";
+const p = JSON.parse(readFileSync(".agf/playtest.json", "utf8")).personas as Record<string, number[]>;
+const c = p.casual, s = p.skilled, n = c.length;
+const mean = (a: number[]) => a.reduce((x, y) => x + y, 0) / Math.max(1, a.length);
+const third = Math.max(3, Math.floor(n / 3));
+const out: [string, boolean, string][] = [];
+out.push(["onboarding", c.slice(0, 3).every((v) => v >= 0.8), c.slice(0, 3).join(",")]);
+out.push(["late casual ≤65 ≥30", mean(c.slice(-third)) <= 0.65 && mean(c.slice(-third)) >= 0.3, mean(c.slice(-third)).toFixed(3)]);
+out.push(["late skilled 50-95", mean(s.slice(-third)) >= 0.5 && mean(s.slice(-third)) <= 0.95, mean(s.slice(-third)).toFixed(3)]);
+let run = 0, longest = 0;
+c.forEach((v, i) => { run = i >= 5 && v >= 0.9 ? run + 1 : 0; longest = Math.max(longest, run); });
+out.push(["boring run ≤2", longest <= 2, String(longest)]);
+const share = c.slice(5).filter((v) => v >= 0.9).length / (n - 5);
+out.push(["easy share ≤25%", share <= 0.25, share.toFixed(2)]);
+const mid = mean(c.slice(third, n - third));
+out.push(["mid 50-85", mid >= 0.5 && mid <= 0.85, mid.toFixed(3)]);
+const spikes = [];
+for (let i = 3; i < n; i++) if (mean(c.slice(i - 3, i)) - c[i] > 0.35) spikes.push(i + 1);
+out.push(["no spikes", spikes.length === 0, spikes.join(",")]);
+const rank = (a: number[]) => { const o = a.map((v, i) => [v, i] as const).sort((x, y) => x[0] - y[0]); const r = Array(a.length); o.forEach(([, i], k) => (r[i] = k)); return r as number[]; };
+const rx = rank(c.map((_, i) => i)), ry = rank(c);
+const rho = 1 - (6 * rx.reduce((acc, v, i) => acc + (v - ry[i]) ** 2, 0)) / (n * (n * n - 1));
+out.push(["rho ≤ -0.5", rho <= -0.5, rho.toFixed(2)]);
+const walls = c.map((v, i) => (v < 0.1 && s[i] < 0.6 ? i + 1 : 0)).filter(Boolean);
+out.push(["no walls", walls.length === 0, walls.join(",")]);
+for (const [k, ok, v] of out) console.log(`${ok ? "PASS" : "FAIL"} ${k}: ${v}`);
+console.log(c.map((v, i) => `${i + 1}:${Math.round(v * 100)}/${Math.round(s[i] * 100)}`).join(" "));
+process.exit(out.every((x) => x[1]) ? 0 : 1);

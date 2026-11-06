@@ -1,0 +1,23 @@
+UNIT L45 (playtest: casual 0.633, skilled 0.933, careless 0.347)
+CH5 TEACH · RIVAL Jackpot Jugglers (balanced AI, skill 0.80) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive only on an ace number (top 15% of the game for that stat), Safe on a weak one (bottom 35%), else Normal
+RULES: plain T20 (no weights) · stances · MEGA POT: dead-heat balls stack 2 runs each, up to 8, and carry across overs · level totals after 6 balls → 3-ball Super Over · squad fixed
+OVER 1 [T20I]
+  RIVAL Devoon Conway R1408 A38.05 SR127.76 W0 E— C32
+  RIVAL Brendan MacCalum R2140 A35.66 SR136.21 W0 E— C36
+  RIVAL Aadam Gilkrist R272 A22.66 SR141.66 W0 E— C17
+  RIVAL Branndon King R1918 A29.06 SR131.10 W0 E— C20
+  RIVAL MS Dhonni R1617 A37.60 SR126.13 W0 E— C57
+  RIVAL Naveen Ul Haaq R80 A8.00 SR95.24 W67 E7.40 C10
+  YOU   Babbar Azam R4223 A39.83 SR129.22 W0 E— C45
+  YOU   Kusal Menddis R2047 A29.66 SR133.00 W0 E— C30
+  YOU   Towhidd Hridoy R750 A26.00 SR120.00 W0 E— C15
+  YOU   Tamiim Iqbal R1758 A24.08 SR116.96 W0 E— C18
+  YOU   Ibrahiim Zadran R1130 A29.00 SR112.40 W0 E— C12
+  YOU   Fazalhaqq Farooqi R30 A5.00 SR75.00 W66 E6.90 C8
+COACH (on-screen hint): Ties now STACK. Once their one bowler is spent, your non-bowler's Wickets call can only tie.
+STARS: 1 win · 2 win by 8+ · 3 also collect a pot of 4+ runs
+REWARD: 310 coins, 110 XP, Gully Pack · 3rd star: their star card Devoon Conway for your album, unlocks confetti boundary burst
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 24-18 and 11/12 re-deals; mid-skill bot wins 68%
+MECHANICS: mega pot, tie pot
+CURRENT INTENT (may be STALE — written for an older deck): TEACH Mega Pot: dead heats now STACK (2 runs each, up to a 4-ball, 8-run Mega Pot). Five of each side's six never bowl and each side holds ONE bowler. Aha: once their bowler is spent, your Wickets call with a non-bowler can only tie — build the pot on purpose, then cash it with the batting ace you saved (3 stars: collect a pot of 4+).

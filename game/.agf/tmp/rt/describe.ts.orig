@@ -1,0 +1,82 @@
+/** describe(): a ladder duel as a lead designer reads it (npm run levels → the content review). */
+import { FORMAT_LABEL, formatStat, player, rarity, STATS, type Format, type StatKey } from "./cards";
+import { swapsAllowed, type Unit } from "./content";
+import type { Goal } from "./duel";
+import type { LevelBrief } from "./sim";
+import { PACK_NAME, unitReward } from "./economy";
+import PROOF from "./proof.json";
+
+const SHORT: Record<StatKey, string> = { runs: "R", avg: "A", sr: "SR", wk: "W", econ: "E", ct: "C" };
+
+function cardLine(id: string, fmts: Format[]): string {
+  const p = player(id);
+  const parts = fmts.map((f) => (fmts.length > 1 ? `${FORMAT_LABEL[f]} ` : "") + STATS.map((k) => `${SHORT[k]}${formatStat(id, f, k)}`).join(" "));
+  return `${p.name} (${p.country} ${p.style}, ${rarity(id)}) ${parts.join(" | ")}`;
+}
+
+export function goalText(g: Goal): string {
+  switch (g.kind) {
+    case "margin": return `win by ${g.runs}+`;
+    case "marginNoWickets": return `win by ${g.runs}+ with no wickets lost`;
+    case "noWickets": return "no wickets lost";
+    case "aggWins": return `${g.n}+ aggressive wins`;
+    case "boundaries": return `${g.n}+ boundaries (4s/6s)`;
+    case "runs": return `${g.n}+ runs`;
+    case "ballsWon": return `win ${g.n}+ balls`;
+    case "pot": return `collect a pot of ${g.n}+ runs`;
+  }
+}
+
+export function rulesText(u: Unit): string {
+  const r = u.rules;
+  const out: string[] = [];
+  out.push(r.weighted ? "format weights ON" : "plain T20 (no weights)");
+  if (r.stances) out.push("stances: Aggressive (win x2 / loss +2 & wicket) · Safe (win cap 2 / loss 1)");
+  if (r.freeHit) out.push(`Free Hit x${r.freeHit}`);
+  if (r.review) out.push(`Review x${r.review}`);
+  if (r.powerplay) out.push(`Powerplay x${r.powerplay} (2 balls doubled)`);
+  if (r.rivalPowerplay) out.push("RIVAL has a Powerplay");
+  if (r.wildcard) out.push(`Wildcard x${r.wildcard}/over`);
+  if (r.captain) out.push("captains (+15% signature stat)");
+  if (r.fog) out.push("FOG: rival's called card face-down");
+  out.push(r.carryPot ? "MEGA POT: dead-heat balls stack 2 runs each, up to 8, and carry across overs" : "dead-heat ball → 2-run pot for the next ball's winner");
+  if (r.target != null) out.push(`CHASE ${r.target} runs (rival runs don't count)`);
+  if (r.maxWickets != null) out.push(`all out at ${r.maxWickets} wickets`);
+  if (r.startTied != null) out.push(`STARTS IN THE SUPER OVER: the 6-ball over is done, level ${r.startTied}-${r.startTied}; 3 balls, full hand back, you call 1 and 3; a level Super Over goes to more Super Over balls won`);
+  else if (r.target == null) out.push(r.mode === "bestOf" ? `best of ${u.decks.length} overs, a level over → Super Over` : u.decks.length > 1 ? `${u.decks.length} overs on aggregate, level totals → 3-ball Super Over` : "level totals after 6 balls → 3-ball Super Over");
+  return out.join(" · ");
+}
+
+export function describeUnit(u: Unit): LevelBrief {
+  const rows: string[] = [];
+  const calls = u.rules.startTied != null ? "Super Over only: you call balls 1 and 3 · rival calls 2" : u.rules.firstCaller === "you" ? "you call balls 1,3,5 · rival calls 2,4,6" : "rival calls balls 1,3,5 · you call 2,4,6";
+  rows.push(`CH${u.chapter} ${u.role.toUpperCase()} · RIVAL ${u.team} (${u.personality} AI, skill ${u.skillUsed.toFixed(2)}) · ${calls}`);
+  const sw = swapsAllowed(u);
+  rows.push(`RULES: ${rulesText(u)}` + (sw ? ` · fixture squad: swap up to ${sw} of YOUR cards for cards from your own deck (proof uses the squad shown)` : " · fixture squad fixed (teach unit)"));
+  u.decks.forEach((o, i) => {
+    const f = o.format ?? "T20";
+    const fmts: Format[] = Array.isArray(f) ? [...new Set(f)] : [f];
+    const fl = Array.isArray(f) ? f.map((x) => FORMAT_LABEL[x]).join("-") : FORMAT_LABEL[f];
+    rows.push(`OVER ${i + 1} [${fl}]`);
+    o.rival.forEach((c) => rows.push(`  RIVAL ${cardLine(c, fmts)}`));
+    o.you.forEach((c) => rows.push(`  YOU   ${cardLine(c, fmts)}`));
+  });
+  rows.push(`STARS: 1 win · 2 ${goalText(u.goals.two)} · 3 also ${goalText(u.goals.three)}`);
+  const rw = unitReward(u);
+  rows.push(`REWARD: ${rw.coins} coins, ${rw.xp} XP` + (rw.pack ? `, ${PACK_NAME[rw.pack]}` : "") + (rw.card ? `, the rival captain-card ${player(rw.card).name}` : "") + (rw.starCard ? ` · 3rd star: their star card ${player(rw.starCard).name} for your album` : "") + (rw.unlock ? `, unlocks ${rw.unlock}` : ""));
+  const pr = (PROOF as Record<string, { first: string; redeals: string; mid: number; skilled?: number }>)[String(u.n)];
+  if (pr) rows.push(`PROOF (npm run validate, real engine): competent fair-information bot wins the first deal ${pr.first} and ${pr.redeals} re-deals; mid-skill bot wins ${Math.round(pr.mid * 100)}%`);
+  return {
+    grid: rows.join("\n"),
+    legend:
+      "Trump-card cricket duel, one 6-ball over per hand. Card stats: R runs, A batting avg, SR strike rate, W wickets, E economy (LOWER wins, '—' never bowled), C catches. " +
+      "Balls alternate callers: the caller plays a card face-up and names a stat (+stance), the other side answers with a hidden card. Higher stat wins; margin → 1/2/3/4/6 runs; a dead heat (<0.1 band) → pot. " +
+      "You see the rival's whole hand before the duel (deck preview), never the order. RULES line per unit lists its extra rules. " +
+      "DUEL SCREEN AIDS (public info only): each stat row shows how many of the rival's REMAINING cards it beats and the run band it would earn against them; spent rival cards grey out; teach units show a coach banner for their one new idea; the captain picker shows boosted numbers. " +
+      "DATA: player names are DELIBERATE altered spellings (cartoon lookalikes — licensing rule, not typos). Every number is a real international career line (stats-as-of date on each card); '—' Economy = no wicket-taking bowling in that format (plays as the worst Economy); a low R/A on a bowler is real tail-end batting. " +
+      "RULE DETAIL: Wildcard SWAPS (exchanges, never copies) one stat value between the card you play and another card in your hand for the rest of the over. Review: after a lost ball, cancel it — runs, pot and any wicket undone, both cards stay spent. All out: reaching the unit's wicket limit ends the duel at once as a loss (a rival all out = your win). Aggressive losses are the only way to lose a wicket. " +
+      "SQUAD: fixture hands are the proven default; outside teach units the player may swap 2 cards for cards from their own collection deck.",
+    intent: u.intent,
+    mechanics: u.mechanics,
+  };
+}

@@ -1,0 +1,35 @@
+UNIT L39 (playtest: casual 0.733, skilled 0.967, careless 0.287)
+CH4 TWIST · RIVAL Twin Tower Watch (balanced AI, skill 0.60) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive only on an ace number (top 15% of the game for that stat), Safe on a weak one (bottom 35%), else Normal
+RULES: format weights ON · stances · 2 overs on aggregate, level totals → 3-ball Super Over · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL Mohammad Rizwaan R3414 A47.41 SR125.37 W0 E— C71
+  RIVAL Mathew Haydenn R308 A51.33 SR143.92 W0 E— C1
+  RIVAL Kusal Menddis R2047 A29.66 SR133.00 W0 E— C30
+  RIVAL Mahmudullaah R2444 A23.50 SR117.75 W40 E7.36 C55
+  RIVAL Benn Stokes R585 A23.40 SR136.29 W26 E8.76 C20
+  RIVAL Ravindre Jadeja R515 A21.45 SR127.16 W54 E7.13 C28
+  YOU   Shai Hoppe R1150 A28.75 SR129.50 W0 E— C18
+  YOU   Dayl Stayn R21 A3.50 SR80.76 W64 E6.94 C12
+  YOU   Hardik Pandey R1812 A27.87 SR141.67 W94 E8.18 C51
+  YOU   Aandray Russell R1022 A22.71 SR162.41 W61 E9.05 C34
+  YOU   Glenn Maxwel R2754 A29.94 SR155.09 W47 E7.86 C51
+  YOU   Yuvraaj Singg R1177 A28.02 SR136.38 W28 E7.29 C12
+OVER 2 [Test]
+  RIVAL Mohammad Rizwaan R2088 A40.94 SR52.10 W0 E— C96
+  RIVAL Mathew Haydenn R8625 A50.73 SR60.10 W0 E— C128
+  RIVAL Kusal Menddis R4100 A35.65 SR63.10 W0 E— C65
+  RIVAL Mahmudullaah R2914 A33.49 SR49.00 W43 E3.40 C38
+  RIVAL Benn Stokes R6861 A35.36 SR58.70 W210 E3.39 C109
+  RIVAL Ravindre Jadeja R3406 A35.11 SR58.20 W324 E2.50 C47
+  YOU   Shai Hoppe R1841 A24.54 SR45.10 W0 E— C60
+  YOU   Dayl Stayn R1251 A13.59 SR44.28 W439 E3.24 C26
+  YOU   Hardik Pandey R532 A31.29 SR73.88 W17 E3.42 C7
+  YOU   Aandray Russell R2 A2.00 SR22.22 W1 E4.72 C1
+  YOU   Glenn Maxwel R339 A26.07 SR70.18 W8 E3.91 C5
+  YOU   Yuvraaj Singg R1900 A33.92 SR57.97 W9 E3.48 C31
+STARS: 1 win · 2 win by 8+ · 3 also win 7+ balls
+REWARD: 274 coins, 98 XP, Gully Pack · 3rd star: their star card Mahmudullaah for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 55-31 and 12/12 re-deals; mid-skill bot wins 77%
+MECHANICS: two-over aggregate, T20 weights, Test weights
+CURRENT INTENT (may be STALE — written for an older deck): TWIST: two overs on aggregate with the SAME six cards re-dealt — over one T20, over two Test — and every card's rank flips. Russell (SR 162) is your T20 ace and a Test blank (2 Test runs); Steyn is a tail-ender in T20 and the best Test bowler in the game (439 wickets). Aha: it's aggregate, so bank the margin where your hand is strong — swipe up in the T20 over with Russell and Maxwel on Strike Rate — then in the Test over call Steyn's Wickets as your one sure ball and play everything else Safe to lose small.

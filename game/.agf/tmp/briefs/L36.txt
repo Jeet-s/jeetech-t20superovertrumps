@@ -1,0 +1,23 @@
+UNIT L36 (playtest: casual 0.76, skilled 0.96, careless 0.42)
+CH4 TWIST · RIVAL Drawbridge Dashers (balanced AI, skill 0.70) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive only on an ace number (top 15% of the game for that stat), Safe on a weak one (bottom 35%), else Normal
+RULES: format weights ON · stances · CHASE 16 runs (rival runs don't count) · all out at 2 wickets · squad swaps ≤2
+OVER 1 [ODI]
+  RIVAL Josh Inglys R862 A33.15 SR104.36 W0 E— C26
+  RIVAL Phill Salt R864 A30.85 SR110.80 W0 E— C13
+  RIVAL KL Raahul R3043 A48.30 SR87.53 W0 E— C62
+  RIVAL Trentt Boult R216 A9.00 SR77.41 W211 E4.99 C43
+  RIVAL Dayl Stayn R365 A9.35 SR64.94 W196 E4.87 C28
+  RIVAL Adiil Rashid R828 A18.40 SR99.04 W207 E5.69 C44
+  YOU   Charrith Asalanka R2350 A42.00 SR86.50 W19 E5.60 C30
+  YOU   Ibrahiim Zadran R1700 A49.12 SR85.10 W0 E— C10
+  YOU   Najibullaah Zadran R1800 A29.03 SR90.50 W0 E— C30
+  YOU   Hasaan Ali R394 A14.07 SR105.34 W100 E5.70 C14
+  YOU   Haaris Rauf R95 A7.30 SR67.38 W83 E5.85 C10
+  YOU   Maheesh Theekshaana R330 A15.00 SR80.00 W70 E4.65 C10
+COACH (on-screen hint): ODI chase: Average and Wickets pay x1.5 here. Which of your sure balls should you swipe up?
+STARS: 1 win · 2 win by 4+ · 3 also no wickets lost
+REWARD: 256 coins, 92 XP, Gully Pack · 3rd star: their star card Adiil Rashid for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 18-12 (target 16) and 12/12 re-deals; mid-skill bot wins 76%
+MECHANICS: target chase, ODI weights, aggressive stance, wicket limit
+CURRENT INTENT (may be STALE — written for an older deck): TWIST blank lines: a Test match where three cards on EACH side have no Test career — blank (0 runs, 0 average, no wickets); blank v blank is a dead heat. Aha: blanks are only good for losing cheaply or tying: throw your blanks at their Test men's calls (sacrifice) or at their blanks (tie → pot), and keep your Test batters to answer their Test batters.

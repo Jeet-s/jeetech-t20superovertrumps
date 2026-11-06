@@ -1,0 +1,35 @@
+UNIT L20 (playtest: casual 0.773, skilled 0.953, careless 0.4)
+CH2 BOSS · RIVAL Inferno Express (aggro AI, skill 0.20) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): always Aggressive
+RULES: plain T20 (no weights) · stances · all out at 3 wickets · 2 overs on aggregate, level totals → 3-ball Super Over · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL Timm Southee R303 A11.22 SR138.99 W164 E8.00 C65
+  RIVAL Glennn Phillips R1929 A31.11 SR140.59 W6 E7.35 C51
+  RIVAL Aiden Markkram R1367 A30.37 SR143.89 W13 E8.54 C37
+  RIVAL Mitchel Starc R99 A9.00 SR104.21 W79 E7.74 C20
+  RIVAL Shaheen Afridy R95 A9.50 SR115.85 W98 E7.80 C18
+  RIVAL Lockiee Ferguson R29 A3.62 SR80.55 W64 E7.10 C13
+  YOU   Dayvid Waarner R3277 A33.43 SR142.47 W0 E— C62
+  YOU   Steven Smyth R1094 A24.86 SR125.45 W17 E8.21 C30
+  YOU   Joe Roott R893 A35.72 SR126.30 W6 E8.79 C18
+  YOU   Hasaan Ali R98 A10.88 SR124.05 W73 E8.70 C16
+  YOU   Matheesha Pathirane R6 A2.00 SR40.00 W24 E8.90 C3
+  YOU   Mohammeed Shami R0 A0.00 SR0.00 W27 E8.94 C3
+OVER 2 [T20I]
+  RIVAL Mathew Haydenn R308 A51.33 SR143.92 W0 E— C1
+  RIVAL Hardik Pandey R1812 A27.87 SR141.67 W94 E8.18 C51
+  RIVAL Maark Wood R26 A8.66 SR108.33 W50 E8.10 C9
+  RIVAL Dayl Stayn R21 A3.50 SR80.76 W64 E6.94 C12
+  RIVAL Yuvraaj Singg R1177 A28.02 SR136.38 W28 E7.29 C12
+  RIVAL Andrew Flintof R76 A12.66 SR122.58 W5 E7.13 C5
+  YOU   Fakhar Zamaan R1866 A22.21 SR127.89 W0 E— C40
+  YOU   Charrith Asalanka R1230 A25.63 SR125.00 W8 E8.00 C25
+  YOU   Darren Sammi R587 A15.44 SR120.53 W44 E7.25 C38
+  YOU   Naveen Ul Haaq R80 A8.00 SR95.24 W67 E7.40 C10
+  YOU   Jaak Kallis R666 A35.05 SR119.35 W12 E7.23 C7
+  YOU   Rachiin Ravindra R309 A17.16 SR127.68 W13 E6.58 C12
+STARS: 1 win · 2 win by 8+ · 3 also lose at most 1 wicket
+REWARD: 260 coins, 60 XP, Club Pack, the rival captain-card Timm Southee · 3rd star: their star card Hardik Pandey for your album, unlocks Power Pavilion pitch + card back + 'Nice shot' emote
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 48-41 and 11/12 re-deals; mid-skill bot wins 66%
+MECHANICS: always-aggressive rival, wicket limit, two-over aggregate, aggressive stance
+CURRENT INTENT (may be STALE — written for an older deck): BOSS: Inferno go aggressive on EVERY call, over two overs; three wickets is all out for either side. Aha: their fire is your fuel — each of their aggressive calls you beat pays you +2 and takes a wicket, so answer with the card that wins, not the cheapest, and you can bowl them out before the 12th ball.

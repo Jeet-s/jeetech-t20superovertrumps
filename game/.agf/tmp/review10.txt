@@ -1,0 +1,52 @@
+PASS level_intents: all 60 levels have a specific intent
+PASS no_filler_levels: no trivial filler levels after the tutorial
+FAIL level_design: level-design review 7/10 (bar 8), 0 level(s) below 6/10: The set is well structured as a mechanic-per-unit tutorial ladder with proven fair winnability, and its pre-duel stat puzzles are readable. But it has too many same-shaped 'find the sure ball' units, a late difficulty cliff (L45-L60 casual wins 54-65%), mislabelled breathers (L44), and weak replay and variance hooks. Overall: solid and well taught, but not yet a memorable Marvel Snap-class ladder. Curve: Strong skeleton: 6 chapters, each introducing one mechanic alone (stat pick, answering, tie pot, aggressive, safe, free hit, review, powerplay, format weights, captain, fog, wildcard, mega pot), then combining it, with a breather and a boss at the end. Rewards rise steadily and Club/Pro Pack boss rewards, pitches and emotes give return reasons. Problems:
+
+1) Early ramp is too flat. L1-L10 are all plain stat-pick, with only 'which card answers which call' changing. Several units (L2, L3, L6, L8, L9) are the same cheapest-winner / sure-tie puzzle on new rosters.
+2) The difficulty cliff is steep and doesn't match the stars. Casual win rates fall from ~90% to the mid-50s by L49-L60, with L50-L60 at 54-61%. That is brutal for a 2-minute casual game. Chase and boss units (L20, L30, L56-L60) sit at 56-69% mid-skill, so many players will stall behind a wall.
+3) There are too many power-card teaching units that repeat. L24/L25, L21/L22/L29 and L41/L42/L46/L48/L51/L53 are variations of 'find the sure ball'. Many 'optimal moves > search cap' units are solved by reading the coach text. The decision is closer to a puzzle than a duel, so it risks being solved once and then repeated.
+4) Breather placement is uneven. L44 is labelled BREATHER but has a 75% win rate and rated 'wildcard defence' difficulty. L55 is a breather straight into the hard chases. L47 and L37 are fine.
+5) Information and fairness. Pre-deal hand preview plus on-screen aids make most units deterministic puzzles, with no variance or surprise. That hurts replay and the 'stat argument' fantasy. Real-stat hands can also repeat the same legends (Salt, Surya, Kohli, Rashid) in many units, so the roster feels small.
+6) Retention is thin in the unit list. There is no per-chapter reward beyond the 3rd-star card, and no replay hooks on cleared nodes such as modifiers, daily variants or star-gated chests. The 3-star criteria are often ones you reach just by following the coach text.
+7) Some star goals are unclear or miscalibrated. L60's text is truncated.
+
+Fixes: add two or three varied-pacing 'duel' nodes per chapter with fewer scripts, soften the L45+ ramp, and add replay modifiers.
+REDESIGN THESE LEVELS (keep the ones not listed):
+L6 (6/10): A re-skin of L3 plus answering; the 'tie on purpose' idea is the same. → Replace with a unit where the tie is a trap.
+L8 (6/10): Another sure-ball hunt similar to L9 and L10. → Merge or vary the twist.
+L9 (6/10): Same shape as L8 and L2. → Add a rule twist such as a rival hand reveal.
+L12 (6/10): Mostly L11 again with counting. → Cut or merge.
+L37 (6/10): Casual 85% 'breather' with a hidden trap. → Remove the trap.
+L44 (6/10): Mislabelled breather; an 'answer' puzzle. → Make it truly easy.
+L51 (6/10): Fog + ODI is not a new idea. → Add a new twist.
+L55 (6/10): Breather placement. → Fine.
+L60 (6/10): Brief truncated; 54% casual. → Fix text.
+L1 (7/10): Fine intro, but 'every stat wins' means no decision except margin; 22+ star needs optimal answers that the preview hides. → Show a post-ball 'best pick' replay and make 3 stars 20+ so it is reachable by following the coach.
+L3 (7/10): Almost a re-run of L2 with a tie rule bolted on; 5 of the 6 cards on your side can't bowl, so the choice is narrow. → Give it two bowlers on each side so the tie is a choice, not a script.
+L4 (7/10): Counting is fine but the fallback (Maxwel Runs beats all) trivialises it. → Remove the all-beating fallback card.
+L5 (7/10): Super Over taught early with only two sure balls and traps; 82% mid-skill is harsh for a teach unit. → Give a third semi-sure ball or move it after L10.
+L7 (7/10): A breather with a hidden-trap theme; fine. → 
+L10 (7/10): Boss relies on counting; 12-ball ramp without a new rule. → Add a unique boss rule.
+L11 (7/10): Fine, first stance. → 
+L13 (7/10): A shaky call plus Safe is a clear lesson; 81% fine. → 
+L14 (7/10): One-wicket sudden death is a spike in a TEACH/COMBINE slot; the trap card is obvious. → Label as Spike.
+L16 (7/10): Super Over repeated; the unit is OK but similar to L5. → Vary the opposition's swipes.
+L17 (7/10): Good breather. → 
+L19 (7/10): Chase is good but a repeat of the aggression drill. → 
+L20 (7/10): 69% mid-skill and 52-34 bot margin is high variance. → Lower the wicket limit pressure.
+L21 (7/10): Free Hit is simple. → 
+L22 (7/10): Obvious double-up. → 
+L24 (7/10): Fine. → 
+
+level-design score 7/10 — The set is well structured as a mechanic-per-unit tutorial ladder with proven fair winnability, and its pre-duel stat puzzles are readable. But it has too many same-shaped 'find the sure ball' units, a late difficulty cliff (L45-L60 casual wins 54-65%), mislabelled breathers (L44), and weak replay and variance hooks. Overall: solid and well taught, but not yet a memorable Marvel Snap-class ladder.
+curve: Strong skeleton: 6 chapters, each introducing one mechanic alone (stat pick, answering, tie pot, aggressive, safe, free hit, review, powerplay, format weights, captain, fog, wildcard, mega pot), then combining it, with a breather and a boss at the end. Rewards rise steadily and Club/Pro Pack boss rewards, pitches and emotes give return reasons. Problems:
+
+1) Early ramp is too flat. L1-L10 are all plain stat-pick, with only 'which card answers which call' changing. Several units (L2, L3, L6, L8, L9) are the same cheapest-winner / sure-tie puzzle on new rosters.
+2) The difficulty cliff is steep and doesn't match the stars. Casual win rates fall from ~90% to the mid-50s by L49-L60, with L50-L60 at 54-61%. That is brutal for a 2-minute casual game. Chase and boss units (L20, L30, L56-L60) sit at 56-69% mid-skill, so many players will stall behind a wall.
+3) There are too many power-card teaching units that repeat. L24/L25, L21/L22/L29 and L41/L42/L46/L48/L51/L53 are variations of 'find the sure ball'. Many 'optimal moves > search cap' units are solved by reading the coach text. The decision is closer to a puzzle than a duel, so it risks being solved once and then repeated.
+4) Breather placement is uneven. L44 is labelled BREATHER but has a 75% win rate and rated 'wildcard defence' difficulty. L55 is a breather straight into the hard chases. L47 and L37 are fine.
+5) Information and fairness. Pre-deal hand preview plus on-screen aids make most units deterministic puzzles, with no variance or surprise. That hurts replay and the 'stat argument' fantasy. Real-stat hands can also repeat the same legends (Salt, Surya, Kohli, Rashid) in many units, so the roster feels small.
+6) Retention is thin in the unit list. There is no per-chapter reward beyond the 3rd-star card, and no replay hooks on cleared nodes such as modifiers, daily variants or star-gated chests. The 3-star criteria are often ones you reach just by following the coach text.
+7) Some star goals are unclear or miscalibrated. L60's text is truncated.
+
+Fixes: add two or three varied-pacing 'duel' nodes per chapter with fewer scripts, soften the L45+ ramp, and add replay modifiers.

@@ -1,0 +1,49 @@
+UNIT L60 (playtest: casual 0.52, skilled 0.947, careless 0.113)
+CH6 FINAL · RIVAL Grand Series Champions (balanced AI, skill 0.90) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive only on an ace number (top 15% of the game for that stat), Safe on a weak one (bottom 35%), else Normal
+RULES: format weights ON · stances · Review x1 · Wildcard x1/over · captains (+15% signature stat) · FOG: rival's called card face-down · MEGA POT: dead-heat balls stack 2 runs each, up to 8, and carry across overs · best of 3 overs, a level over → Super Over · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL Josh Inglys R935 A30.16 SR156.35 W0 E— C22
+  RIVAL Hinerik Klaassen R1000 A23.25 SR141.84 W0 E— C33
+  RIVAL Joss Buttler R3532 A35.32 SR147.30 W0 E— C86
+  RIVAL Mitchel Santner R725 A16.86 SR120.23 W120 E7.03 C43
+  RIVAL Wanindu Hasarange R803 A14.09 SR124.49 W125 E6.91 C20
+  RIVAL Fazalhaqq Farooqi R30 A5.00 SR75.00 W66 E6.90 C8
+  YOU   Babbar Azam R4223 A39.83 SR129.22 W0 E— C45
+  YOU   Najmull Hossain Shanto R1000 A23.81 SR112.00 W0 E— C15
+  YOU   Ibrahiim Zadran R1130 A29.00 SR112.40 W0 E— C12
+  YOU   Timm Southee R303 A11.22 SR138.99 W164 E8.00 C65
+  YOU   Azmatullah Omarzaii R400 A17.39 SR128.60 W25 E8.30 C10
+  YOU   Darren Sammi R587 A15.44 SR120.53 W44 E7.25 C38
+OVER 2 [ODI]
+  RIVAL Branndon King R1612 A33.58 SR87.60 W0 E— C22
+  RIVAL Fakhar Zamaan R3651 A45.63 SR92.96 W1 E4.80 C29
+  RIVAL Josh Inglys R862 A33.15 SR104.36 W0 E— C26
+  RIVAL Mohammeed Shami R236 A8.42 SR82.80 W206 E5.53 C33
+  RIVAL Glenn Maxwel R3990 A33.81 SR126.70 W77 E5.47 C91
+  RIVAL Ravindre Jadeja R2806 A32.62 SR85.30 W231 E4.94 C75
+  YOU   Joss Buttler R5330 A39.19 SR117.20 W0 E— C215
+  YOU   Rishab Pant R871 A33.50 SR106.21 W0 E— C27
+  YOU   Ibrahiim Zadran R1700 A49.12 SR85.10 W0 E— C10
+  YOU   Maheesh Theekshaana R330 A15.00 SR80.00 W70 E4.65 C10
+  YOU   Dwayn Braavo R2968 A25.36 SR82.33 W199 E5.41 C73
+  YOU   Patt Cummins R606 A14.42 SR82.22 W141 E5.25 C23
+OVER 3 [Test]
+  RIVAL Ricki Ponting R13378 A51.85 SR58.72 W5 E2.81 C196
+  RIVAL Andrew Flintof R3845 A31.77 SR62.04 W226 E2.97 C52
+  RIVAL Lasithh Malingha R275 A11.45 SR41.47 W101 E3.65 C7
+  RIVAL Trentt Boult R759 A15.81 SR60.00 W317 E3.00 C43
+  RIVAL Mohammeed Shami R847 A11.44 SR73.00 W229 E3.31 C15
+  RIVAL Anrich Norrtje R187 A7.79 SR30.25 W70 E3.67 C6
+  YOU   Mahmudullaah R2914 A33.49 SR49.00 W43 E3.40 C38
+  YOU   Rohith Sharma R4301 A40.57 SR57.05 W2 E3.51 C69
+  YOU   Joshh Hazlewood R603 A11.81 SR45.30 W295 E2.74 C30
+  YOU   Kriss Gayl R7214 A42.18 SR60.27 W73 E2.75 C96
+  YOU   Mustafizzur Rahman R63 A5.00 SR40.00 W31 E3.30 C3
+  YOU   Shaheen Afridy R400 A11.42 SR62.50 W116 E3.30 C4
+COACH (on-screen hint): Best of three overs: you need two. Know which format your hand is weakest in — that over can be lost.
+STARS: 1 win · 2 win by 8+ · 3 also no wickets lost
+REWARD: 500 coins, 140 XP, Legend Pack, the rival captain-card Joss Buttler · 3rd star: their star card Mitchel Santner for your album, unlocks Champion pitch + gold card back + trophy frame
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 96-57 and 12/12 re-deals; mid-skill bot wins 49%
+MECHANICS: best-of-three overs, super over, format rotation, fog of war, wildcard swap, mega pot, captain bonus
+CURRENT INTENT (may be STALE — written for an older deck): FINAL: best of three overs — a T20 over, an ODI over and a Test over, each with its own hand; a tied over goes to a Super Over. Fog, Wildcard, Mega Pot, captain and one Review. Aha: you only need two overs — know which format your hand is weakest in and treat that over as the one you can afford to lose.

@@ -1,0 +1,56 @@
+PASS level_intents: all 60 levels have a specific intent
+PASS no_filler_levels: no trivial filler levels after the tutorial
+FAIL level_design: level-design review 7/10 (bar 8), 1 level(s) below 6/10: The set is well structured and teaches one mechanic at a time, with strong "aha" lines and proof data. It has some weak units: duplicate-feeling early drills, near-autowin breathers, an opaque late-game chase and format stack, and difficulty spikes in chapters 3, 5 and 6, topped by an unfair final. Curve: Strong spine: mechanics are introduced one at a time (margin bands, answering, tie pot, counting, Super Over, aggressive, safe, Free Hit, Review, Powerplay, formats, captain, fog, wildcard, mega pot), then combined in a boss at the end of each chapter, and the six-chapter, 60-node shape is clear. Almost every unit states a concrete "aha", and the proof lines show the puzzles are solvable.
+
+Problems:
+1. Teaching density is front-loaded and the middle sags. L1-L10 are mostly "pick the best stat" lessons with 89-99% skilled win rates. L7, L17, L27, L37, L47 and L55 are scripted breathers placed almost exactly every 10 units, so the rhythm is predictable.
+2. The late curve is brutal. Chapter 5 and 6 casual win rates are 50-59%, with L60 at 42% for the mid-skill bot and L48 and L50 at 54%. That is a wall for casual players, with no stated soft landing such as assist, retry, hint or card-upgrade gating. Card Form and the deck swaps are meant to be the difficulty valve, but the proof uses fixed squads, so nothing shows that upgraded decks help.
+3. Difficulty steps are lumpy. Chapter 3 jumps from L22 at 71% to L23 at 70%, L26 at 74%, then L28 at 65%. L30 is a boss with a 59% mid-skill win rate, harder than the chapter 4 boss L40 at 69%. L36 and L37 are inverted: the hard Test blank twist sits just before a breather that has a 99% win rate and is effectively a free pass.
+4. Format changes are introduced late (L31, chapter 4). Cards read as T20 only for 30 units, so chapter 4 feels like a second game. Fog and wildcard are then stacked on formats with too little room between lessons.
+5. Hard chases (L56-L58) are labelled PRACTISE and SPIKE but sit in the final chapter, after the breather L55. There are three chase-only units in a row with different tricks, and L57 is closer to a coin flip (30-32 on the first deal).
+6. Retention hooks are thin inside this content. Every unit awards 3rd-star "their star card", which is a good chase, but there is no replay variance because the squads are fixed. Rewards escalate unevenly (L8 gives 148 coins against 114 for L9, and L18 gives 208). The 3rd stars are mostly "win 4+ balls", "no wickets lost" or "boundaries", repeated 60 times, so the three-star ladder is flat. There is no star-gated chapter unlock and no visible mastery chain.
+7. Fairness and clarity are unproven. Many "optimal moves: > search cap" and "trap rate: ?" lines mean the solver never confirmed a unique best line. The player must also see the rival's hand to count, so the UI aids (beats-X-of-N chips) risk doing the thinking for them.
+8. Format weights make the arithmetic opaque (x1.5 stacks with x2, and Powerplay x2 stacks to x4). The 1.5x rule varies by format. I would test whether the margin bands are readable.
+
+Recommended pacing changes: add a format teaser around L21-25. Cap boss difficulty at about 70% for the mid-skill bot in chapters 3 to 5. Place breathers after hard units rather than on a fixed cadence. Add variant hands, such as a re-deal with the same lesson, so the 60 units have replay value.
+REDESIGN THESE LEVELS (keep the ones not listed):
+L37 (5/10): A 99-100% win; the 5-boundary star is a lift but there is no real decision. → Give it a real trap in the rival's calls.
+L7 (6/10): A forgettable score attack at 94% win, not related to the new skill, and it comes too early. → Replace it with a mini-puzzle, or make the 4-boundary goal need a decision rather than being a free fill.
+L15 (6/10): The note says 'never call Economy', which makes it a repeat of L11 with a minor caveat. → Make Economy a real trap by giving the rival one 6.5 spinner.
+L17 (6/10): A 100% skilled win, triple-aggressive locked, no decision. → Add a decoy rival card so the locked doubles still need a check.
+L27 (6/10): A breather with a 99% skilled win that also introduces a major mechanic. → Teach Powerplay in a proper unit and make the breather separate.
+L30 (6/10): 59% mid-skill win with 432 start choices is overwhelming and opaque. → Remove one power card or give the player a hint.
+L33 (6/10): The rival is a Test legends deck and wins Runs, so the lesson is 'avoid Runs'. This is the lesson of L8 repeated. → Give the player one Runs trump.
+L36 (6/10): An unclear and unfair twist; the blank card is a dead pick and the 10/12 re-deals show a swingy deal. → Show 'blank' clearly on the card, and allow Wildcard on blanks (as in L49).
+L47 (6/10): Gets harder than a breather when 3 boundaries are required. → Lower to 2 boundaries.
+L48 (6/10): 56% casual and a luck-heavy ending decided by ties. → Show the pot explicitly and lower the rival skill.
+L51 (6/10): Labelled MIXED and COMBINE, with nothing new. → Add a rival bluff.
+L52 (6/10): 432 choices of power cards with no cost; stat-stack arithmetic. → Limit to two power cards.
+L55 (6/10): A near free win placed before hard chases. → Fine as a breather, but add a decision.
+L57 (6/10): Around a coin-flip (30-32 on the first deal), a possible unfair spike. → Lower the target to 20.
+L60 (6/10): The mid-skill bot wins just 42% and casual 50%; the final stacks every mechanic and has no payoff for 'mastery', only a harder wall. → Lower the rival skill to 0.88 and add a variable star reward.
+L1 (7/10): 99% skilled win and 'any stat wins' means no decision; the lesson is delivered by a banner, not play. → Make 2 of the 6 stats lose (a trap such as Catches) so the margin choice is real, and keep the 3-star at 'win 4+ balls'.
+L2 (7/10): Easy and a good idea, but the 'cheapest winner' lesson is weak because a loss does not matter much. → Add a star condition that rewards cheap answers, for example 'win with 4 balls to spare using 2 commons'.
+L3 (7/10): The tie trick works only after both pacers are spent. The unit is a long setup for a 2-run edge, and the win rate is high. → Add a 3rd star for collecting the pot, and tighten the rival so a tie is actually needed to win.
+L4 (7/10): 69% mid-skill is much harder than the teach units before it; the deck swap option can bypass the puzzle. → Lock the swap in this unit, or show the count chip from the start.
+L6 (7/10): The rival calls first and the unit is a hard 'lose small' puzzle; that is unfun for newcomers. → Give the player one more winning answer card, or lower the rival's Economy cards.
+L10 (7/10): Fresh hand per over shows the aggregate idea, but the 'aha' is trivial compared with other bosses. → Require a banked lead so Safe play is forced in over 2.
+L11 (7/10): The deck is so weak that Aggressive is risk-free, so there is no lesson on risk. → Add one rival card that beats one of your hitters, so the swipe needs a read.
+L12 (7/10): A partial repeat of L4's counting lesson with a swipe added. → Add a rival swipe so the count matters twice.
+L14 (7/10): It is a telegraphed trap with a single trap card. → Add a second trap or an extra clue.
+L16 (7/10): A near-repeat of L15. → Add the new idea that the cautious rival turns aggressive when behind.
+
+level-design score 7/10 — The set is well structured and teaches one mechanic at a time, with strong "aha" lines and proof data. It has some weak units: duplicate-feeling early drills, near-autowin breathers, an opaque late-game chase and format stack, and difficulty spikes in chapters 3, 5 and 6, topped by an unfair final.
+curve: Strong spine: mechanics are introduced one at a time (margin bands, answering, tie pot, counting, Super Over, aggressive, safe, Free Hit, Review, Powerplay, formats, captain, fog, wildcard, mega pot), then combined in a boss at the end of each chapter, and the six-chapter, 60-node shape is clear. Almost every unit states a concrete "aha", and the proof lines show the puzzles are solvable.
+
+Problems:
+1. Teaching density is front-loaded and the middle sags. L1-L10 are mostly "pick the best stat" lessons with 89-99% skilled win rates. L7, L17, L27, L37, L47 and L55 are scripted breathers placed almost exactly every 10 units, so the rhythm is predictable.
+2. The late curve is brutal. Chapter 5 and 6 casual win rates are 50-59%, with L60 at 42% for the mid-skill bot and L48 and L50 at 54%. That is a wall for casual players, with no stated soft landing such as assist, retry, hint or card-upgrade gating. Card Form and the deck swaps are meant to be the difficulty valve, but the proof uses fixed squads, so nothing shows that upgraded decks help.
+3. Difficulty steps are lumpy. Chapter 3 jumps from L22 at 71% to L23 at 70%, L26 at 74%, then L28 at 65%. L30 is a boss with a 59% mid-skill win rate, harder than the chapter 4 boss L40 at 69%. L36 and L37 are inverted: the hard Test blank twist sits just before a breather that has a 99% win rate and is effectively a free pass.
+4. Format changes are introduced late (L31, chapter 4). Cards read as T20 only for 30 units, so chapter 4 feels like a second game. Fog and wildcard are then stacked on formats with too little room between lessons.
+5. Hard chases (L56-L58) are labelled PRACTISE and SPIKE but sit in the final chapter, after the breather L55. There are three chase-only units in a row with different tricks, and L57 is closer to a coin flip (30-32 on the first deal).
+6. Retention hooks are thin inside this content. Every unit awards 3rd-star "their star card", which is a good chase, but there is no replay variance because the squads are fixed. Rewards escalate unevenly (L8 gives 148 coins against 114 for L9, and L18 gives 208). The 3rd stars are mostly "win 4+ balls", "no wickets lost" or "boundaries", repeated 60 times, so the three-star ladder is flat. There is no star-gated chapter unlock and no visible mastery chain.
+7. Fairness and clarity are unproven. Many "optimal moves: > search cap" and "trap rate: ?" lines mean the solver never confirmed a unique best line. The player must also see the rival's hand to count, so the UI aids (beats-X-of-N chips) risk doing the thinking for them.
+8. Format weights make the arithmetic opaque (x1.5 stacks with x2, and Powerplay x2 stacks to x4). The 1.5x rule varies by format. I would test whether the margin bands are readable.
+
+Recommended pacing changes: add a format teaser around L21-25. Cap boss difficulty at about 70% for the mid-skill bot in chapters 3 to 5. Place breathers after hard units rather than on a fixed cadence. Add variant hands, such as a re-deal with the same lesson, so the 60 units have replay value.

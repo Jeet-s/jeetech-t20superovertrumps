@@ -1,0 +1,774 @@
+/**
+ * The duel engine — deterministic, seeded, pure TypeScript (shared by the screens, the bots, validate and online play).
+ *
+ * A duel is one (or more) 6-ball overs. Both sides hold a hand of 6 cricketer cards; every card is played once per over.
+ * Balls alternate: on YOUR call you play a card face-up, pick a stat and a stance (normal / AGGRESSIVE / SAFE); the
+ * rival answers with a hidden card from its hand. On the RIVAL's call it plays face-up (face-down under Fog of War) and
+ * names the stat; you answer with one of your cards. The higher stat wins the ball; the margin converts to runs
+ * (cards.ts bands). Ties feed the pot. After the overs the higher total wins; a tie goes to a 3-ball Super Over.
+ *
+ * Every state the AI acts on is public: the rival never sees your hand, only the card you play face-up.
+ */
+import {
+  applyWeight, bandRuns, cardPower, compare, FORMAT_WEIGHTS, percentile, rawStat, signatureStat, STATS,
+  type Format, type StatKey,
+} from "./cards";
+
+export type Side = "you" | "rival";
+export type Stance = "normal" | "aggressive" | "safe";
+export type Personality = "cautious" | "balanced" | "gambler" | "baiter" | "aggro";
+
+export interface Rules {
+  stances: boolean;
+  /** Power-card uses for the whole duel (wildcard: uses per over). */
+  freeHit: number; review: number; powerplay: number; wildcard: number;
+  /** Format weights on (chapter 4+). Without it every ball is plain T20 with weight 1. */
+  weighted: boolean;
+  captain: boolean;
+  /** Fog of War: the rival's called card stays face-down until you answer. */
+  fog: boolean;
+  /** Pot carry-over: ties stack (2 runs each) up to a 4-ball MEGA POT of 8 instead of capping at 2. */
+  carryPot: boolean;
+  /** Chase: reach this many runs (rival runs don't count). */
+  target?: number;
+  /** All out at this many wickets (you lose; the rival losing this many hands you the win). */
+  maxWickets?: number;
+  mode: "aggregate" | "bestOf";
+  /** Rival owns a Powerplay and uses it on a strong call. */
+  rivalPowerplay: boolean;
+  /** Who calls ball 1 of each over. */
+  firstCaller: Side;
+  /** The over is already played and finished level at this score each: the duel starts IN the 3-ball Super Over. */
+  startTied?: number;
+  /**
+   * ACE SWING (public, shown on the rules line): the rival swipes its ACE — the strongest card of its hand at the start
+   * of the over (rivalAce()) — AGGRESSIVE whenever it calls with it; every other call follows its personality.
+   */
+  aceSwing?: boolean;
+  /**
+   * BLUFF LEAD (fog + baiter teach unit): the baiter's FIRST call of each over (its preferred line) is its weakest card
+   * on that card's WEAKEST stat, swiped Aggressive — a real bluff, so the on-screen bluff tracker has something to count.
+   */
+  bluffLead?: boolean;
+  /**
+   * SCRIPTED SWIPES (public, shown on the rules line): the rival's k-th call of each over / Super Over uses stance k
+   * of this list (the last entry repeats), whatever its card — a readable pattern instead of a personality read.
+   */
+  rivalStances?: Stance[];
+}
+
+export const BASE_RULES: Rules = {
+  stances: false, freeHit: 0, review: 0, powerplay: 0, wildcard: 0, weighted: false, captain: false, fog: false,
+  carryPot: false, mode: "aggregate", rivalPowerplay: false, firstCaller: "you",
+};
+
+export interface OverDef {
+  you: string[]; // 6 card ids
+  rival: string[]; // 6 card ids
+  /** One format for the over, or one per ball (format rotation). Default T20. */
+  format?: Format | Format[];
+}
+
+export interface DuelSetup {
+  overs: OverDef[];
+  rules: Rules;
+  skill: number; // 0..1 how often the rival plays its best line
+  personality: Personality;
+  rivalCaptain?: string | null;
+  seed: number;
+  /** Form-tier boosts of YOUR cards (ladder play only: online/room duels use plain stats), e.g. { id: 0.035 }. */
+  form?: Record<string, number>;
+}
+
+export interface Call { card: string; stat: StatKey; stance: Stance; powerplay: boolean }
+
+export interface BallResult {
+  over: number; ball: number; superOver: boolean; caller: Side; format: Format; stat: StatKey;
+  youCard: string; rivalCard: string; youVal: number; rivalVal: number;
+  winner: Side | "tie"; runs: number; potWon: number; stance: Stance; freeHit: boolean; powerplay: boolean;
+  wicket: Side | null; reviewed: boolean; swap: string | null;
+}
+
+export type Phase = "captain" | "call" | "respond" | "pending" | "review" | "done";
+
+export interface DuelState {
+  setup: DuelSetup;
+  phase: Phase;
+  over: number; ball: number; superOver: boolean;
+  youHand: string[]; rivalHand: string[];
+  overRuns: [number, number][]; // per over [you, rival]
+  soRuns: [number, number];
+  oversWon: [number, number];
+  wickets: [number, number];
+  pot: number; potBalls: number;
+  freeHit: number; review: number; powerplay: number; wildcard: number; rivalPP: number;
+  ppBalls: number; // balls left that count double
+  captain: string | null;
+  swaps: Record<string, Partial<Record<StatKey, number>>>; // wildcard-overridden values this over
+  rivalCall: Call | null; // the rival's call on its balls (card hidden from you under fog)
+  pending: { caller: Side; youCard: string; rivalCard: string | null; stat: StatKey; stance: Stance; freeHit: boolean; powerplay: boolean; swap: string | null } | null;
+  last: BallResult | null;
+  log: BallResult[];
+  rng: number;
+  result: { won: boolean; you: number; rival: number; margin: number; stars: number; reason: string } | null;
+  stats: { aggWins: number; aggLosses: number; safePlays: number; ballsWon: number; boundaries: number; rivalBallsWon: number };
+  /** Goals for 2 and 3 stars (contents.ts). */
+  goals: StarGoals;
+  /** Compact serialisation (state keys for the solver/bots): what decides the rest of the duel, not the history. */
+  toJSON?: () => unknown;
+}
+
+function compactJSON(this: DuelState) {
+  const s = this;
+  return {
+    u: s.setup.seed, d: s.setup.overs.map((o) => o.you.join(",") + "/" + o.rival.join(",")).join(";"),
+    ph: s.phase, o: s.over, b: s.ball, so: s.superOver, yh: s.youHand.join(","), rh: s.rivalHand.join(","),
+    r: s.overRuns, sr: s.soRuns, ow: s.oversWon, w: s.wickets, pot: s.pot, p: [s.freeHit, s.review, s.powerplay, s.wildcard, s.rivalPP, s.ppBalls],
+    c: s.captain, sw: s.swaps, rc: s.rivalCall, pe: s.pending, rng: s.rng, st: s.stats,
+  };
+}
+
+export interface StarGoals { two: Goal; three: Goal }
+export type Goal =
+  | { kind: "margin"; runs: number }
+  | { kind: "marginNoWickets"; runs: number }
+  | { kind: "noWickets" }
+  | { kind: "wicketsAtMost"; n: number }
+  | { kind: "aggWins"; n: number }
+  /** n+ won balls worth 4+ runs; optional: only balls worth `minRuns`+ (after doubling) and/or on one stat. */
+  | { kind: "boundaries"; n: number; minRuns?: number; stat?: StatKey; distinct?: boolean }
+  | { kind: "runs"; n: number }
+  | { kind: "ballsWon"; n: number }
+  | { kind: "pot"; n: number };
+
+export type Move =
+  | { t: "captain"; card: string }
+  | { t: "call"; card: string; stat: StatKey; stance: Stance; freeHit: boolean; powerplay: boolean; swap: string | null }
+  | { t: "respond"; card: string; swap: string | null }
+  | { t: "resolve" }
+  | { t: "review"; use: boolean };
+
+const BALLS = 6;
+const SO_BALLS = 3;
+export const CAPTAIN_BONUS = 0.15;
+
+// ---------------------------------------------------------------- rng (mulberry32 step + move mixing)
+function nextRand(s: DuelState): number {
+  let t = (s.rng = (s.rng + 0x6d2b79f5) | 0);
+  t = Math.imul(t ^ (t >>> 15), 1 | t);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+  return ((t ^ (t >>> 14)) >>> 0) / 2 ** 32;
+}
+function mix(rng: number, key: string): number {
+  let h = rng ^ 0x9e3779b9;
+  for (let i = 0; i < key.length; i++) h = Math.imul(h ^ key.charCodeAt(i), 0x01000193);
+  return h | 0;
+}
+
+// ---------------------------------------------------------------- helpers
+export function overDef(s: DuelState): OverDef { return s.setup.overs[Math.min(s.over, s.setup.overs.length - 1)]; }
+export function ballFormat(s: DuelState, ball = s.ball): Format {
+  if (s.superOver) {
+    const f = overDef(s).format;
+    return Array.isArray(f) ? f[f.length - 1] : f ?? "T20";
+  }
+  const f = overDef(s).format;
+  if (Array.isArray(f)) return f[Math.min(ball, f.length - 1)];
+  return f ?? "T20";
+}
+export function caller(s: DuelState, ball = s.ball): Side {
+  const first = s.superOver ? "you" : s.setup.rules.firstCaller;
+  return ball % 2 === 0 ? first : first === "you" ? "rival" : "you";
+}
+export function ballsInSegment(s: DuelState): number { return s.superOver ? SO_BALLS : BALLS; }
+
+/** The value a card shows on a stat right now (wildcard swaps, captain bonus). */
+export function statValue(s: DuelState, side: Side, card: string, k: StatKey, f: Format = ballFormat(s)): number {
+  const sw = side === "you" ? s.swaps[card]?.[k] : undefined;
+  let v = sw ?? rawStat(card, f, k);
+  const cap = side === "you" ? s.captain : s.setup.rivalCaptain ?? null;
+  if (cap === card && s.setup.rules.captain && signatureStat(card, f) === k) v = k === "econ" ? v * (1 - CAPTAIN_BONUS) : v * (1 + CAPTAIN_BONUS);
+  const form = side === "you" ? s.setup.form?.[card] ?? 0 : 0;
+  if (form) v = k === "econ" ? v * (1 - form) : v * (1 + form);
+  return v;
+}
+function weight(s: DuelState, k: StatKey, f: Format): number {
+  return s.setup.rules.weighted ? FORMAT_WEIGHTS[f][k] ?? 1 : 1;
+}
+export function totals(s: DuelState): [number, number] {
+  let y = 0, r = 0;
+  for (const [a, b] of s.overRuns) { y += a; r += b; }
+  return [y, r];
+}
+
+// ---------------------------------------------------------------- setup
+export function newDuel(setup: DuelSetup, goals: StarGoals): DuelState {
+  const r = setup.rules;
+  const s: DuelState = {
+    setup, phase: r.captain ? "captain" : "call", over: 0, ball: 0, superOver: false,
+    youHand: setup.overs[0].you.slice(), rivalHand: setup.overs[0].rival.slice(),
+    overRuns: [[0, 0]], soRuns: [0, 0], oversWon: [0, 0], wickets: [0, 0], pot: 0, potBalls: 0,
+    freeHit: r.freeHit, review: r.review, powerplay: r.powerplay, wildcard: r.wildcard, rivalPP: r.rivalPowerplay ? 1 : 0,
+    ppBalls: 0, captain: null, swaps: {}, rivalCall: null, pending: null, last: null, log: [],
+    rng: setup.seed | 0, result: null,
+    stats: { aggWins: 0, aggLosses: 0, safePlays: 0, ballsWon: 0, boundaries: 0, rivalBallsWon: 0 },
+    goals, toJSON: compactJSON,
+  };
+  if (r.startTied != null) {
+    s.overRuns = [[r.startTied, r.startTied]];
+    startSuperOver(s);
+  } else if (!r.captain) startBall(s);
+  return s;
+}
+
+function clone(s: DuelState): DuelState {
+  return {
+    ...s,
+    youHand: s.youHand.slice(), rivalHand: s.rivalHand.slice(),
+    overRuns: s.overRuns.map((x) => [x[0], x[1]] as [number, number]),
+    soRuns: [s.soRuns[0], s.soRuns[1]], oversWon: [s.oversWon[0], s.oversWon[1]], wickets: [s.wickets[0], s.wickets[1]],
+    swaps: s.swaps, // copy-on-write (see swapStat)
+    log: s.log, // append-only, copied on write
+    stats: { ...s.stats },
+  };
+}
+
+function startBall(s: DuelState) {
+  s.rivalCall = null;
+  s.phase = caller(s) === "you" ? "call" : "respond";
+  if (s.phase === "respond") {
+    const dist = rivalCallDist(s);
+    let x = nextRand(s), pick = dist[dist.length - 1];
+    for (const d of dist) { x -= d.p; if (x <= 0) { pick = d; break; } }
+    const f = ballFormat(s);
+    const pct = percentile(f, pick.stat, statValue(s, "rival", pick.card, pick.stat));
+    const pp = s.rivalPP > 0 && !s.superOver && s.ppBalls === 0 && pct > 0.8;
+    if (pp) { s.rivalPP--; s.ppBalls = 2; }
+    s.rivalCall = { card: pick.card, stat: pick.stat, stance: rivalStance(s, pct, pick.card), powerplay: pp };
+  }
+}
+
+// ---------------------------------------------------------------- the rival AI (public information only)
+/** How the rival's personality turns the strength of its call (percentile) into a stance. */
+export function rivalStance(s: DuelState, pct: number, card?: string): Stance {
+  const r = s.setup.rules;
+  if (!r.stances) return "normal";
+  if (r.rivalStances?.length) {
+    const k = rivalCallIndex(s);
+    return r.rivalStances[Math.min(k, r.rivalStances.length - 1)];
+  }
+  if (r.aceSwing && card != null && card === rivalAce(s)) return "aggressive";
+  switch (s.setup.personality) {
+    case "aggro": return "aggressive";
+    case "gambler": return pct > 0.5 ? "aggressive" : "normal";
+    case "cautious": return pct < 0.55 ? "safe" : "normal";
+    // Baiter: in the open it sandbags (weak cards Safe so your wins earn 1, its last aces swung hard); in the fog it
+    // bluffs (weak cards swiped Aggressive to draw your aces out, strong cards played quietly).
+    case "baiter": return s.setup.rules.fog ? (pct < 0.6 ? "aggressive" : "normal") : pct < 0.6 ? "safe" : "aggressive";
+    default: return pct > 0.85 ? "aggressive" : pct < 0.35 ? "safe" : "normal";
+  }
+}
+
+/** How many calls the rival has already made in this over (or this Super Over): 0 on its first call. */
+export function rivalCallIndex(s: DuelState): number {
+  let k = 0;
+  for (const b of s.log) if (b.over === s.over && b.superOver === s.superOver && b.caller === "rival") k++;
+  return k;
+}
+
+/** The rival's ACE for Ace Swing: the strongest card (card power in the over's format) of its hand at the over's start. */
+export function rivalAce(s: DuelState): string | null {
+  if (!s.setup.rules.aceSwing) return null;
+  const d = overDef(s);
+  const f = ballFormat(s, 0);
+  return d.rival.reduce((a, c) => (cardPower(c, f) > cardPower(a, f) ? c : a), d.rival[0]);
+}
+
+function callScore(s: DuelState, card: string, k: StatKey): number {
+  const f = ballFormat(s);
+  return percentile(f, k, statValue(s, "rival", card, k, f)) * (0.75 + 0.25 * weight(s, k, f));
+}
+
+/**
+ * The rival's call as a probability distribution (the same one it samples from — the bots' estimator reads it too).
+ * With probability `skill` it plays its preferred line; otherwise a random card with its best stat (half) or any stat.
+ * Preferred line: its strongest card on its strongest stat — except the BAITER, who leads with its weakest card
+ * (dangled aggressively) and keeps its aces to answer your calls.
+ */
+export function rivalCallDist(s: DuelState): { card: string; stat: StatKey; p: number }[] {
+  const hand = s.rivalHand;
+  const sk = s.setup.skill;
+  const best = (c: string) => STATS.reduce((b, k) => (callScore(s, c, k) > callScore(s, c, b) ? k : b), STATS[0]);
+  let pref = hand[0];
+  if (s.setup.personality === "baiter" && hand.length > 1) {
+    pref = hand.reduce((a, c) => (cardPower(c, ballFormat(s)) < cardPower(a, ballFormat(s)) ? c : a), hand[0]);
+  } else {
+    pref = hand.reduce((a, c) => (callScore(s, c, best(c)) > callScore(s, a, best(a)) ? c : a), hand[0]);
+  }
+  const out = new Map<string, { card: string; stat: StatKey; p: number }>();
+  const add = (card: string, stat: StatKey, p: number) => {
+    const key = card + "|" + stat;
+    const e = out.get(key);
+    if (e) e.p += p; else out.set(key, { card, stat, p });
+  };
+  const bluff = s.setup.personality === "baiter" && s.setup.rules.fog && s.setup.rules.bluffLead && hand.length > 1 && rivalCallIndex(s) === 0;
+  const worst = (c: string) => STATS.reduce((b, k) => (callScore(s, c, k) < callScore(s, c, b) ? k : b), STATS[0]);
+  add(pref, bluff ? worst(pref) : best(pref), sk);
+  const rest = 1 - sk;
+  for (const c of hand) {
+    add(c, best(c), (rest * 0.5) / hand.length);
+    for (const k of STATS) add(c, k, (rest * 0.5) / hand.length / STATS.length);
+  }
+  return [...out.values()];
+}
+
+/** Outcome of a ball from the CALLER's point of view, before stances: sign and band runs (weighted). */
+function rawOutcome(s: DuelState, callerSide: Side, callerCard: string, respCard: string, k: StatKey): { sign: number; runs: number; cv: number; rv: number } {
+  const f = ballFormat(s);
+  const respSide: Side = callerSide === "you" ? "rival" : "you";
+  const cv = statValue(s, callerSide, callerCard, k, f);
+  const rv = statValue(s, respSide, respCard, k, f);
+  const c = compare(f, k, cv, rv);
+  return { sign: c.sign, runs: c.sign === 0 ? 0 : applyWeight(bandRuns(c.units), weight(s, k, f)), cv, rv };
+}
+
+/**
+ * The rival's answer to your face-up call, as a distribution. With probability `skill` it plays its best answer:
+ * the weakest card that still wins (saving its aces), or — when nothing wins — its weakest card. Otherwise random.
+ */
+export function rivalResponseDist(s: DuelState, youCard: string, k: StatKey): { card: string; p: number }[] {
+  const hand = s.rivalHand;
+  const f = ballFormat(s);
+  const pw = (c: string) => cardPower(c, f);
+  const winners = hand.filter((c) => rawOutcome(s, "you", youCard, c, k).sign < 0);
+  const pool = winners.length ? winners : hand;
+  const pick = pool.reduce((a, c) => (pw(c) < pw(a) ? c : a), pool[0]);
+  const m = new Map<string, number>();
+  m.set(pick, s.setup.skill);
+  for (const c of hand) m.set(c, (m.get(c) ?? 0) + (1 - s.setup.skill) / hand.length);
+  return [...m.entries()].map(([card, p]) => ({ card, p }));
+}
+
+// ---------------------------------------------------------------- ball resolution
+interface BallCalc { winner: Side | "tie"; runs: number; wicket: Side | null }
+
+function ballCalc(s: DuelState, callerSide: Side, callerCard: string, respCard: string, k: StatKey, stance: Stance, freeHit: boolean, ppActive: boolean): BallCalc & { cv: number; rv: number } {
+  const o = rawOutcome(s, callerSide, callerCard, respCard, k);
+  if (o.sign === 0) return { winner: "tie", runs: 0, wicket: null, cv: o.cv, rv: o.rv };
+  const respSide: Side = callerSide === "you" ? "rival" : "you";
+  let runs = o.runs;
+  let wicket: Side | null = null;
+  if (o.sign > 0) {
+    if (stance === "aggressive") runs *= 2;
+    else if (stance === "safe") runs = Math.min(runs, 2);
+  } else {
+    if (stance === "aggressive") { runs += 2; wicket = callerSide; }
+    else if (stance === "safe") runs = 1;
+    if (freeHit) { runs = 0; wicket = null; }
+  }
+  if (ppActive) runs *= 2;
+  return { winner: o.sign > 0 ? callerSide : respSide, runs, wicket, cv: o.cv, rv: o.rv };
+}
+
+function potAdd(s: DuelState) {
+  if (s.setup.rules.carryPot) {
+    if (s.potBalls < 4) { s.potBalls++; s.pot = s.potBalls * 2; }
+  } else { s.potBalls = 1; s.pot = 2; }
+}
+
+function credit(s: DuelState, side: Side, runs: number) {
+  const i = side === "you" ? 0 : 1;
+  if (s.superOver) s.soRuns[i] += runs;
+  else s.overRuns[s.overRuns.length - 1][i] += runs;
+}
+
+function resolve(s: DuelState) {
+  const p = s.pending!;
+  const f = ballFormat(s);
+  const callerSide = p.caller;
+  let rivalCard = p.rivalCard;
+  if (callerSide === "you") {
+    // The rival answers now (it saw only your face-up card and the stat).
+    const dist = rivalResponseDist(s, p.youCard, p.stat);
+    let x = nextRand(s);
+    rivalCard = dist[dist.length - 1].card;
+    for (const d of dist) { x -= d.p; if (x <= 0) { rivalCard = d.card; break; } }
+  }
+  const rc = rivalCard!;
+  const ppActive = s.ppBalls > 0;
+  const c = callerSide === "you"
+    ? ballCalc(s, "you", p.youCard, rc, p.stat, p.stance, p.freeHit, ppActive)
+    : ballCalc(s, "rival", rc, p.youCard, p.stat, p.stance, false, ppActive);
+  const youVal = callerSide === "you" ? c.cv : c.rv;
+  const rivalVal = callerSide === "you" ? c.rv : c.cv;
+  let potWon = 0;
+  if (c.winner === "tie") potAdd(s);
+  else {
+    potWon = s.pot;
+    credit(s, c.winner, c.runs + potWon);
+    s.pot = 0; s.potBalls = 0;
+    if (c.winner === "you") s.stats.ballsWon++; else s.stats.rivalBallsWon++;
+    if (c.runs >= 4) s.stats.boundaries += c.winner === "you" ? 1 : 0;
+  }
+  if (c.wicket) s.wickets[c.wicket === "you" ? 0 : 1]++;
+  if (callerSide === "you" && p.stance === "aggressive") { if (c.winner === "you") s.stats.aggWins++; else if (c.winner === "rival") s.stats.aggLosses++; }
+  if (callerSide === "you" && p.stance === "safe") s.stats.safePlays++;
+  if (ppActive) s.ppBalls--;
+  s.youHand = s.youHand.filter((x) => x !== p.youCard);
+  s.rivalHand = s.rivalHand.filter((x) => x !== rc);
+  const res: BallResult = {
+    over: s.over, ball: s.ball, superOver: s.superOver, caller: callerSide, format: f, stat: p.stat,
+    youCard: p.youCard, rivalCard: rc, youVal, rivalVal, winner: c.winner, runs: c.runs, potWon,
+    stance: p.stance, freeHit: p.freeHit, powerplay: ppActive, wicket: c.wicket, reviewed: false, swap: p.swap,
+  };
+  s.last = res;
+  s.log = [...s.log, res];
+  s.pending = null;
+  s.rivalCall = null;
+  if (c.winner === "rival" && s.review > 0 && !s.superOver && c.runs + potWon > 0) { s.phase = "review"; return; }
+  afterBall(s);
+}
+
+/** Review: the lost ball is overturned — the rival's runs come off, a lost wicket is restored, the pot goes back. */
+function overturn(s: DuelState) {
+  const b = s.last!;
+  s.review--;
+  const i = 1;
+  if (s.superOver) s.soRuns[i] -= b.runs + b.potWon; else s.overRuns[s.overRuns.length - 1][i] -= b.runs + b.potWon;
+  if (b.potWon) { s.pot = b.potWon; s.potBalls = Math.max(1, Math.round(b.potWon / 2)); }
+  if (b.wicket === "you") s.wickets[0]--;
+  if (b.caller === "you" && b.stance === "aggressive") s.stats.aggLosses--;
+  s.stats.rivalBallsWon--;
+  const nb = { ...b, reviewed: true, winner: "tie" as const, runs: 0, potWon: 0, wicket: null };
+  s.last = nb;
+  s.log = [...s.log.slice(0, -1), nb];
+}
+
+function afterBall(s: DuelState) {
+  const r = s.setup.rules;
+  // Chase won the moment the target is reached; all out ends the duel at once.
+  if (r.target != null && totals(s)[0] >= r.target) return finish(s, true, "chased");
+  if (r.maxWickets != null && s.wickets[0] >= r.maxWickets) return finish(s, false, "all out");
+  if (r.maxWickets != null && s.wickets[1] >= r.maxWickets && r.target == null) return finish(s, true, "rival all out");
+  s.ball++;
+  if (s.ball < ballsInSegment(s)) { startBall(s); return; }
+  endSegment(s);
+}
+
+function endSegment(s: DuelState) {
+  const r = s.setup.rules;
+  const overs = s.setup.overs.length;
+  if (s.superOver) {
+    const [y, v] = s.soRuns;
+    let won = y > v;
+    if (y === v) won = tiebreak(s);
+    if (r.mode === "bestOf") {
+      s.oversWon[won ? 0 : 1]++;
+      s.superOver = false;
+      return nextOverOrFinish(s, `super over ${won ? "won" : "lost"}`);
+    }
+    return finish(s, won, y === v ? "super over tiebreak" : "super over");
+  }
+  const [oy, or] = s.overRuns[s.overRuns.length - 1];
+  if (r.target != null) {
+    if (s.over + 1 < overs) return nextOver(s);
+    return finish(s, totals(s)[0] >= r.target, "chase");
+  }
+  if (r.mode === "bestOf") {
+    if (oy === or) return startSuperOver(s);
+    s.oversWon[oy > or ? 0 : 1]++;
+    return nextOverOrFinish(s, "overs");
+  }
+  if (s.over + 1 < overs) return nextOver(s);
+  const [ty, tr] = totals(s);
+  if (ty === tr) return startSuperOver(s);
+  finish(s, ty > tr, "runs");
+}
+
+function nextOverOrFinish(s: DuelState, reason: string) {
+  const need = Math.floor(s.setup.overs.length / 2) + 1;
+  if (s.oversWon[0] >= need) return finish(s, true, reason);
+  if (s.oversWon[1] >= need) return finish(s, false, reason);
+  if (s.over + 1 >= s.setup.overs.length) return finish(s, s.oversWon[0] > s.oversWon[1], reason);
+  nextOver(s);
+}
+
+function nextOver(s: DuelState) {
+  s.over++;
+  s.ball = 0;
+  const d = overDef(s);
+  s.youHand = d.you.slice();
+  s.rivalHand = d.rival.slice();
+  s.overRuns = [...s.overRuns, [0, 0]];
+  s.swaps = {};
+  s.wildcard = s.setup.rules.wildcard;
+  if (!s.setup.rules.carryPot) { s.pot = 0; s.potBalls = 0; } // only the mega pot crosses overs
+  startBall(s);
+}
+
+function startSuperOver(s: DuelState) {
+  s.superOver = true;
+  s.ball = 0;
+  s.soRuns = [0, 0];
+  const d = overDef(s);
+  s.youHand = d.you.slice();
+  s.rivalHand = d.rival.slice();
+  s.swaps = {};
+  s.ppBalls = 0;
+  startBall(s);
+}
+
+/** Deterministic Super Over tiebreak: more Super Over balls won → fewer wickets → more balls won in the duel → you. */
+function tiebreak(s: DuelState): boolean {
+  const so = s.log.filter((b) => b.superOver && b.over === s.over);
+  const yw = so.filter((b) => b.winner === "you").length, rw = so.filter((b) => b.winner === "rival").length;
+  if (yw !== rw) return yw > rw;
+  if (s.wickets[0] !== s.wickets[1]) return s.wickets[0] < s.wickets[1];
+  if (s.stats.ballsWon !== s.stats.rivalBallsWon) return s.stats.ballsWon > s.stats.rivalBallsWon;
+  return true;
+}
+
+function finish(s: DuelState, won: boolean, reason: string) {
+  const [y, r] = totals(s);
+  const margin = s.setup.rules.target != null ? y - s.setup.rules.target : y - r;
+  s.phase = "done";
+  s.result = { won, you: y, rival: r, margin, stars: 0, reason };
+  s.result.stars = won ? 1 + (goalMet(s, s.goals.two) ? 1 : 0) + (goalMet(s, s.goals.two) && goalMet(s, s.goals.three) ? 1 : 0) : 0;
+}
+
+export function goalMet(s: DuelState, g: Goal): boolean {
+  const [y, r] = totals(s);
+  const margin = s.setup.rules.target != null ? y - s.setup.rules.target : y - r;
+  switch (g.kind) {
+    case "margin": return margin >= g.runs;
+    case "marginNoWickets": return margin >= g.runs && s.wickets[0] === 0;
+    case "noWickets": return s.wickets[0] === 0;
+    case "wicketsAtMost": return s.wickets[0] <= g.n;
+    case "aggWins": return s.stats.aggWins >= g.n;
+    case "boundaries":
+      if (g.distinct) return new Set(s.log.filter((b) => b.winner === "you" && b.runs >= 4).map((b) => b.stat)).size >= g.n;
+      if (g.minRuns == null && g.stat == null) return s.stats.boundaries >= g.n;
+      return s.log.filter((b) => b.winner === "you" && b.runs >= (g.minRuns ?? 4) && (g.stat == null || b.stat === g.stat)).length >= g.n;
+    case "runs": return y >= g.n;
+    case "ballsWon": return s.stats.ballsWon >= g.n;
+    case "pot": return s.log.some((b) => b.winner === "you" && b.potWon >= g.n);
+  }
+}
+
+// ---------------------------------------------------------------- moves
+export function legalMoves(s: DuelState): Move[] {
+  const r = s.setup.rules;
+  switch (s.phase) {
+    case "done": return [];
+    case "pending": return [{ t: "resolve" }];
+    case "review": return [{ t: "review", use: true }, { t: "review", use: false }];
+    case "captain": {
+      const all = [...new Set(s.setup.overs.flatMap((o) => o.you))];
+      return all.map((card) => ({ t: "captain", card }));
+    }
+    case "call": {
+      const out: Move[] = [];
+      const stances: Stance[] = r.stances ? ["normal", "aggressive", "safe"] : ["normal"];
+      const fhs = s.freeHit > 0 && !s.superOver ? [false, true] : [false];
+      const pps = s.powerplay > 0 && !s.superOver && s.ppBalls === 0 ? [false, true] : [false];
+      for (const card of s.youHand) for (const stat of STATS) {
+        for (const swap of swapOptions(s, card, stat)) for (const stance of stances) for (const freeHit of fhs) for (const powerplay of pps)
+          out.push({ t: "call", card, stat, stance, freeHit, powerplay, swap });
+      }
+      return out;
+    }
+    case "respond": {
+      const out: Move[] = [];
+      const k = s.rivalCall!.stat;
+      for (const card of s.youHand) for (const swap of swapOptions(s, card, k)) out.push({ t: "respond", card, swap });
+      return out;
+    }
+  }
+}
+
+/** Wildcard partners worth swapping with: a card still in hand whose value on this stat is better. */
+function swapOptions(s: DuelState, card: string, k: StatKey): (string | null)[] {
+  if (s.wildcard <= 0 || s.superOver) return [null];
+  const f = ballFormat(s);
+  const mine = statValue(s, "you", card, k, f);
+  const out: (string | null)[] = [null];
+  for (const o of s.youHand) {
+    if (o === card) continue;
+    const v = statValue(s, "you", o, k, f);
+    if (compare(f, k, v, mine).sign > 0) out.push(o);
+  }
+  return out;
+}
+
+function swapStat(s: DuelState, a: string, b: string, k: StatKey) {
+  const f = ballFormat(s);
+  const va = s.swaps[a]?.[k] ?? rawStat(a, f, k);
+  const vb = s.swaps[b]?.[k] ?? rawStat(b, f, k);
+  s.swaps = { ...s.swaps, [a]: { ...s.swaps[a], [k]: vb }, [b]: { ...s.swaps[b], [k]: va } };
+  s.wildcard--;
+}
+
+export function moveKey(m: Move): string {
+  switch (m.t) {
+    case "captain": return `C${m.card}`;
+    case "call": return `K${m.card}|${m.stat}|${m.stance}|${m.freeHit ? 1 : 0}|${m.powerplay ? 1 : 0}|${m.swap ?? ""}`;
+    case "respond": return `R${m.card}|${m.swap ?? ""}`;
+    case "resolve": return "X";
+    case "review": return m.use ? "V1" : "V0";
+  }
+}
+
+/** Applies a move (returns a NEW state). Throws on an illegal move. */
+export function applyMove(prev: DuelState, m: Move): DuelState {
+  const s = clone(prev);
+  s.rng = mix(s.rng, moveKey(m));
+  switch (m.t) {
+    case "captain":
+      if (s.phase !== "captain") throw new Error("not captain phase");
+      s.captain = m.card;
+      startBall(s);
+      return s;
+    case "call": {
+      if (s.phase !== "call" || !s.youHand.includes(m.card)) throw new Error("illegal call");
+      if (m.swap) swapStat(s, m.card, m.swap, m.stat);
+      if (m.freeHit) { if (s.freeHit <= 0) throw new Error("no free hit"); s.freeHit--; }
+      if (m.powerplay) { if (s.powerplay <= 0) throw new Error("no powerplay"); s.powerplay--; s.ppBalls = 2; }
+      s.pending = { caller: "you", youCard: m.card, rivalCard: null, stat: m.stat, stance: m.stance, freeHit: m.freeHit, powerplay: m.powerplay, swap: m.swap };
+      s.phase = "pending";
+      return s;
+    }
+    case "respond": {
+      if (s.phase !== "respond" || !s.youHand.includes(m.card)) throw new Error("illegal response");
+      const rc = s.rivalCall!;
+      if (m.swap) swapStat(s, m.card, m.swap, rc.stat);
+      s.pending = { caller: "rival", youCard: m.card, rivalCard: rc.card, stat: rc.stat, stance: rc.stance, freeHit: false, powerplay: rc.powerplay, swap: m.swap };
+      s.phase = "pending";
+      return s;
+    }
+    case "resolve":
+      if (s.phase !== "pending") throw new Error("nothing to resolve");
+      resolve(s);
+      return s;
+    case "review":
+      if (s.phase !== "review") throw new Error("no review pending");
+      if (m.use) overturn(s);
+      afterBall(s);
+      return s;
+  }
+}
+
+// ---------------------------------------------------------------- the fair estimator (bots + coach hint)
+/**
+ * What a sharp player can EXPECT from a choice using only what is on the table: your hand, the rival's hand from the
+ * pre-duel deck preview (minus the cards it has played), the rival's face-up call, and its known personality/skill.
+ * It never reads the hidden response or the rng. Returned in runs (you minus rival) for this ball.
+ */
+export function expectedBall(s: DuelState): number {
+  const p = s.pending;
+  if (!p) return 0;
+  const pp = s.ppBalls > 0;
+  const val = (c: BallCalc) => (c.winner === "tie" ? 0 : (c.winner === "you" ? 1 : -1) * (c.runs + s.pot)) + (c.winner === "tie" ? tieValue(s) : 0) - wicketCost(s, c.wicket);
+  if (p.caller === "you") {
+    let e = 0;
+    for (const d of rivalResponseDist(s, p.youCard, p.stat)) e += d.p * val(ballCalc(s, "you", p.youCard, d.card, p.stat, p.stance, p.freeHit, pp));
+    return e;
+  }
+  if (!s.setup.rules.fog) return val(ballCalc(s, "rival", p.rivalCard!, p.youCard, p.stat, p.stance, false, pp));
+  // Fog: the called card is hidden — weigh every card in the rival's hand by how likely it made this call (the stat AND
+  // the visible swipe: a personality's stance rule is public, so a swipe narrows down which card it can be).
+  const dist = fogCandidates(s, p.stat, p.stance);
+  const tot = dist.reduce((a, d) => a + d.p, 0) || 1;
+  let e = 0;
+  for (const d of dist) e += (d.p / tot) * val(ballCalc(s, "rival", d.card, p.youCard, p.stat, p.stance, false, pp));
+  return e;
+}
+/**
+ * Under fog: the rival cards that could have made this call (stat + visible stance), with their call probability.
+ * Public information only — the stance rule of each personality is shown in the pre-duel card.
+ */
+export function fogCandidates(s: DuelState, stat: StatKey, stance: Stance): { card: string; stat: StatKey; p: number }[] {
+  const f = ballFormat(s);
+  const all = rivalCallDist(s).filter((d) => d.stat === stat);
+  const fit = all.filter((d) => rivalStance(s, percentile(f, d.stat, statValue(s, "rival", d.card, d.stat, f)), d.card) === stance);
+  return fit.length ? fit : all;
+}
+function tieValue(s: DuelState): number { return 0 * s.pot; }
+function wicketCost(s: DuelState, w: Side | null): number {
+  if (!w) return 0;
+  const mw = s.setup.rules.maxWickets;
+  const sign = w === "you" ? 1 : -1;
+  if (mw == null) return sign * 0.5;
+  const left = mw - s.wickets[w === "you" ? 0 : 1];
+  return sign * (left <= 1 ? 40 : 3);
+}
+
+/** Value of the cards still to play (yours minus the rival's) + unused power cards, in rough runs. */
+export function handValue(s: DuelState, exclude?: { you?: string; rival?: string }): number {
+  if (s.phase === "done") return 0;
+  const f = ballFormat(s);
+  const left = ballsInSegment(s) - s.ball;
+  if (left <= 1) return 0;
+  const pw = (c: string, side: Side) => cardPower(c, f) + (side === "you" && s.captain === c && s.setup.rules.captain ? 0.08 : 0);
+  let mine = 0, theirs = 0;
+  for (const c of s.youHand) if (c !== exclude?.you) mine += pw(c, "you");
+  for (const c of s.rivalHand) if (c !== exclude?.rival) theirs += pw(c, "rival");
+  const nMine = s.youHand.length - (exclude?.you ? 1 : 0), nTheirs = s.rivalHand.length - (exclude?.rival ? 1 : 0);
+  const avg = (nMine ? mine / nMine : 0) - (nTheirs ? theirs / nTheirs : 0);
+  const balls = Math.max(0, Math.min(nMine, nTheirs));
+  let v = avg * balls * HAND_WEIGHT;
+  if (!s.superOver) v += (s.review > 0 ? 2 : 0) + (s.freeHit > 0 ? 2.5 : 0) + (s.powerplay > 0 ? 2.5 : 0) + (s.wildcard > 0 ? 1.5 : 0);
+  return v;
+}
+export const HAND_WEIGHT = 5;
+
+/** The one number a player "sees" as how well it is going: runs ahead + expected value of the ball in play + hand. */
+export function evaluate(s: DuelState): number {
+  if (s.phase === "done") return s.result!.won ? 1000 + s.result!.margin : -1000 + s.result!.margin;
+  const [y, r] = totals(s);
+  const rules = s.setup.rules;
+  const lead = s.superOver ? s.soRuns[0] - s.soRuns[1] : rules.target != null ? y - rules.target : y - r;
+  let v = lead + (rules.mode === "bestOf" ? (s.oversWon[0] - s.oversWon[1]) * 30 : 0);
+  if (rules.target != null) {
+    // In a chase only your runs count; the rival's runs are irrelevant.
+    v = y - rules.target;
+  }
+  if (s.pending) {
+    const e = expectedBall(s);
+    v += rules.target != null ? chaseExpected(s) : e;
+    const ex = { you: s.pending.youCard, rival: s.pending.rivalCard ?? undefined };
+    v += handValue(s, s.pending.caller === "rival" ? ex : { you: ex.you });
+  } else {
+    v += handValue(s);
+  }
+  return v;
+}
+
+/** Chase version of expectedBall: only runs you score count, wickets are what hurt. */
+function chaseExpected(s: DuelState): number {
+  const p = s.pending!;
+  const pp = s.ppBalls > 0;
+  const val = (c: BallCalc) => (c.winner === "you" ? c.runs + s.pot : 0) - wicketCost(s, c.wicket) * 2;
+  if (p.caller === "you") {
+    let e = 0;
+    for (const d of rivalResponseDist(s, p.youCard, p.stat)) e += d.p * val(ballCalc(s, "you", p.youCard, d.card, p.stat, p.stance, p.freeHit, pp));
+    return e;
+  }
+  if (!s.setup.rules.fog) return val(ballCalc(s, "rival", p.rivalCard!, p.youCard, p.stat, p.stance, false, pp));
+  const dist = fogCandidates(s, p.stat, p.stance);
+  const tot = dist.reduce((a, d) => a + d.p, 0) || 1;
+  let e = 0;
+  for (const d of dist) e += (d.p / tot) * val(ballCalc(s, "rival", d.card, p.youCard, p.stat, p.stance, false, pp));
+  return e;
+}
+
+/** Best move by the fair estimator (the Coach hint and the validate bot). */
+export function bestMove(s: DuelState): Move | null {
+  const ms = legalMoves(s);
+  if (!ms.length) return null;
+  let best = ms[0], bv = -Infinity;
+  for (const m of ms) {
+    const v = evaluate(applyMove(s, m));
+    if (v > bv) { bv = v; best = m; }
+  }
+  return best;
+}

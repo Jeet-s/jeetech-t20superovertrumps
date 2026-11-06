@@ -1,0 +1,58 @@
+PASS level_intents: all 60 levels have a specific intent
+PASS no_filler_levels: no trivial filler levels after the tutorial
+FAIL level_design: level-design review 6.4/10 (bar 8), 8 level(s) below 6/10: The ladder has a good teach-then-combine structure and clear intents. Weaknesses: a trivial opening (about 20 levels at 80-99% win rate), a late cliff (L58-L60 at 43-49% casual), fixed hands that bypass the collection meta, heavy card and rival reuse, rule stacking that is too dense, data errors on some cards, and IP risk from near-real names. About half the units are solid, a few are memorable bosses, and many are filler. Curve: Strong mechanic ladder: stat pick, then answering, then tie pot, counting, Super Over, stances, Free Hit, Review, Powerplay, format weights, captain, fog, wildcard, mega pot, chases. Each chapter teaches before it combines, and each ends on a boss (L10, L20, L30, L40, L50, L60).
+
+Problems:
+1. Difficulty is front-loaded wrongly. Ch1-2 win rates are 80-99% for casual players, so the first 20 levels barely test anything. Ch5-6 then drop to 43-62% casual (L58 47%, L59 43%, L60 49%). That is a cliff for a 2-minute casual game, and some units also fail skilled players (L35 76% skilled).
+2. Mechanic density is too high. Ch3-6 add a new rule about every 2 levels, and stacking (L29, L52, L60) turns the game into a rules lawyer's puzzle, not a quick duel. Players can't hold fog, wildcard, mega pot, formats and captain in their heads at once.
+3. Deck reuse and repetition. The same cards (Taijull Islam, Mohammeed Shami, Imaad Waseem, Babbar Azam, Pathirane) appear in nearly every unit. Rival decks are fixed lists of 6 weak or strong cards, so levels feel samey and the 480-card collection never shows.
+4. The player's hand is given, not built. That undercuts the Deck Builder, albums and Form upgrades, which are the main retention pillars. Hands should come from the player's own deck, with the given hand only in teaching levels.
+5. Breather placement is inconsistent. L7, L17, L27, L37, L47 and L55 are well-timed, but L55 sits before the hardest chase block and is also a very easy 100% skilled win. L58-L60 have no breather after them.
+6. Retention: rewards scale linearly (46 to 500 coins) and the only differentiators are the boss captain cards. There is no replay value or star-chasing beyond the 3-star goals, and no variant nodes, so after 60 nodes the loop depends on the meta-layer.
+7. Data errors: many cards have bad or inconsistent data. Najibullaah Zadran and Hinerik Klaassen show Economy values with W0, which is impossible. Aandray Russell's ODI and T20 lines are inconsistent, and Test lines for pacers like Shaheen Afridy show unrealistic numbers.
+8. The "altered spelling" cartoon names (Babbar Azam, Rohith Sharma, Viraat Kohli) are still obviously real people. This is a licensing and IP risk.
+9. Player-facing complexity: aggression, safe, power cards, formats and captains all share the swipe and tap controls. Fog hides the opponent's card but the call gives it away, so it's a weak mystery.
+
+Overall: a clever, teachable design with a good chapter shape, but the difficulty curve is inverted (trivial early, brutal late) and units feel like puzzles with fixed hands.
+REDESIGN THESE LEVELS (keep the ones not listed):
+L35 (4/10): Skilled win rate is 76%, only 10 points above casual, so skill doesn't pay. The player is down on pure card quality (rival legends), making it feel unfair. → Give the player a stronger bowling set or lower the rival Runs so the captain bowler decides it.
+L4 (5/10): The rival has only one slugger and 99% skilled win. The deck preview makes counting trivial. → Add a second near-slugger on the rival and make the player's lead choice matter.
+L7 (5/10): 97% to 100% win rate; no spectacle beyond 'hunt boundaries'. → Add a visible score-attack target (6 boundaries) and a bonus reward for it.
+L17 (5/10): 93% to 99% win; placed after only 3 stance levels, so it is rewarding but forgettable. → Make the star goal more spectacular, e.g. 3 aggressive wins for a 6-run swing.
+L37 (5/10): Plays like a duplicate of L32 with easier cards. → Use the breather to let the player try a captain on any card with a free swap.
+L55 (5/10): 91% casual, 100% skilled; no tension. → Add a scoring target for the spectacle.
+L57 (5/10): Fog + ODI + chase 26: 56% casual, 83% skilled; the difficulty is rules complexity, not decisions. → Reduce to 24 and remove the fog.
+L58 (5/10): 47% casual; requires near-perfect play and may exceed what the deck can produce. Chase 30 may be feasible only with the Powerplay x4 ball. → Lower to 26 and verify solvability.
+L1 (6/10): Near-certain win (99% skilled); the stated aha (widest gap) isn't tested. Rival includes a fully blank card. → Add one call where the obvious stat is the wrong pick, and remove the blank Taijull card.
+L2 (6/10): 95% casual win, so cheapest-winner is not enforced. Blank Taijull is in rival hand. → Make the rival's calls tight enough that overspending an ace costs a later ball.
+L3 (6/10): Ties are 'better than losing' only in a narrow case, and the 2-run pot is overvalued so ties always look good. Dense explanation. → Give a clearer scripted moment where a deliberate tie wins the over and reduce the text.
+L6 (6/10): The intent is overloaded (answering, pot, counting) and the unwinnable Economy calls are unintuitive for a fresh player. → Split the pot lesson out or add an explicit hint on the tie option.
+L9 (6/10): Very similar to L8 and L6 (lose small, answer calls). → Give it unique value, e.g. only two of the rival's three calls are Economy and one is a surprise Catches call.
+L13 (6/10): 89% casual win; Safe is rarely needed. Intent is to lose small, but the AI is balanced and not punishing. → Add a rival hand that clearly out-cards the player so Safe becomes necessary.
+L14 (6/10): Close repeat of L11 with different rival. → Merge into a chapter with distinctive rules, such as wicket limit of 1.
+L16 (6/10): Largely a repeat of L15 with the call order flipped. → Give the rival different constraints, such as being capped at 1 run on Safe.
+L23 (6/10): Mostly a repeat of L22; the gambler is predictable. → Change the rival so it only swipes up when the player has no Free Hit.
+L27 (6/10): Two goals in one; the Powerplay lesson is overwhelmed by the breather. 87% casual. → Make it a pure Powerplay teach level at normal difficulty.
+L28 (6/10): Casual 63% is tough for a new mechanic, and a rival power-play can feel unfair when it follows the player's loss. → Telegraph the rival's Powerplay a ball earlier.
+L34 (6/10): Only 6 choices (a captain pick), and the 'just short' scenario is hard to see. → Display the captain bonus delta against the rival's ace.
+L42 (6/10): Largely a flip of L41. → Add a swipe-reading puzzle with a distinct reward.
+L44 (6/10): Overlap with L43 and L46. → Combine L43 and L44 into one unit.
+L46 (6/10): 351 choices with hidden information; 61% casual but 96% skilled means a huge skill gap. → Tutorial prompts to narrow the choice.
+L47 (6/10): 79% casual isn't a breather after the 61% level; cautious AI is boring. → Loosen the rival further to reach 90%.
+L48 (6/10): 56% casual; the key answer ('a card that cannot lose') is rarely available. → Include one clear safe answer card.
+
+level-design score 6.4/10 — The ladder has a good teach-then-combine structure and clear intents. Weaknesses: a trivial opening (about 20 levels at 80-99% win rate), a late cliff (L58-L60 at 43-49% casual), fixed hands that bypass the collection meta, heavy card and rival reuse, rule stacking that is too dense, data errors on some cards, and IP risk from near-real names. About half the units are solid, a few are memorable bosses, and many are filler.
+curve: Strong mechanic ladder: stat pick, then answering, then tie pot, counting, Super Over, stances, Free Hit, Review, Powerplay, format weights, captain, fog, wildcard, mega pot, chases. Each chapter teaches before it combines, and each ends on a boss (L10, L20, L30, L40, L50, L60).
+
+Problems:
+1. Difficulty is front-loaded wrongly. Ch1-2 win rates are 80-99% for casual players, so the first 20 levels barely test anything. Ch5-6 then drop to 43-62% casual (L58 47%, L59 43%, L60 49%). That is a cliff for a 2-minute casual game, and some units also fail skilled players (L35 76% skilled).
+2. Mechanic density is too high. Ch3-6 add a new rule about every 2 levels, and stacking (L29, L52, L60) turns the game into a rules lawyer's puzzle, not a quick duel. Players can't hold fog, wildcard, mega pot, formats and captain in their heads at once.
+3. Deck reuse and repetition. The same cards (Taijull Islam, Mohammeed Shami, Imaad Waseem, Babbar Azam, Pathirane) appear in nearly every unit. Rival decks are fixed lists of 6 weak or strong cards, so levels feel samey and the 480-card collection never shows.
+4. The player's hand is given, not built. That undercuts the Deck Builder, albums and Form upgrades, which are the main retention pillars. Hands should come from the player's own deck, with the given hand only in teaching levels.
+5. Breather placement is inconsistent. L7, L17, L27, L37, L47 and L55 are well-timed, but L55 sits before the hardest chase block and is also a very easy 100% skilled win. L58-L60 have no breather after them.
+6. Retention: rewards scale linearly (46 to 500 coins) and the only differentiators are the boss captain cards. There is no replay value or star-chasing beyond the 3-star goals, and no variant nodes, so after 60 nodes the loop depends on the meta-layer.
+7. Data errors: many cards have bad or inconsistent data. Najibullaah Zadran and Hinerik Klaassen show Economy values with W0, which is impossible. Aandray Russell's ODI and T20 lines are inconsistent, and Test lines for pacers like Shaheen Afridy show unrealistic numbers.
+8. The "altered spelling" cartoon names (Babbar Azam, Rohith Sharma, Viraat Kohli) are still obviously real people. This is a licensing and IP risk.
+9. Player-facing complexity: aggression, safe, power cards, formats and captains all share the swipe and tap controls. Fog hides the opponent's card but the call gives it away, so it's a weak mystery.
+
+Overall: a clever, teachable design with a good chapter shape, but the difficulty curve is inverted (trivial early, brutal late) and units feel like puzzles with fixed hands.

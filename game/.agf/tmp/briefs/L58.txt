@@ -1,0 +1,23 @@
+UNIT L58 (playtest: casual 0.667, skilled 0.947, careless 0.327)
+CH6 SPIKE · RIVAL Coastline Climbers (balanced AI, skill 0.40) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive only on an ace number (top 15% of the game for that stat), Safe on a weak one (bottom 35%), else Normal
+RULES: plain T20 (no weights) · stances · Review x1 · Powerplay x1 (2 balls doubled) · CHASE 22 runs (rival runs don't count) · all out at 3 wickets · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL Rohith Sharma R4231 A32.05 SR140.89 W1 E9.26 C65
+  RIVAL Kumaar Sangakkaara R1382 A31.40 SR119.55 W0 E— C25
+  RIVAL Charrith Asalanka R1230 A25.63 SR125.00 W8 E8.00 C25
+  RIVAL Wanindu Hasarange R803 A14.09 SR124.49 W125 E6.91 C20
+  RIVAL Daniel Vettoori R205 A12.81 SR107.89 W38 E5.70 C9
+  RIVAL Kuldeep Yaadav R46 A9.20 SR92.00 W69 E6.75 C12
+  YOU   Darryl Mitchell R1473 A26.30 SR138.30 W9 E10.59 C38
+  YOU   Harry Brookk R798 A26.60 SR145.08 W0 E— C22
+  YOU   KL Raahul R2265 A37.75 SR139.12 W0 E— C23
+  YOU   Angello Mathews R1416 A25.29 SR119.00 W45 E7.37 C40
+  YOU   Maark Wood R26 A8.66 SR108.33 W50 E8.10 C9
+  YOU   Tabraiz Shemsi R10 A2.00 SR37.03 W89 E7.39 C12
+COACH (on-screen hint): Powerplay + swipe up on a sure ball is 4x. Review gives a lost wicket back — so one brave swipe is free.
+STARS: 1 win · 2 win by 4+ · 3 also no wickets lost
+REWARD: 393 coins, 136 XP, Club Pack · 3rd star: their star card Kumaar Sangakkaara for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 24-24 (target 22) and 11/12 re-deals; mid-skill bot wins 61%
+MECHANICS: target chase, powerplay, review, wicket limit
+CURRENT INTENT (may be STALE — written for an older deck): SPIKE — HARD CHASE 3: 26 off 6, three wickets, Powerplay + Review. Aha: Powerplay + aggressive on two sure balls is 4x the band twice; Review is your third wicket — swipe on the brave ball because a lost wicket can come back.

@@ -1,0 +1,23 @@
+UNIT L53 (playtest: casual 0.64, skilled 0.96, careless 0.387)
+CH6 COMBINE · RIVAL Riverside Regents (baiter AI, skill 0.60) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): BLUFFS in the fog: Aggressive on a weak number (bottom 60%), quiet (Normal) on a strong one
+RULES: plain T20 (no weights) · stances · Review x1 · FOG: rival's called card face-down · level totals after 6 balls → 3-ball Super Over · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL Gulbbadin Naib R1000 A19.23 SR125.60 W25 E7.80 C20
+  RIVAL Tamiim Iqbal R1758 A24.08 SR116.96 W0 E— C18
+  RIVAL Andrew Flintof R76 A12.66 SR122.58 W5 E7.13 C5
+  RIVAL Mohammaad Nabi R2300 A22.00 SR138.10 W99 E7.20 C65
+  RIVAL Kanne Williamson R2575 A33.44 SR123.08 W6 E8.33 C45
+  RIVAL Imaad Waseem R554 A27.70 SR125.62 W73 E6.27 C23
+  YOU   Mahayla Jayavardene R1493 A31.76 SR133.18 W0 E— C14
+  YOU   Rishab Pant R1209 A23.25 SR127.17 W0 E— C44
+  YOU   Towhidd Hridoy R750 A26.00 SR120.00 W0 E— C15
+  YOU   Anrich Norrtje R17 A2.83 SR48.57 W53 E7.01 C10
+  YOU   Keshav Maharaaj R103 A11.44 SR89.56 W38 E7.33 C14
+  YOU   Naseem Shaah R58 A7.25 SR107.40 W33 E8.05 C4
+COACH (on-screen hint): They BLUFF in the fog: a loud (Aggressive) call is always a weak number — beat it cheaply. Quiet means strong.
+STARS: 1 win · 2 win by 5+ · 3 also no wickets lost
+REWARD: 358 coins, 126 XP · 3rd star: their star card Gulbbadin Naib for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 21-0 and 11/12 re-deals; mid-skill bot wins 76%
+MECHANICS: bluffing rival, fog of war, review
+CURRENT INTENT (may be STALE — written for an older deck): MIXED, one headline — the BLUFF read, taught on the spot. Unlike the honest gamblers of L42 (loud = strong), the sandbagging Regents BLUFF in the fog, by a fixed public rule shown on the pre-duel card: a LOUD (Aggressive) call is always a weak number (bottom 60% of the game for that stat); a strong number is always called quietly. They lead with their weakest cards (Flintof, Naib, Tamiim) and keep three aces (Nabi, Williamson, Imaad). Aha: invert the read — beat a loud call with a mid card (it pays +2 and takes a wicket) and save Jayavardene and Norrtje (Economy 7.01) for the quiet calls; the bluff tracker shows how every loud call turned out, and the Review covers one quiet big loss. 3 stars: win by 5+ without losing a wicket.

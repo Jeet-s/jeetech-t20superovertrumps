@@ -1,0 +1,23 @@
+UNIT L49 (playtest: casual 0.6, skilled 0.88, careless 0.373)
+CH5 TWIST · RIVAL Topsy Turvy Troupe (balanced AI, skill 0.90) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive only on an ace number (top 15% of the game for that stat), Safe on a weak one (bottom 35%), else Normal
+RULES: format weights ON · stances · Wildcard x1/over · level totals after 6 balls → 3-ball Super Over · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL Harry Brookk R798 A26.60 SR145.08 W0 E— C22
+  RIVAL Darryl Mitchell R1473 A26.30 SR138.30 W9 E10.59 C38
+  RIVAL Rashhid Khan R520 A12.68 SR135.40 W161 E6.15 C20
+  RIVAL Wanindu Hasarange R803 A14.09 SR124.49 W125 E6.91 C20
+  RIVAL Rachiin Ravindra R309 A17.16 SR127.68 W13 E6.58 C12
+  RIVAL Azmatullah Omarzaii R400 A17.39 SR128.60 W25 E8.30 C10
+  YOU   Davvid Miller R2591 A33.21 SR140.66 W0 E— C82
+  YOU   Mohammaad Nabi R2300 A22.00 SR138.10 W99 E7.20 C65
+  YOU   Shakiib Al Hasan R2551 A23.19 SR121.19 W149 E6.81 C27
+  YOU   Mehidyy Hasan Miraz R450 A20.45 SR110.00 W22 E7.00 C10
+  YOU   Towhidd Hridoy R750 A26.00 SR120.00 W0 E— C15
+  YOU   Traviss Head R1093 A31.22 SR158.17 W1 E8.16 C11
+COACH (on-screen hint): T20 weights: Strike Rate and Economy pay x1.5. A swap can move a big number onto the card you call.
+STARS: 1 win · 2 win by 8+ · 3 also 1+ ball won for 9+ runs
+REWARD: 334 coins, 118 XP · 3rd star: their star card Wanindu Hasarange for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 36-16 and 12/12 re-deals; mid-skill bot wins 56%
+MECHANICS: wildcard swap, T20 weights, aggressive stance
+CURRENT INTENT (may be STALE — written for an older deck): TWIST wildcard + Test format: half your hand has no Test career (blank). Aha: the Wildcard can lend a Test man's Runs to a blank T20 card — a blank card plus a swap becomes a decoy that wins.

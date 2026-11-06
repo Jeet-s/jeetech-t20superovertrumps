@@ -1,0 +1,23 @@
+UNIT L42 (playtest: casual 0.653, skilled 0.893, careless 0.32)
+CH5 PRACTISE · RIVAL Mirror Maze Circus (gambler AI, skill 0.40) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive on any number above the game's median, else Normal (honest: loud = strong)
+RULES: plain T20 (no weights) · stances · FOG: rival's called card face-down · all out at 2 wickets · level totals after 6 balls → 3-ball Super Over · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL MS Dhonni R1617 A37.60 SR126.13 W0 E— C57
+  RIVAL Suryakumaar Yadav R2598 A38.20 SR167.07 W2 E6.25 C40
+  RIVAL Sachinn Tendulkaar R10 A10.00 SR83.33 W1 E8.00 C1
+  RIVAL Lasithh Malingha R323 A7.69 SR107.30 W107 E7.42 C13
+  RIVAL Yuvraaj Singg R1177 A28.02 SR136.38 W28 E7.29 C12
+  RIVAL Dasun Shaanaka R1456 A18.43 SR123.10 W33 E8.30 C40
+  YOU   Towhidd Hridoy R750 A26.00 SR120.00 W0 E— C15
+  YOU   Najibullaah Zadran R1900 A25.33 SR136.40 W0 E— C55
+  YOU   Shadaab Khan R735 A17.09 SR137.00 W112 E7.30 C45
+  YOU   Lockiee Ferguson R29 A3.62 SR80.55 W64 E7.10 C13
+  YOU   Gulbbadin Naib R1000 A19.23 SR125.60 W25 E7.80 C20
+  YOU   Azmatullah Omarzaii R400 A17.39 SR128.60 W25 E8.30 C10
+COACH (on-screen hint): Fog: a loud (Aggressive) call is a strong card — beat it and they lose a wicket. Two wickets and they're all out.
+STARS: 1 win · 2 win by 8+ · 3 also win 4+ balls
+REWARD: 292 coins, 104 XP, Gully Pack · 3rd star: their star card Yuvraaj Singg for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 29-14 and 12/12 re-deals; mid-skill bot wins 57%
+MECHANICS: fog of war, aggressive stance, wicket limit
+CURRENT INTENT (may be STALE — written for an older deck): PRACTISE fog with a wicket race: two wickets is all out for EITHER side, and the gambling Circus swipe AGGRESSIVE on any above-average call — honest swipes, so loud means strong. Aha: a loud fogged call is a strong card but also your chance: beating it pays +2 and takes a wicket, and two beaten swipes bowl them out — answer loud calls with your best (Shadaab's 112 wickets top all six; Najibullaah's Runs 1900 beat all but Suryakumaar), quiet ones with your cheapest. Their weak link is Tendulkaar (one T20I, 10 runs): a quiet call is often him.

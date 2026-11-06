@@ -1,0 +1,1592 @@
+{
+ "1": {
+  "decks": [
+   {
+    "you": [
+     "mohammad_rizwaan",
+     "ibrahiim_zadran",
+     "mahayla_jayavardene",
+     "haashim_amla",
+     "jaason_holder",
+     "jaak_kallis"
+    ],
+    "rival": [
+     "mujeeeb_ur_rahman",
+     "tabraiz_shemsi",
+     "mitchel_starc",
+     "jamess_anderson",
+     "lockiee_ferguson",
+     "shaheen_afridy"
+    ]
+   }
+  ],
+  "skill": 0.2
+ },
+ "2": {
+  "decks": [
+   {
+    "you": [
+     "ms_dhonni",
+     "martin_guptil",
+     "patt_cummins",
+     "tasskin_ahmed",
+     "hardik_pandey",
+     "yuvraaj_singg"
+    ],
+    "rival": [
+     "mohammad_rizwaan",
+     "aiden_markkram",
+     "najmull_hossain_shanto",
+     "akeall_hosein",
+     "mutti_ah_muraali_tharan",
+     "mitchel_starc"
+    ]
+   }
+  ],
+  "skill": 0.21
+ },
+ "3": {
+  "decks": [
+   {
+    "you": [
+     "joss_buttler",
+     "kl_raahul",
+     "davvid_miller",
+     "pathum_nissaanka",
+     "najmull_hossain_shanto",
+     "charrith_asalanka"
+    ],
+    "rival": [
+     "devoon_conway",
+     "shimron_hetmyre",
+     "mohammad_rizwaan",
+     "ibrahiim_zadran",
+     "timm_southee",
+     "mustafizzur_rahman"
+    ]
+   }
+  ],
+  "skill": 0.23
+ },
+ "4": {
+  "decks": [
+   {
+    "you": [
+     "aandray_russell",
+     "traviss_head",
+     "mitchel_marsh",
+     "tasskin_ahmed",
+     "dasun_shaanaka",
+     "liam_livingstonee"
+    ],
+    "rival": [
+     "glenn_maxwel",
+     "martin_guptil",
+     "tabraiz_shemsi",
+     "mujeeeb_ur_rahman",
+     "kuldeep_yaadav",
+     "fazalhaqq_farooqi"
+    ]
+   }
+  ],
+  "skill": 0.24
+ },
+ "5": {
+  "decks": [
+   {
+    "you": [
+     "phill_salt",
+     "traviss_head",
+     "trentt_boult",
+     "mohammaad_nabi",
+     "joe_roott",
+     "mahayla_jayavardene"
+    ],
+    "rival": [
+     "quinten_de_kock",
+     "mathew_haydenn",
+     "alzarrii_joseph",
+     "shadaab_khan",
+     "saim_ayuub",
+     "suryakumaar_yadav"
+    ]
+   }
+  ],
+  "skill": 0.25
+ },
+ "6": {
+  "decks": [
+   {
+    "you": [
+     "kevin_peeter_sen",
+     "mahayla_jayavardene",
+     "adaam_zampa",
+     "tasskin_ahmed",
+     "kanne_williamson",
+     "kusal_menddis"
+    ],
+    "rival": [
+     "mujeeeb_ur_rahman",
+     "jasprit_bumraah",
+     "daniel_vettoori",
+     "fazalhaqq_farooqi",
+     "joshh_hazlewood",
+     "tabraiz_shemsi"
+    ]
+   }
+  ],
+  "skill": 0.26
+ },
+ "7": {
+  "decks": [
+   {
+    "you": [
+     "veerender_sehwaag",
+     "shoayb_akhtar",
+     "timm_southee",
+     "kriss_gayl",
+     "maark_wood",
+     "mujeeeb_ur_rahman"
+    ],
+    "rival": [
+     "joffra_archer",
+     "mitchel_starc",
+     "shimron_hetmyre",
+     "jaason_holder",
+     "jamess_anderson",
+     "rishab_pant"
+    ]
+   }
+  ],
+  "skill": 0.28
+ },
+ "8": {
+  "decks": [
+   {
+    "you": [
+     "joe_roott",
+     "najmull_hossain_shanto",
+     "mohammad_rizwaan",
+     "adiil_rashid",
+     "haaris_rauf",
+     "mutti_ah_muraali_tharan"
+    ],
+    "rival": [
+     "dwayn_braavo",
+     "keeron_pollarrd",
+     "andrew_flintof",
+     "shakiib_al_hasan",
+     "davvid_miller",
+     "fazalhaqq_farooqi"
+    ]
+   }
+  ],
+  "skill": 0.29
+ },
+ "9": {
+  "decks": [
+   {
+    "you": [
+     "suryakumaar_yadav",
+     "tamiim_iqbal",
+     "sachinn_tendulkaar",
+     "ibrahiim_zadran",
+     "dasun_shaanaka",
+     "liam_livingstonee"
+    ],
+    "rival": [
+     "maark_wood",
+     "haaris_rauf",
+     "shaheen_afridy",
+     "lasithh_malingha",
+     "tabraiz_shemsi",
+     "rashhid_khan"
+    ]
+   }
+  ],
+  "skill": 0.3
+ },
+ "10": {
+  "decks": [
+   {
+    "you": [
+     "kriss_gayl",
+     "najmull_hossain_shanto",
+     "brendan_maccalum",
+     "hasaan_ali",
+     "alzarrii_joseph",
+     "kagisoo_rabada"
+    ],
+    "rival": [
+     "aadam_gilkrist",
+     "phill_salt",
+     "veerender_sehwaag",
+     "benn_stokes",
+     "patt_cummins",
+     "jaason_holder"
+    ]
+   },
+   {
+    "you": [
+     "steven_smyth",
+     "aadam_gilkrist",
+     "akeall_hosein",
+     "mustafizzur_rahman",
+     "rachiin_ravindra",
+     "jaason_holder"
+    ],
+    "rival": [
+     "najibullaah_zadran",
+     "aybee_de_villyers",
+     "tabraiz_shemsi",
+     "naseem_shaah",
+     "mehidyy_hasan_miraz",
+     "jaak_kallis"
+    ]
+   }
+  ],
+  "skill": 0.31
+ },
+ "11": {
+  "decks": [
+   {
+    "you": [
+     "kl_raahul",
+     "shimron_hetmyre",
+     "mahayla_jayavardene",
+     "aiden_markkram",
+     "aadam_gilkrist",
+     "rohith_sharma"
+    ],
+    "rival": [
+     "lockiee_ferguson",
+     "maheesh_theekshaana",
+     "mujeeeb_ur_rahman",
+     "alzarrii_joseph",
+     "lasithh_malingha",
+     "kagisoo_rabada"
+    ]
+   }
+  ],
+  "skill": 0.33
+ },
+ "12": {
+  "decks": [
+   {
+    "you": [
+     "kriss_gayl",
+     "aybee_de_villyers",
+     "maheesh_theekshaana",
+     "mustafizzur_rahman",
+     "mitchel_marsh",
+     "shakiib_al_hasan"
+    ],
+    "rival": [
+     "aandray_russell",
+     "josh_inglys",
+     "rashhid_khan",
+     "mujeeeb_ur_rahman",
+     "viraat_kohli",
+     "haashim_amla"
+    ]
+   }
+  ],
+  "skill": 0.34
+ },
+ "13": {
+  "decks": [
+   {
+    "you": [
+     "veerender_sehwaag",
+     "quinten_de_kock",
+     "suryakumaar_yadav",
+     "alzarrii_joseph",
+     "gulbbadin_naib",
+     "mujeeeb_ur_rahman"
+    ],
+    "rival": [
+     "kevin_peeter_sen",
+     "glennn_phillips",
+     "kusal_menddis",
+     "mutti_ah_muraali_tharan",
+     "maheesh_theekshaana",
+     "adaam_zampa"
+    ]
+   }
+  ],
+  "skill": 0.35
+ },
+ "14": {
+  "decks": [
+   {
+    "you": [
+     "rahmannullah_gurbaz",
+     "rishab_pant",
+     "pathum_nissaanka",
+     "sachinn_tendulkaar",
+     "benn_stokes",
+     "keeron_pollarrd"
+    ],
+    "rival": [
+     "patt_cummins",
+     "tasskin_ahmed",
+     "maark_wood",
+     "haaris_rauf",
+     "naseem_shaah",
+     "joshh_hazlewood"
+    ]
+   }
+  ],
+  "skill": 0.37
+ },
+ "15": {
+  "decks": [
+   {
+    "you": [
+     "shubmaan_gill",
+     "aiden_markkram",
+     "darryl_mitchell",
+     "jaak_kallis",
+     "matheesha_pathirane",
+     "akeall_hosein"
+    ],
+    "rival": [
+     "keshav_maharaaj",
+     "shadaab_khan",
+     "wanindu_hasarange",
+     "adaam_zampa",
+     "mutti_ah_muraali_tharan",
+     "haashim_amla"
+    ]
+   }
+  ],
+  "skill": 0.38
+ },
+ "16": {
+  "decks": [
+   {
+    "you": [
+     "kumaar_sangakkaara",
+     "ms_dhonni",
+     "akeall_hosein",
+     "kuldeep_yaadav",
+     "jaason_holder",
+     "azmatullah_omarzaii"
+    ],
+    "rival": [
+     "viraat_kohli",
+     "kanne_williamson",
+     "ricki_ponting",
+     "mitchel_santner",
+     "darren_sammi",
+     "dwayn_braavo"
+    ]
+   }
+  ],
+  "skill": 0.39
+ },
+ "17": {
+  "decks": [
+   {
+    "you": [
+     "traviss_head",
+     "shoayb_akhtar",
+     "suryakumaar_yadav",
+     "mohammad_amirr",
+     "lasithh_malingha",
+     "jasprit_bumraah"
+    ],
+    "rival": [
+     "matheesha_pathirane",
+     "dasun_shaanaka",
+     "littoon_das",
+     "naseem_shaah",
+     "najibullaah_zadran",
+     "joe_roott"
+    ]
+   }
+  ],
+  "skill": 0.4
+ },
+ "18": {
+  "decks": [
+   {
+    "you": [
+     "towhidd_hridoy",
+     "kriss_gayl",
+     "kevin_peeter_sen",
+     "joshh_hazlewood",
+     "arshdeep_singhh",
+     "shoayb_akhtar"
+    ],
+    "rival": [
+     "shai_hoppe",
+     "rahmannullah_gurbaz",
+     "veerender_sehwaag",
+     "mitchel_marsh",
+     "shadaab_khan",
+     "rachiin_ravindra"
+    ]
+   }
+  ],
+  "skill": 0.42
+ },
+ "19": {
+  "decks": [
+   {
+    "you": [
+     "glennn_phillips",
+     "phill_salt",
+     "aiden_markkram",
+     "shoayb_akhtar",
+     "darren_sammi",
+     "liam_livingstonee"
+    ],
+    "rival": [
+     "shai_hoppe",
+     "kl_raahul",
+     "brendan_maccalum",
+     "mustafizzur_rahman",
+     "mitchel_starc",
+     "haaris_rauf"
+    ]
+   }
+  ],
+  "skill": 0.43
+ },
+ "20": {
+  "decks": [
+   {
+    "you": [
+     "pathum_nissaanka",
+     "towhidd_hridoy",
+     "najibullaah_zadran",
+     "dwayn_braavo",
+     "yuvraaj_singg",
+     "keshav_maharaaj"
+    ],
+    "rival": [
+     "aadam_gilkrist",
+     "traviss_head",
+     "shubmaan_gill",
+     "lasithh_malingha",
+     "joffra_archer",
+     "kemaar_roach"
+    ]
+   },
+   {
+    "you": [
+     "shubmaan_gill",
+     "charrith_asalanka",
+     "alzarrii_joseph",
+     "joshh_hazlewood",
+     "andrew_flintof",
+     "shakiib_al_hasan"
+    ],
+    "rival": [
+     "suryakumaar_yadav",
+     "mohammaad_nabi",
+     "dayl_stayn",
+     "mohammad_amirr",
+     "rachiin_ravindra",
+     "azmatullah_omarzaii"
+    ]
+   }
+  ],
+  "skill": 0.44
+ },
+ "21": {
+  "decks": [
+   {
+    "you": [
+     "aybee_de_villyers",
+     "najmull_hossain_shanto",
+     "haashim_amla",
+     "hasaan_ali",
+     "angello_mathews",
+     "wanindu_hasarange"
+    ],
+    "rival": [
+     "saim_ayuub",
+     "najibullaah_zadran",
+     "ricki_ponting",
+     "liam_livingstonee",
+     "patt_cummins",
+     "mujeeeb_ur_rahman"
+    ]
+   }
+  ],
+  "skill": 0.45
+ },
+ "22": {
+  "decks": [
+   {
+    "you": [
+     "rishab_pant",
+     "quinten_de_kock",
+     "ravindre_jadeja",
+     "trentt_boult",
+     "mehidyy_hasan_miraz",
+     "mitchel_marsh"
+    ],
+    "rival": [
+     "timm_southee",
+     "harry_brookk",
+     "darryl_mitchell",
+     "daniel_vettoori",
+     "mohammad_amirr",
+     "maheesh_theekshaana"
+    ]
+   }
+  ],
+  "skill": 0.47
+ },
+ "23": {
+  "decks": [
+   {
+    "you": [
+     "shimron_hetmyre",
+     "ibrahiim_zadran",
+     "viraat_kohli",
+     "ravindre_jadeja",
+     "mitchel_starc",
+     "mitchel_marsh"
+    ],
+    "rival": [
+     "yuvraaj_singg",
+     "ms_dhonni",
+     "martin_guptil",
+     "kagisoo_rabada",
+     "tasskin_ahmed",
+     "joffra_archer"
+    ]
+   }
+  ],
+  "skill": 0.48
+ },
+ "24": {
+  "decks": [
+   {
+    "you": [
+     "haashim_amla",
+     "kevin_peeter_sen",
+     "aybee_de_villyers",
+     "kuldeep_yaadav",
+     "azmatullah_omarzaii",
+     "mitchel_marsh"
+    ],
+    "rival": [
+     "veerender_sehwaag",
+     "charrith_asalanka",
+     "mohammad_rizwaan",
+     "daniel_vettoori",
+     "adaam_zampa",
+     "fazalhaqq_farooqi"
+    ]
+   }
+  ],
+  "skill": 0.49
+ },
+ "25": {
+  "decks": [
+   {
+    "you": [
+     "kumaar_sangakkaara",
+     "tamiim_iqbal",
+     "kanne_williamson",
+     "liam_livingstonee",
+     "lasithh_malingha",
+     "jaason_holder"
+    ],
+    "rival": [
+     "glenn_maxwel",
+     "kl_raahul",
+     "davvid_miller",
+     "fazalhaqq_farooqi",
+     "jasprit_bumraah",
+     "shoayb_akhtar"
+    ]
+   }
+  ],
+  "skill": 0.51
+ },
+ "26": {
+  "decks": [
+   {
+    "you": [
+     "aadam_gilkrist",
+     "josh_inglys",
+     "suryakumaar_yadav",
+     "aiden_markkram",
+     "shoayb_akhtar",
+     "patt_cummins"
+    ],
+    "rival": [
+     "shimron_hetmyre",
+     "martin_guptil",
+     "kevin_peeter_sen",
+     "dayl_stayn",
+     "maheesh_theekshaana",
+     "shakiib_al_hasan"
+    ]
+   }
+  ],
+  "skill": 0.52
+ },
+ "27": {
+  "decks": [
+   {
+    "you": [
+     "kevin_peeter_sen",
+     "aandray_russell",
+     "darryl_mitchell",
+     "matheesha_pathirane",
+     "mutti_ah_muraali_tharan",
+     "mujeeeb_ur_rahman"
+    ],
+    "rival": [
+     "littoon_das",
+     "shimron_hetmyre",
+     "kemaar_roach",
+     "sachinn_tendulkaar",
+     "najmull_hossain_shanto",
+     "maark_wood"
+    ]
+   }
+  ],
+  "skill": 0.53
+ },
+ "28": {
+  "decks": [
+   {
+    "you": [
+     "littoon_das",
+     "veerender_sehwaag",
+     "haashim_amla",
+     "lockiee_ferguson",
+     "kuldeep_yaadav",
+     "jamess_anderson"
+    ],
+    "rival": [
+     "sachinn_tendulkaar",
+     "viraat_kohli",
+     "pathum_nissaanka",
+     "timm_southee",
+     "shadaab_khan",
+     "anrich_norrtje"
+    ]
+   }
+  ],
+  "skill": 0.54
+ },
+ "29": {
+  "decks": [
+   {
+    "you": [
+     "charrith_asalanka",
+     "kriss_gayl",
+     "saim_ayuub",
+     "rashhid_khan",
+     "shadaab_khan",
+     "jaak_kallis"
+    ],
+    "rival": [
+     "traviss_head",
+     "hinerik_klaassen",
+     "quinten_de_kock",
+     "dayl_stayn",
+     "lockiee_ferguson",
+     "jasprit_bumraah"
+    ]
+   }
+  ],
+  "skill": 0.56
+ },
+ "30": {
+  "decks": [
+   {
+    "you": [
+     "rahmannullah_gurbaz",
+     "shai_hoppe",
+     "sachinn_tendulkaar",
+     "lasithh_malingha",
+     "maark_wood",
+     "keeron_pollarrd"
+    ],
+    "rival": [
+     "fakhar_zamaan",
+     "dayvid_waarner",
+     "hinerik_klaassen",
+     "dwayn_braavo",
+     "mitchel_starc",
+     "hardik_pandey"
+    ]
+   },
+   {
+    "you": [
+     "darryl_mitchell",
+     "suryakumaar_yadav",
+     "jasprit_bumraah",
+     "rachiin_ravindra",
+     "darren_sammi",
+     "mehidyy_hasan_miraz"
+    ],
+    "rival": [
+     "keeron_pollarrd",
+     "aybee_de_villyers",
+     "matheesha_pathirane",
+     "mohammad_amirr",
+     "adiil_rashid",
+     "wanindu_hasarange"
+    ]
+   }
+  ],
+  "skill": 0.57
+ },
+ "31": {
+  "decks": [
+   {
+    "you": [
+     "darryl_mitchell",
+     "hinerik_klaassen",
+     "kl_raahul",
+     "mutti_ah_muraali_tharan",
+     "rachiin_ravindra",
+     "jasprit_bumraah"
+    ],
+    "rival": [
+     "harry_brookk",
+     "dayvid_waarner",
+     "mathew_haydenn",
+     "jamess_anderson",
+     "akeall_hosein",
+     "hasaan_ali"
+    ],
+    "format": "T20"
+   }
+  ],
+  "skill": 0.58
+ },
+ "32": {
+  "decks": [
+   {
+    "you": [
+     "kevin_peeter_sen",
+     "najibullaah_zadran",
+     "fakhar_zamaan",
+     "jasprit_bumraah",
+     "mitchel_santner",
+     "keshav_maharaaj"
+    ],
+    "rival": [
+     "pathum_nissaanka",
+     "babbar_azam",
+     "rohith_sharma",
+     "steven_smyth",
+     "mustafizzur_rahman",
+     "dasun_shaanaka"
+    ],
+    "format": "ODI"
+   }
+  ],
+  "skill": 0.59
+ },
+ "33": {
+  "decks": [
+   {
+    "you": [
+     "mitchel_santner",
+     "harry_brookk",
+     "kuldeep_yaadav",
+     "mahmudullaah",
+     "tamiim_iqbal",
+     "dayvid_waarner"
+    ],
+    "rival": [
+     "shakiib_al_hasan",
+     "jamess_anderson",
+     "ricki_ponting",
+     "brendan_maccalum",
+     "taijull_islam",
+     "naseem_shaah"
+    ],
+    "format": "TEST"
+   }
+  ],
+  "skill": 0.61
+ },
+ "34": {
+  "decks": [
+   {
+    "you": [
+     "josh_inglys",
+     "haashim_amla",
+     "branndon_king",
+     "timm_southee",
+     "jaason_holder",
+     "yuvraaj_singg"
+    ],
+    "rival": [
+     "hinerik_klaassen",
+     "aandray_russell",
+     "kriss_gayl",
+     "maheesh_theekshaana",
+     "dayl_stayn",
+     "gulbbadin_naib"
+    ]
+   }
+  ],
+  "skill": 0.62
+ },
+ "35": {
+  "decks": [
+   {
+    "you": [
+     "kanne_williamson",
+     "traviss_head",
+     "rohith_sharma",
+     "taijull_islam",
+     "jaak_kallis",
+     "joffra_archer"
+    ],
+    "rival": [
+     "mathew_haydenn",
+     "kevin_peeter_sen",
+     "kriss_gayl",
+     "steven_smyth",
+     "benn_stokes",
+     "keshav_maharaaj"
+    ],
+    "format": "TEST"
+   }
+  ],
+  "skill": 0.63
+ },
+ "36": {
+  "decks": [
+   {
+    "you": [
+     "haashim_amla",
+     "mahayla_jayavardene",
+     "dayvid_waarner",
+     "maheesh_theekshaana",
+     "davvid_miller",
+     "naveen_ul_haaq"
+    ],
+    "rival": [
+     "fazalhaqq_farooqi",
+     "arshdeep_singhh",
+     "phill_salt",
+     "kumaar_sangakkaara",
+     "shakiib_al_hasan",
+     "angello_mathews"
+    ],
+    "format": "TEST"
+   }
+  ],
+  "skill": 0.64
+ },
+ "37": {
+  "decks": [
+   {
+    "you": [
+     "ricki_ponting",
+     "mathew_haydenn",
+     "tamiim_iqbal",
+     "jasprit_bumraah",
+     "anrich_norrtje",
+     "hardik_pandey"
+    ],
+    "rival": [
+     "jaak_kallis",
+     "dayl_stayn",
+     "maark_wood",
+     "shubmaan_gill",
+     "taijull_islam",
+     "dwayn_braavo"
+    ],
+    "format": "TEST"
+   }
+  ],
+  "skill": 0.66
+ },
+ "38": {
+  "decks": [
+   {
+    "you": [
+     "mehidyy_hasan_miraz",
+     "joe_roott",
+     "aadam_gilkrist",
+     "mohammaad_nabi",
+     "dayl_stayn",
+     "mohammad_amirr"
+    ],
+    "rival": [
+     "mahmudullaah",
+     "sachinn_tendulkaar",
+     "quinten_de_kock",
+     "joss_buttler",
+     "shaheen_afridy",
+     "matheesha_pathirane"
+    ],
+    "format": [
+     "T20",
+     "T20",
+     "ODI",
+     "ODI",
+     "TEST",
+     "TEST"
+    ]
+   }
+  ],
+  "skill": 0.67
+ },
+ "39": {
+  "decks": [
+   {
+    "you": [
+     "shai_hoppe",
+     "dayl_stayn",
+     "hardik_pandey",
+     "aandray_russell",
+     "glenn_maxwel",
+     "yuvraaj_singg"
+    ],
+    "rival": [
+     "mohammad_rizwaan",
+     "mathew_haydenn",
+     "kusal_menddis",
+     "mahmudullaah",
+     "benn_stokes",
+     "ravindre_jadeja"
+    ],
+    "format": "T20"
+   },
+   {
+    "you": [
+     "shai_hoppe",
+     "dayl_stayn",
+     "hardik_pandey",
+     "aandray_russell",
+     "glenn_maxwel",
+     "yuvraaj_singg"
+    ],
+    "rival": [
+     "mohammad_rizwaan",
+     "mathew_haydenn",
+     "kusal_menddis",
+     "mahmudullaah",
+     "benn_stokes",
+     "ravindre_jadeja"
+    ],
+    "format": "TEST"
+   }
+  ],
+  "skill": 0.68
+ },
+ "40": {
+  "decks": [
+   {
+    "you": [
+     "mehidyy_hasan_miraz",
+     "trentt_boult",
+     "kemaar_roach",
+     "mohammeed_shami",
+     "dasun_shaanaka",
+     "anrich_norrtje"
+    ],
+    "rival": [
+     "darren_sammi",
+     "mohammad_amirr",
+     "dayvid_waarner",
+     "naveen_ul_haaq",
+     "hasaan_ali",
+     "imaad_waseem"
+    ],
+    "format": [
+     "T20",
+     "ODI",
+     "TEST",
+     "T20",
+     "ODI",
+     "TEST"
+    ]
+   },
+   {
+    "you": [
+     "jaak_kallis",
+     "taijull_islam",
+     "dayvid_waarner",
+     "shoayb_akhtar",
+     "gulbbadin_naib",
+     "mujeeeb_ur_rahman"
+    ],
+    "rival": [
+     "kuldeep_yaadav",
+     "trentt_boult",
+     "rohith_sharma",
+     "harry_brookk",
+     "aiden_markkram",
+     "adiil_rashid"
+    ],
+    "format": [
+     "TEST",
+     "ODI",
+     "T20",
+     "TEST",
+     "ODI",
+     "T20"
+    ]
+   }
+  ],
+  "skill": 0.7
+ },
+ "41": {
+  "decks": [
+   {
+    "you": [
+     "rahmannullah_gurbaz",
+     "devoon_conway",
+     "rishab_pant",
+     "steven_smyth",
+     "adiil_rashid",
+     "tasskin_ahmed"
+    ],
+    "rival": [
+     "hinerik_klaassen",
+     "glennn_phillips",
+     "andrew_flintof",
+     "jasprit_bumraah",
+     "kanne_williamson",
+     "haashim_amla"
+    ]
+   }
+  ],
+  "skill": 0.71
+ },
+ "42": {
+  "decks": [
+   {
+    "you": [
+     "joss_buttler",
+     "shubmaan_gill",
+     "mohammaad_nabi",
+     "daniel_vettoori",
+     "imaad_waseem",
+     "dwayn_braavo"
+    ],
+    "rival": [
+     "fakhar_zamaan",
+     "babbar_azam",
+     "najibullaah_zadran",
+     "rashhid_khan",
+     "joshh_hazlewood",
+     "mahmudullaah"
+    ]
+   }
+  ],
+  "skill": 0.72
+ },
+ "43": {
+  "decks": [
+   {
+    "you": [
+     "ibrahiim_zadran",
+     "aadam_gilkrist",
+     "mahayla_jayavardene",
+     "mitchel_starc",
+     "keshav_maharaaj",
+     "liam_livingstonee"
+    ],
+    "rival": [
+     "veerender_sehwaag",
+     "littoon_das",
+     "ms_dhonni",
+     "mitchel_marsh",
+     "glenn_maxwel",
+     "jamess_anderson"
+    ]
+   }
+  ],
+  "skill": 0.73
+ },
+ "44": {
+  "decks": [
+   {
+    "you": [
+     "ibrahiim_zadran",
+     "martin_guptil",
+     "azmatullah_omarzaii",
+     "glenn_maxwel",
+     "benn_stokes",
+     "mitchel_marsh"
+    ],
+    "rival": [
+     "hinerik_klaassen",
+     "traviss_head",
+     "kuldeep_yaadav",
+     "daniel_vettoori",
+     "kanne_williamson",
+     "ms_dhonni"
+    ]
+   }
+  ],
+  "skill": 0.75
+ },
+ "45": {
+  "decks": [
+   {
+    "you": [
+     "babbar_azam",
+     "kusal_menddis",
+     "towhidd_hridoy",
+     "tamiim_iqbal",
+     "ibrahiim_zadran",
+     "fazalhaqq_farooqi"
+    ],
+    "rival": [
+     "devoon_conway",
+     "brendan_maccalum",
+     "aadam_gilkrist",
+     "branndon_king",
+     "ms_dhonni",
+     "naveen_ul_haaq"
+    ]
+   }
+  ],
+  "skill": 0.76
+ },
+ "46": {
+  "decks": [
+   {
+    "you": [
+     "devoon_conway",
+     "shimron_hetmyre",
+     "kanne_williamson",
+     "timm_southee",
+     "keeron_pollarrd",
+     "dasun_shaanaka"
+    ],
+    "rival": [
+     "aadam_gilkrist",
+     "suryakumaar_yadav",
+     "akeall_hosein",
+     "andrew_flintof",
+     "viraat_kohli",
+     "steven_smyth"
+    ]
+   }
+  ],
+  "skill": 0.77
+ },
+ "47": {
+  "decks": [
+   {
+    "you": [
+     "aadam_gilkrist",
+     "hinerik_klaassen",
+     "arshdeep_singhh",
+     "naseem_shaah",
+     "steven_smyth",
+     "towhidd_hridoy"
+    ],
+    "rival": [
+     "maark_wood",
+     "alzarrii_joseph",
+     "jamess_anderson",
+     "naveen_ul_haaq",
+     "fakhar_zamaan",
+     "rishab_pant"
+    ]
+   }
+  ],
+  "skill": 0.78
+ },
+ "48": {
+  "decks": [
+   {
+    "you": [
+     "towhidd_hridoy",
+     "littoon_das",
+     "harry_brookk",
+     "mitchel_santner",
+     "angello_mathews",
+     "trentt_boult"
+    ],
+    "rival": [
+     "tamiim_iqbal",
+     "brendan_maccalum",
+     "josh_inglys",
+     "liam_livingstonee",
+     "yuvraaj_singg",
+     "adiil_rashid"
+    ]
+   }
+  ],
+  "skill": 0.8
+ },
+ "49": {
+  "decks": [
+   {
+    "you": [
+     "martin_guptil",
+     "jaak_kallis",
+     "keshav_maharaaj",
+     "keeron_pollarrd",
+     "towhidd_hridoy",
+     "davvid_miller"
+    ],
+    "rival": [
+     "brendan_maccalum",
+     "kevin_peeter_sen",
+     "veerender_sehwaag",
+     "ms_dhonni",
+     "rohith_sharma",
+     "naseem_shaah"
+    ],
+    "format": "TEST"
+   }
+  ],
+  "skill": 0.81
+ },
+ "50": {
+  "decks": [
+   {
+    "you": [
+     "najmull_hossain_shanto",
+     "steven_smyth",
+     "kl_raahul",
+     "arshdeep_singhh",
+     "mohammeed_shami",
+     "matheesha_pathirane"
+    ],
+    "rival": [
+     "joe_roott",
+     "charrith_asalanka",
+     "mahayla_jayavardene",
+     "mitchel_santner",
+     "trentt_boult",
+     "lasithh_malingha"
+    ]
+   },
+   {
+    "you": [
+     "brendan_maccalum",
+     "tamiim_iqbal",
+     "naveen_ul_haaq",
+     "keshav_maharaaj",
+     "glennn_phillips",
+     "gulbbadin_naib"
+    ],
+    "rival": [
+     "devoon_conway",
+     "shubmaan_gill",
+     "azmatullah_omarzaii",
+     "wanindu_hasarange",
+     "mitchel_marsh",
+     "mehidyy_hasan_miraz"
+    ]
+   }
+  ],
+  "skill": 0.78
+ },
+ "51": {
+  "decks": [
+   {
+    "you": [
+     "veerender_sehwaag",
+     "quinten_de_kock",
+     "rohith_sharma",
+     "ravindre_jadeja",
+     "liam_livingstonee",
+     "kriss_gayl"
+    ],
+    "rival": [
+     "brendan_maccalum",
+     "joss_buttler",
+     "davvid_miller",
+     "akeall_hosein",
+     "azmatullah_omarzaii",
+     "shakiib_al_hasan"
+    ],
+    "format": "ODI"
+   }
+  ],
+  "skill": 0.84
+ },
+ "52": {
+  "decks": [
+   {
+    "you": [
+     "tamiim_iqbal",
+     "aybee_de_villyers",
+     "brendan_maccalum",
+     "haaris_rauf",
+     "daniel_vettoori",
+     "mitchel_santner"
+    ],
+    "rival": [
+     "aiden_markkram",
+     "phill_salt",
+     "joss_buttler",
+     "imaad_waseem",
+     "rachiin_ravindra",
+     "arshdeep_singhh"
+    ]
+   }
+  ],
+  "skill": 0.85
+ },
+ "53": {
+  "decks": [
+   {
+    "you": [
+     "mahayla_jayavardene",
+     "najmull_hossain_shanto",
+     "charrith_asalanka",
+     "darren_sammi",
+     "kuldeep_yaadav",
+     "gulbbadin_naib"
+    ],
+    "rival": [
+     "joss_buttler",
+     "mathew_haydenn",
+     "kl_raahul",
+     "aiden_markkram",
+     "shakiib_al_hasan",
+     "adaam_zampa"
+    ]
+   }
+  ],
+  "skill": 0.86
+ },
+ "54": {
+  "decks": [
+   {
+    "you": [
+     "kusal_menddis",
+     "ms_dhonni",
+     "kevin_peeter_sen",
+     "hardik_pandey",
+     "mustafizzur_rahman",
+     "aandray_russell"
+    ],
+    "rival": [
+     "angello_mathews",
+     "adiil_rashid",
+     "mohammaad_nabi",
+     "timm_southee",
+     "kagisoo_rabada",
+     "gulbbadin_naib"
+    ],
+    "format": [
+     "T20",
+     "ODI",
+     "TEST",
+     "T20",
+     "ODI",
+     "TEST"
+    ]
+   }
+  ],
+  "skill": 0.87
+ },
+ "55": {
+  "decks": [
+   {
+    "you": [
+     "phill_salt",
+     "suryakumaar_yadav",
+     "aiden_markkram",
+     "kagisoo_rabada",
+     "naseem_shaah",
+     "hasaan_ali"
+    ],
+    "rival": [
+     "fakhar_zamaan",
+     "littoon_das",
+     "dwayn_braavo",
+     "rishab_pant",
+     "joffra_archer",
+     "arshdeep_singhh"
+    ]
+   }
+  ],
+  "skill": 0.89
+ },
+ "56": {
+  "decks": [
+   {
+    "you": [
+     "shubmaan_gill",
+     "harry_brookk",
+     "liam_livingstonee",
+     "angello_mathews",
+     "devoon_conway",
+     "babbar_azam"
+    ],
+    "rival": [
+     "mathew_haydenn",
+     "fakhar_zamaan",
+     "ricki_ponting",
+     "imaad_waseem",
+     "mohammad_amirr",
+     "shakiib_al_hasan"
+    ]
+   }
+  ],
+  "skill": 0.9
+ },
+ "57": {
+  "decks": [
+   {
+    "you": [
+     "hardik_pandey",
+     "glennn_phillips",
+     "andrew_flintof",
+     "babbar_azam",
+     "ravindre_jadeja",
+     "alzarrii_joseph"
+    ],
+    "rival": [
+     "kusal_menddis",
+     "haashim_amla",
+     "lasithh_malingha",
+     "anrich_norrtje",
+     "joshh_hazlewood",
+     "benn_stokes"
+    ],
+    "format": "TEST"
+   }
+  ],
+  "skill": 0.91
+ },
+ "58": {
+  "decks": [
+   {
+    "you": [
+     "darryl_mitchell",
+     "harry_brookk",
+     "kl_raahul",
+     "angello_mathews",
+     "maark_wood",
+     "tabraiz_shemsi"
+    ],
+    "rival": [
+     "rohith_sharma",
+     "kumaar_sangakkaara",
+     "charrith_asalanka",
+     "wanindu_hasarange",
+     "daniel_vettoori",
+     "kuldeep_yaadav"
+    ]
+   }
+  ],
+  "skill": 0.92
+ },
+ "59": {
+  "decks": [
+   {
+    "you": [
+     "kumaar_sangakkaara",
+     "kanne_williamson",
+     "mohammad_rizwaan",
+     "angello_mathews",
+     "mutti_ah_muraali_tharan",
+     "tabraiz_shemsi"
+    ],
+    "rival": [
+     "phill_salt",
+     "rohith_sharma",
+     "davvid_miller",
+     "lockiee_ferguson",
+     "rashhid_khan",
+     "andrew_flintof"
+    ],
+    "format": "T20"
+   },
+   {
+    "you": [
+     "brendan_maccalum",
+     "viraat_kohli",
+     "kumaar_sangakkaara",
+     "joffra_archer",
+     "adaam_zampa",
+     "kagisoo_rabada"
+    ],
+    "rival": [
+     "branndon_king",
+     "kevin_peeter_sen",
+     "traviss_head",
+     "rachiin_ravindra",
+     "jaak_kallis",
+     "joshh_hazlewood"
+    ],
+    "format": "ODI"
+   }
+  ],
+  "skill": 0.94
+ },
+ "60": {
+  "decks": [
+   {
+    "you": [
+     "babbar_azam",
+     "najmull_hossain_shanto",
+     "ibrahiim_zadran",
+     "timm_southee",
+     "azmatullah_omarzaii",
+     "darren_sammi"
+    ],
+    "rival": [
+     "josh_inglys",
+     "hinerik_klaassen",
+     "joss_buttler",
+     "mitchel_santner",
+     "wanindu_hasarange",
+     "fazalhaqq_farooqi"
+    ],
+    "format": "T20"
+   },
+   {
+    "you": [
+     "joss_buttler",
+     "rishab_pant",
+     "ibrahiim_zadran",
+     "maheesh_theekshaana",
+     "dwayn_braavo",
+     "patt_cummins"
+    ],
+    "rival": [
+     "branndon_king",
+     "fakhar_zamaan",
+     "josh_inglys",
+     "mohammeed_shami",
+     "glenn_maxwel",
+     "ravindre_jadeja"
+    ],
+    "format": "ODI"
+   },
+   {
+    "you": [
+     "mahmudullaah",
+     "rohith_sharma",
+     "joshh_hazlewood",
+     "kriss_gayl",
+     "mustafizzur_rahman",
+     "shaheen_afridy"
+    ],
+    "rival": [
+     "ricki_ponting",
+     "andrew_flintof",
+     "lasithh_malingha",
+     "trentt_boult",
+     "mohammeed_shami",
+     "anrich_norrtje"
+    ],
+    "format": "TEST"
+   }
+  ],
+  "skill": 0.88
+ }
+}

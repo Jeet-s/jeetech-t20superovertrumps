@@ -1,0 +1,22 @@
+UNIT L28 (playtest: casual 0.74, skilled 0.96, careless 0.367)
+CH3 SPIKE · RIVAL Circle Force (balanced AI, skill 0.40) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive only on an ace number (top 15% of the game for that stat), Safe on a weak one (bottom 35%), else Normal
+RULES: plain T20 (no weights) · stances · Review x1 · Powerplay x1 (2 balls doubled) · RIVAL has a Powerplay · level totals after 6 balls → 3-ball Super Over · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL Sachinn Tendulkaar R10 A10.00 SR83.33 W1 E8.00 C1
+  RIVAL Viraat Kohli R4188 A48.69 SR137.04 W4 E8.05 C54
+  RIVAL Pathum Nissaanka R1900 A29.69 SR122.80 W0 E— C15
+  RIVAL Timm Southee R303 A11.22 SR138.99 W164 E8.00 C65
+  RIVAL Shadaab Khan R735 A17.09 SR137.00 W112 E7.30 C45
+  RIVAL Anrich Norrtje R17 A2.83 SR48.57 W53 E7.01 C10
+  YOU   Littoon Das R2490 A21.10 SR125.50 W0 E— C55
+  YOU   Veerender Sehwaag R394 A21.88 SR145.38 W0 E— C3
+  YOU   Haashim Amla R1277 A33.60 SR132.05 W0 E— C19
+  YOU   Lockiee Ferguson R29 A3.62 SR80.55 W64 E7.10 C13
+  YOU   Kuldeep Yaadav R46 A9.20 SR92.00 W69 E6.75 C12
+  YOU   Jamess Anderson R1 A1.00 SR25.00 W18 E7.84 C3
+STARS: 1 win · 2 win by 8+ · 3 also win 4+ balls
+REWARD: 213 coins, 76 XP, Club Pack · 3rd star: their star card Pathum Nissaanka for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 32-12 and 12/12 re-deals; mid-skill bot wins 64%
+MECHANICS: rival powerplay, powerplay, review
+CURRENT INTENT (may be STALE — written for an older deck): SPIKE: Circle Force own a Powerplay too and fire it on their strongest call — that ball AND your next call are doubled. Aha: when their Powerplay lands, answer with your best card and make sure the doubled next ball is your ace's call; keep your Review for the doubled loss.

@@ -1,0 +1,1 @@
+L37 target 0.84 → casual 0.85 skilled 1.00 det true (40s)

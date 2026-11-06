@@ -1,0 +1,21 @@
+UNIT L47 (playtest: casual 0.733, skilled 0.967, careless 0.387)
+CH5 BREATHER · RIVAL Candyfloss Crew (cautious AI, skill 0.78) · you call balls 1,3,5 · rival calls 2,4,6
+RULES: plain T20 (no weights) · Wildcard x1/over · level totals after 6 balls → 3-ball Super Over · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL Kemaar Roach R5 A5.00 SR62.50 W8 E8.30 C2
+  RIVAL Matheesha Pathirane R6 A2.00 SR40.00 W24 E8.90 C3
+  RIVAL Najmull Hossain Shanto R1000 A23.81 SR112.00 W0 E— C15
+  RIVAL Kagisoo Rabada R156 A17.33 SR110.63 W71 E8.30 C21
+  RIVAL Martin Guptil R3531 A31.81 SR135.70 W0 E— C68
+  RIVAL Brendan MacCalum R2140 A35.66 SR136.21 W0 E— C36
+  YOU   Liam Livingstonee R1057 A24.58 SR145.39 W26 E8.26 C25
+  YOU   Veerender Sehwaag R394 A21.88 SR145.38 W0 E— C3
+  YOU   Yuvraaj Singg R1177 A28.02 SR136.38 W28 E7.29 C12
+  YOU   Alzarrii Joseph R82 A8.20 SR105.13 W52 E9.02 C7
+  YOU   Steven Smyth R1094 A24.86 SR125.45 W17 E8.21 C30
+  YOU   Aadam Gilkrist R272 A22.66 SR141.66 W0 E— C17
+STARS: 1 win · 2 win by 6+ · 3 also 2+ boundaries (4s/6s)
+REWARD: 322 coins, 114 XP · 3rd star: their star card Kagisoo Rabada for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 18-12 and 12/12 re-deals; mid-skill bot wins 71%
+MECHANICS: wildcard swap, margin bands
+CURRENT INTENT (may be STALE — written for an older deck): BREATHER with the Wildcard, trimmed to one decision per ball (no stances): three of the Crew are bowlers who can't bat (Rabada, Naveen, Naseem Shaah), Naib and Hoppe are ordinary — and the trap is Buttler (Runs 3532, SR 147, Catches 86), who out-bats your whole hand. Aha: count Buttler out before you call batting stats, and use the Wildcard as a boundary-maker: swap de Villyers' Catches 65 or Phillips' Runs 1929 onto the card you call with so a second card clears the rope (the swap MOVES the number). Hasaan Ali's 73 wickets beat all six. 3 stars: win by 6+ with two boundaries.

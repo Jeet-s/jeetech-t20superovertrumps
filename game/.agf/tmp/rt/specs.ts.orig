@@ -1,0 +1,451 @@
+/**
+ * The ladder: 60 handcrafted rival duels in 6 chapters (docs/CONTENT.md is the design doc for every line here).
+ * A spec fixes the rival, its personality, the rules, the deck THEMES (slots of tags) and the intent; the exact six
+ * cards per side were chosen by scripts/tune-units.ts against the target curve and frozen in units.json.
+ */
+import type { Format } from "./cards";
+import { BASE_RULES, type OverDef, type Personality, type Rules, type StarGoals } from "./duel";
+import type { Slot } from "./pools";
+
+export type UnitRole = "teach" | "practise" | "combine" | "twist" | "breather" | "spike" | "boss" | "final" | "semi";
+
+export interface OverSpec { format?: Format | Format[]; you: Slot[]; rival: Slot[]; sameAs?: number }
+export interface UnitSpec {
+  n: number;
+  chapter: number;
+  team: string;
+  captain: string;
+  role: UnitRole;
+  personality: Personality;
+  rules: Rules;
+  overs: OverSpec[];
+  goals: StarGoals;
+  intent: string;
+  mechanics: string[];
+  /** Hand-set decks (no tuning) — e.g. the mirror match. */
+  fixed?: OverDef[];
+  /** How many fixture-squad cards the player may swap for cards from their own deck (default 2; 0 on teach units). */
+  swaps?: number;
+  /** Tuning knob: the rival's skill (defaults to the ladder curve). */
+  skill?: number;
+  /** Tuning knob: the casual win rate the tuner aims for (defaults to the ladder curve, scripts/tune-units.ts). */
+  aim?: number;
+}
+
+export const CHAPTERS = [
+  { n: 1, name: "Gully Greens", theme: "ch1_gully", blurb: "Street cricket basics: stats, margins, the pot and the Super Over." },
+  { n: 2, name: "Aggro Alley", theme: "ch2_aggro", blurb: "Neon nets: swipe up to go Aggressive, down to play Safe." },
+  { n: 3, name: "Power Pavilion", theme: "ch3_pavilion", blurb: "Power cards: Free Hit, Review and Powerplay." },
+  { n: 4, name: "Format Fortress", theme: "ch4_fortress", blurb: "T20, ODI and Test weights, and your Captain." },
+  { n: 5, name: "Twist Town", theme: "ch5_twist", blurb: "Fog of War, Wildcard swaps and the Mega Pot." },
+  { n: 6, name: "Grand Super Series", theme: "ch6_grand", blurb: "Every rule, the toughest rivals, the final." },
+] as const;
+
+const R = (r: Partial<Rules>): Rules => ({ ...BASE_RULES, ...r });
+const S = (n: number, ...tags: Slot["tags"]): Slot => ({ n, tags });
+const SP = (n: number, power: [number, number], ...tags: Slot["tags"]): Slot => ({ n, tags, power });
+const G = (two: StarGoals["two"], three: StarGoals["three"]): StarGoals => ({ two, three });
+const M8 = G({ kind: "margin", runs: 8 }, { kind: "noWickets" });
+const BW = (n: number, m = 8) => G({ kind: "margin", runs: m }, { kind: "ballsWon", n });
+const STANCE = { stances: true };
+const one = (you: Slot[], rival: Slot[], format?: Format | Format[]): OverSpec[] => [{ you, rival, format }];
+
+const MIRROR = ["yuvraaj_singg", "kanne_williamson", "rashhid_khan", "quinten_de_kock", "trentt_boult", "aandray_russell"];
+
+export const SPECS: UnitSpec[] = [
+  // ───────────────────────── CHAPTER 1 · GULLY GREENS (plain T20, no stances) ─────────────────────────
+  {
+    n: 1, chapter: 1, team: "Lanepur Lancers", captain: "Skip Pappu", role: "teach", personality: "balanced", rules: R({}),
+    overs: one([S(4, "bat"), S(2, "allrounder")], [S(4, "bowl", "slow"), S(2, "bowl")]), goals: BW(4),
+    intent: "TEACH stat pick + margin bands. Your batting XI meets six tail-end bowlers. On your calls any batting stat wins; the aha is that the size of the margin sets the runs: Strike Rate 140 vs 70 is a SIX, Runs by a whisker is a single — pick the stat with the widest gap.",
+    mechanics: ["stat pick", "margin bands"],
+  },
+  {
+    n: 2, chapter: 1, team: "Chowk Street Chums", captain: "Skip Golu", role: "teach", personality: "balanced", rules: R({ firstCaller: "rival" }),
+    overs: one([S(2, "bat"), S(2, "bowl"), S(2, "allrounder")], [S(3, "bat"), S(3, "bowl")]), goals: BW(4),
+    intent: "TEACH answering a call. The Chums call first: you see their face-up card and stat, then choose your answer. Aha: answer with the CHEAPEST card that still wins — beat a 20-wicket card with your 30-wicket part-timer, not your 150-wicket spinner you need later.",
+    mechanics: ["stat pick", "answering a call", "rival calls first"],
+  },
+  {
+    n: 3, chapter: 1, team: "Rooftop Rovers", captain: "Skip Chintu", role: "teach", personality: "balanced", rules: R({}),
+    overs: one([S(4, "bat", "noBowl", "modern"), S(2, "bat", "modern")], [S(4, "bat", "noBowl", "modern"), S(2, "bowls", "modern")]), goals: BW(3),
+    intent: "TEACH the tie pot. Four of their six never bowl (only their two pacers have Wickets/Economy) and five of yours never bowl. Non-bowler v non-bowler on Wickets or Economy is a dead heat: 2 runs go in the pot for the next ball's winner. Aha: a tie beats a loss — call Wickets with a non-bowler once both their pacers are spent and it is a sure tie, then cash the pot with your best batting call.",
+    mechanics: ["stat pick", "tie pot"],
+  },
+  {
+    n: 4, chapter: 1, team: "Bazaar Bashers", captain: "Skip Raju", role: "practise", personality: "balanced", rules: R({}),
+    overs: one([S(2, "bigHitter"), S(1, "midHitter"), S(3, "bowls")], [S(1, "bigHitter"), S(1, "midHitter"), S(1, "slow"), S(3, "bowl", "tight")]), goals: BW(4),
+    intent: "PRACTISE card counting. Their deck preview shows two hitters among four tight spinners and pacers: a big hitter (SR 155) and a 135 opener. Your two big hitters (SR 158+) out-hit both, but your two mid hitters (134-145) lose to their slugger, and one loses to the opener too. Aha: while their hitters are in hand, call Strike Rate only with a big hitter; once both are spent (count them), every mid hitter's Strike Rate call is a free boundary against the bowlers left.",
+    mechanics: ["stat pick", "card counting"],
+  },
+  {
+    n: 5, chapter: 1, team: "Tie Lane Twins", captain: "Skip Bablu", role: "teach", personality: "balanced", rules: R({ startTied: 10 }),
+    overs: one([S(2, "bigHitter"), S(2, "strikeBowler"), S(2, "anchor", "goodAvg")], [S(2, "hitter"), S(2, "bowls"), S(2, "bat")]),
+    goals: G({ kind: "ballsWon", n: 2 }, { kind: "ballsWon", n: 3 }),
+    intent: "TEACH the Super Over, alone: the over is already in the books, level at 10-10, so this duel IS the 3-ball Super Over — your full six-card hand comes back, you call balls 1 and 3, they call ball 2. Aha: with three balls there is nothing to save — lead your best card on its best stat, answer their call with whatever wins, and know the tiebreak: if the Super Over is level too, more Super Over balls WON decides it, so a 1-run win on a ball beats a tie.",
+    mechanics: ["super over", "answering a call"],
+  },
+  {
+    n: 6, chapter: 1, team: "Tiffin Town Tumblers", captain: "Skip Munna", role: "combine", personality: "balanced", rules: R({ firstCaller: "rival" }),
+    overs: one([S(2, "anchor", "goodAvg"), S(2, "bowls"), S(2, "bat")], [S(3, "miser"), S(3, "bowl")]), goals: BW(4),
+    intent: "COMBINE counting + the pot, on the back foot: the Tumblers call first with three of the game's meanest bowlers (Economy under 6.7) backed by three more bowlers who can barely bat. Aha: their Economy calls are unwinnable — lose them small with your cheapest card or tie them with a non-bowler (both blank = pot); then take the pot and the over on your calls with Average, where your two 30+ anchors crush them.",
+    mechanics: ["answering a call", "tie pot", "card counting", "rival calls first"],
+  },
+  {
+    n: 7, chapter: 1, team: "Sunday Scramblers", captain: "Skip Lallu", role: "breather", personality: "balanced", rules: R({}),
+    overs: one([S(3, "hitter"), S(2, "bowls"), S(1, "miser")], [S(6, "soft")]), goals: G({ kind: "margin", runs: 12 }, { kind: "boundaries", n: 4 }),
+    intent: "BREATHER score attack: a Sunday side of six soft cards (averages under 24, strike rates under 128, leaky or no bowling). The win is easy; the aim is spectacle — 3 stars for FOUR boundaries in six balls: hitters on Strike Rate, your miser on Economy, and pick your answers to win big, not just win.",
+    mechanics: ["margin bands", "stat pick"],
+  },
+  {
+    n: 8, chapter: 1, team: "Monsoon Mavericks", captain: "Skip Bunty", role: "spike", personality: "balanced", rules: R({}),
+    overs: one([S(3, "bat"), S(3, "bowls")], [S(4, "legend"), S(2, "modern")]), goals: BW(4),
+    intent: "SPIKE v an all-rounder XI: their Strike Rates (Miller 141, Pollarrd 135) and Shakiib's 149 wickets out-class your whole hand, and they call three balls with them. Your one edge is Average: Rizwaan 47.4 and Root 35.7 beat every card they hold. Aha: their calls are unwinnable, so answer them with your cheapest cards and lose small; make all three of your calls on Average — Root and Rizwaan are sure, and your third (Shanto 23.8) only wins once Miller and Pollarrd are spent, so count them first.",
+    mechanics: ["card counting", "answering a call", "stat pick"],
+  },
+  {
+    n: 9, chapter: 1, team: "Backyard Bowling Club", captain: "Skip Tinku", role: "twist", personality: "balanced", rules: R({}),
+    overs: one([S(4, "bat"), S(2, "partTimer")], [S(6, "bowl")]), goals: BW(3),
+    intent: "TWIST batters v bowlers: six specialist bowlers call Wickets/Economy on their three balls and none of your batters reaches 35 wickets. But Suryakumaar is a hidden bowler: Economy 6.25 beats five of their six (all but Rashhid). Aha: your best batter is also your only answer — spend him answering an Economy call (not Rashhid's), throw your blanks at their Wickets calls to lose small, and win your own three calls on Runs/Average, where every batter you hold beats their tail.",
+    mechanics: ["answering a call", "margin bands", "card counting"],
+  },
+  {
+    n: 10, chapter: 1, team: "Gullyvale Bosses", captain: "Big Boss Dabbu", role: "boss", personality: "balanced", rules: R({}),
+    overs: [{ you: [S(3, "bat"), S(3, "bowls")], rival: [S(3, "bat"), S(3, "bowls")] }, { you: [S(2, "bat"), S(2, "bowl"), S(2, "allrounder")], rival: [S(2, "bat"), S(2, "bowl"), S(2, "allrounder")] }],
+    goals: BW(7),
+    intent: "BOSS: two overs on aggregate with a fresh hand each over, and a Super Over if the 12 balls finish level. Aha: the totals carry, so a 6-run lead after over one lets you play the second over for small safe wins instead of chasing.",
+    mechanics: ["two-over aggregate", "super over", "card counting"],
+  },
+
+  // ───────────────────────── CHAPTER 2 · AGGRO ALLEY (stances) ─────────────────────────
+  {
+    n: 11, chapter: 2, team: "Neon Nets Ninjas", captain: "Skip Zippy", role: "teach", personality: "balanced", rules: R({ ...STANCE, maxWickets: 2 }),
+    overs: one([S(3, "bat"), S(3, "hitter")], [S(4, "slow"), S(2, "bowl")]), goals: G({ kind: "margin", runs: 8 }, { kind: "aggWins", n: 2 }),
+    intent: "TEACH Aggressive (swipe up): a win pays DOUBLE, a loss gives them +2 and costs a wicket — and two wickets is all out. Every Ninja strikes under 115. Aha: go aggressive only on a stat you cannot lose; Strike Rate against this deck is a locked double.",
+    mechanics: ["aggressive stance", "wicket limit"],
+  },
+  {
+    n: 12, chapter: 2, team: "Flashpoint Foxes", captain: "Skip Foxy", role: "practise", personality: "balanced", rules: R({ ...STANCE }),
+    overs: one([S(2, "bat"), S(2, "bowls"), S(2, "allrounder")], [S(2, "bigHitter"), S(2, "miser"), S(2, "anchor", "goodAvg")]), goals: G({ kind: "margin", runs: 8 }, { kind: "aggWins", n: 2 }),
+    intent: "PRACTISE aggressive with counting: the Foxes hold exactly two aces per stat family — two big hitters (SR 148+), two misers (Economy under 6.7) and two 30+ average anchors. Aha: a swipe up is safe only once both aces for that stat are gone from their hand — count, then swipe.",
+    mechanics: ["aggressive stance", "card counting"],
+  },
+  {
+    n: 13, chapter: 2, team: "Shieldwall Sentinels", captain: "Skip Shields", role: "teach", personality: "balanced", rules: R({ ...STANCE }),
+    overs: one([S(2, "bat"), S(1, "bigHitter"), S(3, "bowls")], [S(2, "hitter"), S(1, "bat"), S(3, "tight")]), goals: M8,
+    intent: "TEACH Safe (swipe down): a win is capped at 2 runs but a loss gives them only 1. You call three balls and own two sure Strike Rate calls — Suryakumaar 167 and Sehwaag 145 out-hit their whole hand — but your third call must come from a shaky card (De Kock, Naib, Joseph) against two 140+ hitters. Aha: the shaky call goes SAFE (a loss costs 1, not 4) and the two sure ones go Normal or Aggressive — you win this over by losing small on the ball you can't control.",
+    mechanics: ["safe stance", "aggressive stance"],
+  },
+  {
+    n: 14, chapter: 2, team: "Pace Alley Panthers", captain: "Skip Pacey", role: "combine", personality: "balanced", rules: R({...STANCE, maxWickets: 1}),
+    overs: one([S(4, "bat"), S(2, "bowls")], [S(6, "pacer")]), goals: G({ kind: "margin", runs: 8 }, { kind: "aggWins", n: 2 }),
+    intent: "COMBINE stances with sudden death: six fast bowlers and ONE wicket — a single lost aggressive swipe is all out. Their batting is tail-end (no Average above 13.3), so five of your six beat their whole hand on Runs and Average. Aha: swipe up on every batting call you make — except with the trap card, Tendulkaar (one T20I, 10 runs), who loses Average to Cummins; spend him answering their Wickets calls, which you cannot win anyway (Pollarrd's 42 wickets only beat Naseem Shaah).",
+    mechanics: ["aggressive stance", "wicket limit", "answering a call"],
+  },
+  {
+    n: 15, chapter: 2, team: "Spinwheel Syndicate", captain: "Skip Twirly", role: "combine", personality: "cautious", rules: R({ ...STANCE }),
+    overs: one([S(3, "hitter"), S(3, "bowls")], [S(5, "spinner"), S(1, "anchor")]), goals: G({ kind: "margin", runs: 8 }, { kind: "boundaries", n: 3 }),
+    intent: "COMBINE v a spin web: five spinners with tight Economy (6.9-7.3) plus one anchor, and a cautious captain who plays Safe on weak calls. Your four batters' Strike Rates (138-144) beat every card they hold. Aha: never call Economy here — call Strike Rate and go aggressive, expect only singles when they turtle Safe on their own weak calls, and keep Hosein (Economy 6.92) to answer their best spinner.",
+    mechanics: ["aggressive stance", "safe stance", "cautious rival"],
+  },
+  {
+    n: 16, chapter: 2, team: "Sandbag Strollers", captain: "Skip Snooze", role: "combine", personality: "cautious", rules: R({ ...STANCE, firstCaller: "rival" }),
+    overs: one([S(2, "bat"), S(2, "bowls"), S(2, "allrounder")], [S(3, "anchor"), S(3, "bowls")]), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "COMBINE v a cautious side that calls first and swipes Safe on most of its balls, so beating their calls earns you just 1 run. Aha: your three calls must carry the over — save your aces for them and go aggressive there, and answer their Safe calls with cheap cards.",
+    mechanics: ["cautious rival", "aggressive stance", "rival calls first"],
+  },
+  {
+    n: 17, chapter: 2, team: "Night Lounge Loungers", captain: "Skip Chill", role: "breather", personality: "cautious", rules: R({ ...STANCE }),
+    overs: one([S(3, "hitter"), S(2, "bowls"), S(1, "miser")], [S(3, "soft"), S(3, "leaky")]), goals: G({ kind: "margin", runs: 14 }, { kind: "aggWins", n: 3 }),
+    intent: "BREATHER score attack after the stance drills: slow bats and leaky bowling, and you finally hold a miser. Aha: all three of your calls can be locked doubles — an aggressive Strike Rate double with each hitter, an aggressive Economy double with your miser (3 stars for 3 aggressive wins and a 14-run margin).",
+    mechanics: ["aggressive stance", "margin bands"],
+  },
+  {
+    n: 18, chapter: 2, team: "Backstreet Bandits", captain: "Skip Bluffy", role: "spike", personality: "baiter", rules: R({ ...STANCE }),
+    overs: one([S(3, "bat"), S(3, "bowls")], [S(3, "bat"), S(3, "bowls")]), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "SPIKE: the Bandits SANDBAG. They lead their calls with their weakest cards swiped Safe, so beating them earns you a single, and keep every ace to answer YOUR calls. Aha: don't spend an ace on a 1-run Safe ball — answer with your cheapest winner or concede it, count their aces out, and play Safe on your own calls while those aces are still in hand.",
+    mechanics: ["sandbagging rival", "safe stance", "card counting"],
+  },
+  {
+    n: 19, chapter: 2, team: "Run Rush Rascals", captain: "Skip Dash", role: "twist", personality: "balanced", rules: R({ ...STANCE, target: 18, maxWickets: 2 }),
+    overs: one([S(3, "hitter"), S(3, "bowls")], [S(3, "bat"), S(3, "bowl")]), goals: G({ kind: "margin", runs: 4 }, { kind: "noWickets" }),
+    intent: "TWIST: a target chase — 18 runs in 6 balls with two wickets in hand; their runs don't count. Aha: Safe is useless in a chase and aggressive doubles are the only way to 18, but two aggressive losses end it — pick the two or three balls you are sure of and double them.",
+    mechanics: ["target chase", "aggressive stance", "wicket limit"],
+  },
+  {
+    n: 20, chapter: 2, team: "Inferno Express", captain: "Big Boss Blaze", role: "boss", personality: "aggro", rules: R({ ...STANCE, maxWickets: 3 }),
+    overs: [{ you: [S(3, "bat"), S(3, "bowls")], rival: [S(3, "hitter"), S(3, "pacer")] }, { you: [S(2, "bat"), S(2, "bowls"), S(2, "allrounder")], rival: [S(2, "hitter"), S(2, "pacer"), S(2, "allrounder")] }],
+    goals: M8,
+    intent: "BOSS: Inferno go aggressive on EVERY call, over two overs; three wickets is all out for either side. Aha: their fire is your fuel — each of their aggressive calls you beat pays you +2 and takes a wicket, so answer with the card that wins, not the cheapest, and you can bowl them out before the 12th ball.",
+    mechanics: ["always-aggressive rival", "wicket limit", "two-over aggregate", "aggressive stance"],
+  },
+
+  // ───────────────────────── CHAPTER 3 · POWER PAVILION (power cards) ─────────────────────────
+  {
+    n: 21, chapter: 3, team: "Pavilion Patrons", captain: "Skip Monty", role: "teach", personality: "balanced", rules: R({ ...STANCE, freeHit: 1 }),
+    overs: one([S(3, "bat"), S(3, "bowls")], [S(3, "bat"), S(3, "bowls")]), goals: G({ kind: "margin", runs: 8 }, { kind: "boundaries", n: 3 }),
+    intent: "TEACH Free Hit: once per duel, a call you lose gives the rival nothing and costs no wicket. Aha: spend it on your riskiest strong call — the stat where you'd win big but one of their cards could still beat you.",
+    mechanics: ["free hit"],
+  },
+  {
+    n: 22, chapter: 3, team: "Golden Hour Guild", captain: "Skip Goldie", role: "twist", personality: "balanced", rules: R({ ...STANCE, freeHit: 1 }),
+    overs: one([S(2, "bat"), S(2, "bowls"), S(2, "allrounder")], [S(3, "hitter"), S(3, "tight")]), goals: G({ kind: "margin", runs: 8 }, { kind: "aggWins", n: 2 }),
+    intent: "TWIST Free Hit + Aggressive: a Free Hit removes the downside of a swipe up. Aha: Free Hit and aggressive on the SAME ball is a double with no risk — save the pair for the ball where a win is a SIX.",
+    mechanics: ["free hit", "aggressive stance"],
+  },
+  {
+    n: 23, chapter: 3, team: "Long Room Lords", captain: "Skip Lordy", role: "practise", personality: "gambler", rules: R({ ...STANCE, freeHit: 1, maxWickets: 2 }),
+    overs: one([S(3, "bat"), S(3, "bowls")], [S(3, "legend"), S(3, "modern")]), goals: M8,
+    intent: "PRACTISE Free Hit under pressure: two wickets is all out and the gambling Lords swipe up on any decent card. Aha: the Free Hit is also wicket insurance — use it on the aggressive call that would otherwise risk your last wicket.",
+    mechanics: ["free hit", "wicket limit", "aggressive stance"],
+  },
+  {
+    n: 24, chapter: 3, team: "Third Eye Club", captain: "Skip Specs", role: "teach", personality: "balanced", rules: R({ ...STANCE, review: 1 }),
+    overs: one([S(3, "bat"), S(3, "bowls")], [S(3, "bat"), S(3, "bowls")]), goals: M8,
+    intent: "TEACH Review: once per duel, overturn a ball you lost — their runs come off and a lost wicket comes back. Aha: don't spend it on a single; keep it for the boundary-sized loss.",
+    mechanics: ["review"],
+  },
+  {
+    n: 25, chapter: 3, team: "Replay Rangers", captain: "Skip Rewind", role: "practise", personality: "gambler", rules: R({ ...STANCE, review: 1 }),
+    overs: one([S(3, "bat"), S(3, "bowls")], [S(3, "hitter"), S(3, "pacer")]), goals: M8,
+    intent: "PRACTISE Review v gamblers: the Rangers swipe up whenever their card looks good, so their wins are huge doubles. Aha: their aggressive win on their own call is the ball to Review — an 8-run swing — never a 1-run loss early on.",
+    mechanics: ["review", "aggressive stance"],
+  },
+  {
+    n: 26, chapter: 3, team: "Chase Chamber", captain: "Skip Hurry", role: "combine", personality: "balanced", rules: R({ ...STANCE, review: 1, target: 20, maxWickets: 2 }),
+    overs: one([S(3, "hitter"), S(3, "bowls")], [S(3, "bat"), S(3, "tight")]), goals: G({ kind: "margin", runs: 4 }, { kind: "noWickets" }),
+    intent: "COMBINE Review + chase: 20 runs in 6 balls, two wickets. In a chase their runs don't matter, so Review is only worth one thing. Aha: Review restores the WICKET — it turns a lost aggressive swipe into a free second try.",
+    mechanics: ["review", "target chase", "wicket limit", "aggressive stance"],
+  },
+  {
+    n: 27, chapter: 3, team: "Teatime Tinkers", captain: "Skip Biscuit", role: "breather", personality: "cautious", rules: R({ ...STANCE, powerplay: 1 }),
+    overs: one([S(3, "hitter"), S(2, "bowls"), S(1, "miser")], [S(6, "soft")]), goals: G({ kind: "margin", runs: 12 }, { kind: "boundaries", n: 3 }),
+    intent: "BREATHER + TEACH Powerplay: one call, and the ball after it, count double for both sides. Aha: trigger it on a call with your ace when you also hold the card that beats their next call — two doubled wins and the tea is served.",
+    mechanics: ["powerplay", "aggressive stance"],
+  },
+  {
+    n: 28, chapter: 3, team: "Circle Force", captain: "Skip Ringo", role: "spike", personality: "balanced", rules: R({ ...STANCE, powerplay: 1, review: 1, rivalPowerplay: true }),
+    overs: one([S(3, "bat"), S(3, "bowls")], [S(3, "bat"), S(3, "bowls")]), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "SPIKE: Circle Force own a Powerplay too and fire it on their strongest call — that ball AND your next call are doubled. Aha: when their Powerplay lands, answer with your best card and make sure the doubled next ball is your ace's call; keep your Review for the doubled loss.",
+    mechanics: ["rival powerplay", "powerplay", "review"],
+  },
+  {
+    n: 29, chapter: 3, team: "Double Rush Dragons", captain: "Skip Smokey", role: "twist", personality: "gambler", rules: R({ ...STANCE, powerplay: 1, freeHit: 1 }),
+    overs: one([S(3, "bat"), S(3, "bowls")], [S(3, "hitter"), S(3, "tight")]), goals: G({ kind: "margin", runs: 10 }, { kind: "boundaries", n: 3 }),
+    intent: "TWIST: Powerplay x Aggressive x Free Hit. A Powerplay aggressive win is worth FOUR times the band. Aha: stack all three on one locked call — a 6-run band becomes 24 with no way to lose it — then defend.",
+    mechanics: ["powerplay", "free hit", "aggressive stance"],
+  },
+  {
+    n: 30, chapter: 3, team: "Grand Pavilion Guard", captain: "Big Boss Brigadier", role: "boss", personality: "gambler", rules: R({ ...STANCE, freeHit: 1, review: 1, powerplay: 1, rivalPowerplay: true }),
+    overs: [{ you: [S(3, "bat"), S(3, "bowls")], rival: [S(3, "bat"), S(3, "bowls")] }, { you: [S(2, "hitter"), S(2, "tight"), S(2, "allrounder")], rival: [S(2, "legend"), S(2, "pacer"), S(2, "spinner")] }],
+    goals: M8,
+    intent: "BOSS: two overs, all three power cards (one use each across BOTH overs) against gamblers with their own Powerplay. Aha: the powers don't refresh — plan which over gets the Free Hit and which gets the Powerplay before ball one.",
+    mechanics: ["free hit", "review", "powerplay", "rival powerplay", "two-over aggregate"],
+  },
+
+  // ───────────────────────── CHAPTER 4 · FORMAT FORTRESS (format weights, captain) ─────────────────────────
+  {
+    n: 31, chapter: 4, team: "Gatehouse Gallopers", captain: "Skip Trotter", role: "teach", personality: "gambler", rules: R({ ...STANCE, weighted: true }),
+    overs: one([S(3, "hitter"), S(3, "tight")], [S(3, "hitter"), S(3, "bowls")], "T20"), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "TEACH format weights, starting at home in T20: from now on stats are weighted, and in T20 Strike Rate and Economy pay x1.5. Both sides are hitters and bowlers. Aha: the 1.5x stats are where the over is decided — an aggressive Economy win with a tight bowler is 2 x 1.5 the band.",
+    mechanics: ["T20 weights", "aggressive stance"],
+  },
+  {
+    n: 32, chapter: 4, team: "Rampart Regiment", captain: "Skip Major", role: "teach", personality: "balanced", rules: R({ ...STANCE, weighted: true }),
+    overs: one([S(3, "bat", "odi"), S(3, "bowls", "odi")], [S(3, "bat", "odi"), S(3, "bowls", "odi")], "ODI"), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "TEACH ODI format (after T20 weights at the gate): every card now reads its ODI career, and Average and Wickets pay x1.5. Aha: a 3-run Average win is worth 5 here — move your calls from Strike Rate to Average/Wickets.",
+    mechanics: ["ODI weights"],
+  },
+  {
+    n: 33, chapter: 4, team: "Citadel Stoics", captain: "Skip Stoney", role: "teach", personality: "balanced", rules: R({ ...STANCE, weighted: true }),
+    overs: one([S(2, "test", "modern"), S(2, "test", "bowls"), S(2, "test")], [S(4, "test", "legend"), S(2, "test")], "TEST"), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "TEACH Test format: Test careers, Runs and Average pay x1.5 and Strike Rate is half-price. The Stoics are Test legends with mountains of runs. Aha: their Runs calls are unbeatable, so make yours on Average and Wickets, and never waste an ace on a Strike Rate ball.",
+    mechanics: ["Test weights"],
+  },
+  {
+    n: 34, chapter: 4, team: "Captain's Keep", captain: "Skip Armband", role: "teach", personality: "balanced", rules: R({ ...STANCE, captain: true }),
+    overs: one([S(1, "bigHitter"), S(2, "midHitter"), S(3, "bowls")], [S(2, "hitter"), S(1, "midHitter"), S(3, "bowls")]), goals: G({ kind: "margin", runs: 8 }, { kind: "aggWins", n: 2 }),
+    intent: "TEACH Captain, alone (plain T20, no format weights this time): before ball one name a captain — +15% on that card's signature stat. The captain picker shows each card's boosted number and how many of their six it beats before and after. Aha: the armband is wasted on a card that already wins — Southee's 164 wickets, Amla's 33.6 average and Holder's wickets beat their whole hand anyway. Captain the card that is JUST SHORT: Yuvraaj's Economy 7.29 beats only 3 of their bowlers, captained (6.20) it beats all 6 — one extra sure ball, and on a sure ball you can swipe up.",
+    mechanics: ["captain bonus"],
+  },
+  {
+    n: 35, chapter: 4, team: "Old Guard Garrison", captain: "Skip Whiskers", role: "combine", personality: "cautious", rules: R({ ...STANCE, weighted: true, captain: true }),
+    overs: one([S(3, "testBat"), S(1, "testBowler"), S(2, "test", "bowls")], [SP(3, [0, 0.9], "testBat", "legend"), S(3, "test", "bowls")], "TEST"), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "COMBINE Captain + Test: the Garrison's Test legends own Runs and Average, and their own captain is boosted too. Kallis already beats their whole hand on Runs and Wickets — so the armband is wasted on him — but on Average even Kallis (55.4) loses to Smyth (56.6). Aha: captain the card that is just short: Williamson's Average 54.88 → 63.1 passes Smyth, giving you the duel's only sure Average ball (Taijull's and Archer's Economy are the other just-short picks, each from 5 of 6 to all 6).",
+    mechanics: ["captain bonus", "Test weights", "cautious rival"],
+  },
+  {
+    n: 36, chapter: 4, team: "Drawbridge Dashers", captain: "Skip Zoom", role: "twist", personality: "balanced", rules: R({ ...STANCE, weighted: true }),
+    overs: one([S(3, "testBat"), S(3, "noTest")], [S(3, "noTest"), S(3, "testBat")], "TEST"), goals: G({ kind: "margin", runs: 8 }, { kind: "boundaries", n: 2 }),
+    intent: "TWIST blank lines: a Test match where three cards on EACH side have no Test career — blank (0 runs, 0 average, no wickets); blank v blank is a dead heat. Aha: blanks are only good for losing cheaply or tying: throw your blanks at their Test men's calls (sacrifice) or at their blanks (tie → pot), and keep your Test batters to answer their Test batters.",
+    mechanics: ["blank format lines", "Test weights", "card counting"],
+  },
+  {
+    n: 37, chapter: 4, team: "Courtyard Casuals", captain: "Skip Sunny", role: "breather", personality: "cautious", aim: 0.84, rules: R({ ...STANCE, weighted: true, captain: true }),
+    overs: one([S(3, "testBat"), S(3, "test", "bowls")], [S(1, "testBat", "legend"), SP(5, [0.35, 0.78], "test")], "TEST"), goals: G({ kind: "margin", runs: 12 }, { kind: "boundaries", n: 5 }),
+    intent: "BREATHER in Test whites: a soft Test side with ONE Test legend hidden among them (the trap: it out-scores your batters on Runs, so a Runs call into it loses big), and captains on — winning is easy once you count the legend out, 3 stars are not: FIVE boundaries (4s/6s) in six balls, so even their calls must be answered for a boundary. Most of your Runs/Average margins land one band short of a four; the captain's +15% (Test Runs and Average also pay x1.5) is exactly what lifts one card's signature stat over the line. Aha: captain for the band, not for the win — pick the batter whose boosted Runs turns a 3 into a 4 on every ball it plays.",
+    mechanics: ["Test weights", "captain bonus"],
+  },
+  {
+    n: 38, chapter: 4, team: "Turret Turners", captain: "Skip Spinna", role: "spike", personality: "balanced", rules: R({ ...STANCE, weighted: true }),
+    overs: one([S(2, "test"), S(2, "hitter"), S(2, "odi", "bowls")], [S(2, "test", "legend"), S(2, "hitter"), S(2, "bowls")], ["T20", "T20", "ODI", "ODI", "TEST", "TEST"]), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "SPIKE format rotation: balls 1-2 are T20, 3-4 ODI, 5-6 Test, and each card reads its career for the format of the ball. Aha: sequence the hand — hitters on balls 1-2, ODI bowlers on 3-4, Test anchors held for 5-6 — because the same card is an ace in one format and blank in another.",
+    mechanics: ["format rotation", "T20 weights", "ODI weights", "Test weights"],
+  },
+  {
+    n: 39, chapter: 4, team: "Twin Tower Watch", captain: "Skip Twinny", role: "twist", personality: "balanced", rules: R({ ...STANCE, weighted: true }),
+    overs: [{ format: "T20", you: [S(3, "test"), S(3, "bowls")], rival: [S(3, "test"), S(3, "bowls")] }, { format: "TEST", you: [], rival: [], sameAs: 0 }],
+    goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 7 }),
+    intent: "TWIST: two overs on aggregate with the SAME six cards re-dealt — over one T20, over two Test — and every card's rank flips. Russell (SR 162) is your T20 ace and a Test blank (2 Test runs); Steyn is a tail-ender in T20 and the best Test bowler in the game (439 wickets). Aha: it's aggregate, so bank the margin where your hand is strong — swipe up in the T20 over with Russell and Maxwel on Strike Rate — then in the Test over call Steyn's Wickets as your one sure ball and play everything else Safe to lose small.",
+    mechanics: ["two-over aggregate", "T20 weights", "Test weights"],
+  },
+  {
+    n: 40, chapter: 4, team: "Fortress Marshals", captain: "Big Boss Marshal", role: "boss", personality: "balanced", rules: R({...STANCE, weighted: true, captain: true}),
+    overs: [
+      { format: ["T20", "ODI", "TEST", "T20", "ODI", "TEST"], you: [S(3, "test"), S(3, "bowls")], rival: [S(3, "test", "legend"), S(3, "bowls")] },
+      { format: ["TEST", "ODI", "T20", "TEST", "ODI", "T20"], you: [S(2, "test"), S(2, "hitter"), S(2, "bowls")], rival: [S(2, "test"), S(2, "hitter"), S(2, "bowls")] },
+    ],
+    goals: M8,
+    intent: "BOSS: two overs where the format changes EVERY ball (T20-ODI-Test, then reversed), with captains on both sides. Aha: your captain's boost only fires on its signature stat in the ball's format — captain a card whose best stat is the same in all three formats (a bowler's Wickets, an anchor's Average) and plan which ball each card plays.",
+    mechanics: ["format rotation", "captain bonus", "two-over aggregate"],
+  },
+
+  // ───────────────────────── CHAPTER 5 · TWIST TOWN (fog, wildcard, mega pot) ─────────────────────────
+  {
+    n: 41, chapter: 5, team: "Mist Carnival", captain: "Skip Misty", role: "teach", personality: "balanced", rules: R({ ...STANCE, fog: true }),
+    overs: one([S(3, "bat"), S(3, "bowls")], [S(2, "hitter"), S(2, "tight"), S(2, "anchor")]), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "TEACH Fog of War: on their calls the card stays face-down — you see only the stat and the swipe. Aha: the call gives the card away — they call their best stat, so 'Strike Rate' means a hitter, 'Economy' means a tight bowler; answer what the call tells you.",
+    mechanics: ["fog of war", "card counting"],
+  },
+  {
+    n: 42, chapter: 5, team: "Mirror Maze Circus", captain: "Skip Jester", role: "practise", personality: "gambler", rules: R({ ...STANCE, fog: true, firstCaller: "rival" }),
+    overs: one([S(2, "bat"), S(2, "bowls"), S(2, "allrounder")], [S(3, "bat"), S(3, "bowls")]), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "PRACTISE fog v gamblers who call first: an aggressive swipe in the fog means a strong card. Aha: read the swipe as much as the stat — answer aggressive calls with your best, normal ones with your cheapest winner.",
+    mechanics: ["fog of war", "aggressive stance", "rival calls first"],
+  },
+  {
+    n: 43, chapter: 5, team: "Hall of Swaps", captain: "Skip Switcheroo", role: "teach", personality: "balanced", rules: R({ ...STANCE, wildcard: 1 }),
+    overs: one([S(3, "bat"), S(3, "bowls")], [S(3, "bat"), S(3, "bowls")]), goals: G({ kind: "margin", runs: 8 }, { kind: "boundaries", n: 2 }),
+    intent: "TEACH Wildcard: once per over, swap ONE stat between the card you play and another card in your hand. Aha: lend your ace's stat to a weaker card — the ace keeps its other stats for later, so one great number wins twice.",
+    mechanics: ["wildcard swap"],
+  },
+  {
+    n: 44, chapter: 5, team: "Carousel Switchers", captain: "Skip Twirl", role: "practise", personality: "balanced", rules: R({ ...STANCE, wildcard: 1, firstCaller: "rival" }),
+    overs: one([S(2, "bat"), S(2, "bowls"), S(2, "allrounder")], [S(2, "hitter"), S(2, "tight"), S(2, "bat")]), goals: G({ kind: "margin", runs: 8 }, { kind: "boundaries", n: 2 }),
+    intent: "PRACTISE Wildcard on defence: the Switchers call first. Aha: the swap works on your ANSWER too — when their face-up call beats every card you'd like to spend, swap the winning number onto a card you don't need.",
+    mechanics: ["wildcard swap", "answering a call", "rival calls first"],
+  },
+  {
+    n: 45, chapter: 5, team: "Jackpot Jugglers", captain: "Skip Lucky", role: "teach", personality: "balanced", rules: R({ ...STANCE, carryPot: true }),
+    overs: one([S(5, "bat", "noBowl"), S(1, "bowls")], [S(5, "bat", "noBowl"), S(1, "bowls")]), goals: G({ kind: "margin", runs: 8 }, { kind: "pot", n: 4 }),
+    intent: "TEACH Mega Pot: dead heats now STACK (2 runs each, up to a 4-ball, 8-run Mega Pot). Five of each side's six never bowl and each side holds ONE bowler. Aha: once their bowler is spent, your Wickets call with a non-bowler can only tie — build the pot on purpose, then cash it with the batting ace you saved (3 stars: collect a pot of 4+).",
+    mechanics: ["mega pot", "tie pot"],
+  },
+  {
+    n: 46, chapter: 5, team: "Fog & Swap Fair", captain: "Skip Haze", role: "combine", personality: "balanced", rules: R({ ...STANCE, fog: true, wildcard: 1 }),
+    overs: one([S(3, "bat"), S(3, "bowls")], [S(2, "hitter"), S(2, "tight"), S(2, "anchor")]), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "COMBINE fog + wildcard: in the fog you guess which card you face, and the Wildcard lets you fix a guess by borrowing the number you need. Aha: read the call, then swap — Wildcard is strongest on a fogged answer.",
+    mechanics: ["fog of war", "wildcard swap"],
+  },
+  {
+    n: 47, chapter: 5, team: "Candyfloss Crew", captain: "Skip Fluffy", role: "breather", personality: "cautious", aim: 0.88, rules: R({ ...STANCE, wildcard: 1 }),
+    overs: one([S(2, "hitter"), S(2, "bowls"), S(2, "bat")], [S(4, "soft"), S(2, "bat", "noBowl")]), goals: G({ kind: "margin", runs: 10 }, { kind: "boundaries", n: 2 }),
+    intent: "BREATHER with the new toys: a soft side, so the win is easy — 3 stars ask for two boundaries plus a 10-run win, and the Wildcard is how a second card clears the rope. Aha: the Wildcard is a boundary-maker, not just a rescue — once per over move your best Strike Rate onto an ordinary batter and that card's call clears the rope too.",
+    mechanics: ["wildcard swap", "aggressive stance"],
+  },
+  {
+    n: 48, chapter: 5, team: "Midnight Mist Parade", captain: "Skip Moony", role: "spike", personality: "balanced", aim: 0.6, rules: R({ ...STANCE, fog: true, carryPot: true }),
+    overs: one([S(3, "bat", "noBowl"), S(3, "bowls")], [S(3, "bat", "noBowl"), S(3, "bowls")]), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "SPIKE fog + mega pot: dead heats pile up and the fogged aggressive call that wins the pot is the over. Aha: when the pot is big, answer a fogged call with a card that cannot lose the stat even to their best — ties keep the pot alive, losses hand it over.",
+    mechanics: ["fog of war", "mega pot", "aggressive stance"],
+  },
+  {
+    n: 49, chapter: 5, team: "Topsy Turvy Troupe", captain: "Skip Wobble", role: "twist", personality: "balanced", rules: R({ ...STANCE, wildcard: 1, weighted: true }),
+    overs: one([S(3, "test"), S(3, "noTest")], [S(3, "test", "legend"), S(3, "test")], "TEST"), goals: G({ kind: "margin", runs: 8 }, { kind: "boundaries", n: 2 }),
+    intent: "TWIST wildcard + Test format: half your hand has no Test career (blank). Aha: the Wildcard can lend a Test man's Runs to a blank T20 card — a blank card plus a swap becomes a decoy that wins.",
+    mechanics: ["wildcard swap", "Test weights", "blank format lines"],
+  },
+  {
+    n: 50, chapter: 5, team: "Ringmaster's Ring", captain: "Big Boss Ringmaster", role: "boss", personality: "gambler", skill: 0.78, aim: 0.62, rules: R({ ...STANCE, fog: true, wildcard: 1, carryPot: true }),
+    overs: [{ you: [S(3, "bat"), S(3, "bowls")], rival: [S(3, "bat"), S(3, "bowls")] }, { you: [S(2, "bat", "noBowl"), S(2, "bowls"), S(2, "allrounder")], rival: [S(2, "bat", "noBowl"), S(2, "bowls"), S(2, "allrounder")] }],
+    goals: M8,
+    intent: "BOSS: two overs with fog, a Wildcard each over and a Mega Pot that CARRIES from over one into over two. Aha: a pot left at the end of over one is a head start for whoever wins ball one of over two — so lead over two with your ace.",
+    mechanics: ["fog of war", "wildcard swap", "mega pot", "two-over aggregate"],
+  },
+
+  // ───────────────────────── CHAPTER 6 · GRAND SUPER SERIES (mastery) ─────────────────────────
+  {
+    n: 51, chapter: 6, team: "Harbour City Hawks", captain: "Skip Gulliver", role: "combine", personality: "balanced", rules: R({...STANCE, weighted: true, fog: true}),
+    overs: one([S(3, "bat", "odi"), S(3, "bowls", "odi")], [S(3, "bat", "odi"), S(3, "bowls", "odi")], "ODI"), goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 4 }),
+    intent: "MIXED: ODI weights + fog. Aha: in the fog an ODI side calls Average or Wickets (the 1.5x stats) — so a fogged Average call is one of their three ODI batters: answer with a batter that beats all three, not your best bowler.",
+    mechanics: ["ODI weights", "fog of war"],
+  },
+  {
+    n: 52, chapter: 6, team: "Hilltop Comets", captain: "Skip Starry", role: "combine", personality: "gambler", rules: R({ ...STANCE, powerplay: 1, freeHit: 1, carryPot: true }),
+    overs: one([S(3, "bat", "noBowl"), S(3, "bowls")], [S(3, "hitter"), S(3, "bowls")]), goals: G({ kind: "margin", runs: 8 }, { kind: "boundaries", n: 3 }),
+    intent: "MIXED: Powerplay + Free Hit + Mega Pot v gamblers. Aha: a Powerplay doubles the pot-winning ball too — build a pot with ties, then Powerplay the ball that collects it.",
+    mechanics: ["powerplay", "free hit", "mega pot"],
+  },
+  {
+    n: 53, chapter: 6, team: "Riverside Regents", captain: "Skip Regent", role: "combine", personality: "baiter", rules: R({...STANCE, fog: true, review: 1, rivalPowerplay: true}),
+    overs: one([S(3, "bat"), S(3, "bowls")], [S(3, "bat"), S(3, "bowls")]), goals: M8,
+    intent: "MIXED: the sandbaggers are back, now in the fog with a Powerplay — and in the fog they BLUFF: weak cards swiped Aggressive to draw out your aces, strong cards played quietly (and Powerplayed). Aha: invert the read — a loud fogged call is a cheap card to beat with a cheap card; a quiet Powerplayed one is an ace worth your best answer, and your Review.",
+    mechanics: ["bluffing rival", "fog of war", "review", "rival powerplay"],
+  },
+  {
+    n: 54, chapter: 6, team: "Summit Smashers", captain: "Skip Peak", role: "combine", personality: "balanced", rules: R({...STANCE, weighted: true, wildcard: 1}),
+    overs: one([S(2, "test"), S(2, "hitter"), S(2, "bowls", "odi")], [S(2, "test"), S(2, "hitter"), S(2, "bowls", "odi")], ["T20", "ODI", "TEST", "T20", "ODI", "TEST"]), goals: G({ kind: "margin", runs: 8 }, { kind: "boundaries", n: 2 }),
+    intent: "MIXED: per-ball format rotation + Wildcard. Aha: a swap is made in the CURRENT ball's format — on a Test ball, borrow a Test number for the card you are playing, so a T20 specialist can win a Test ball once.",
+    mechanics: ["format rotation", "wildcard swap"],
+  },
+  {
+    n: 55, chapter: 6, team: "Lantern Lane Lads", captain: "Skip Glow", role: "breather", personality: "cautious", aim: 0.9, rules: R({ ...STANCE, review: 1, captain: true, maxWickets: 2 }),
+    overs: one([S(2, "bigHitter"), S(1, "goodAvg"), S(3, "bowls")], [S(4, "soft"), S(2, "bowls")]), goals: G({ kind: "margin", runs: 14 }, { kind: "aggWins", n: 3 }),
+    intent: "BREATHER victory lap before the run chases: a soft side, your captain armband, all out at 2 wickets — and a Review as the safety net. 3 stars for THREE aggressive wins — captain your best hitter, swipe up on every ball you have counted as sure, and when a swipe goes wrong the Review cancels the ball (runs AND wicket). Aha: with a Review in hand you can afford one brave swipe more than your two wickets allow.",
+    mechanics: ["captain bonus", "review", "aggressive stance"],
+  },
+  {
+    n: 56, chapter: 6, team: "Skyline Chasers", captain: "Skip Skye", role: "practise", personality: "balanced", rules: R({ ...STANCE, target: 22, maxWickets: 2, wildcard: 1 }),
+    overs: one([S(2, "hitter"), S(2, "bowls"), S(2, "bat")], [S(3, "bat"), S(3, "tight")]), goals: G({ kind: "runs", n: 26 }, { kind: "noWickets" }),
+    intent: "HARD CHASE 1 — the swap chase: 22 off 6, two wickets, one Wildcard per over and no Free Hit. Brookk and Livingstonee (SR 145) beat their whole hand on Strike Rate; Gill (139) loses only to Haydenn (144). The Wildcard SWAPS one stat between the card you play and another in your hand for the rest of the over — it moves a number, it doesn't copy it. Aha: while Haydenn is unplayed, swap a 145 onto Gill for his call so all three hitters are sure balls to swipe up on, and play the donor later on a stat it still wins.",
+    mechanics: ["target chase", "wildcard swap", "wicket limit"],
+  },
+  {
+    n: 57, chapter: 6, team: "Dune Runners", captain: "Skip Sandy", role: "practise", personality: "balanced", rules: R({...STANCE, target: 22, maxWickets: 2, weighted: true}),
+    overs: one([S(2, "hitter", "test"), S(2, "testBat"), S(2, "test", "bowls")], [S(3, "test"), S(3, "test", "bowls")], "TEST"), goals: G({ kind: "runs", n: 26 }, { kind: "noWickets" }),
+    intent: "HARD CHASE 2 — the Test chase: 22 off 6 in Test whites, two wickets. Every chase so far was won by hitters on Strike Rate; here Strike Rate pays HALF (Test strike rates sit at 50-75, so SR margins are singles) and Runs/Average pay x1.5. Aha: unlearn the T20 chase — call Runs and Average with your Test batters (a 4-run band becomes 6, aggressive 12), and answer their pacers' Wickets/Economy calls with your own two pacers, never with a batter you need.",
+    mechanics: ["target chase", "Test weights", "wicket limit"],
+  },
+  {
+    n: 58, chapter: 6, team: "Coastline Climbers", captain: "Skip Tide", role: "spike", personality: "balanced", rules: R({...STANCE, target: 26, maxWickets: 3, powerplay: 1, review: 1}),
+    overs: one([S(3, "hitter"), S(3, "bowls")], [S(3, "bat"), S(3, "tight")]), goals: G({ kind: "margin", runs: 4 }, { kind: "noWickets" }),
+    intent: "SPIKE — HARD CHASE 3: 26 off 6, three wickets, Powerplay + Review. Aha: Powerplay + aggressive on two sure balls is 4x the band twice; Review is your third wicket — swipe on the brave ball because a lost wicket can come back.",
+    mechanics: ["target chase", "powerplay", "review", "wicket limit"],
+  },
+  {
+    n: 59, chapter: 6, team: "Floodlight Phantoms", captain: "Big Boss Phantom", role: "semi", personality: "gambler", aim: 0.56, rules: R({ ...STANCE, weighted: true, captain: true, review: 1, powerplay: 1, rivalPowerplay: true }),
+    overs: [
+      { format: "T20", you: [S(3, "bat"), S(3, "bowls")], rival: [S(3, "hitter"), S(3, "tight")] },
+      { format: "ODI", you: [S(3, "bat", "odi"), S(3, "bowls", "odi")], rival: [S(3, "bat", "odi"), S(3, "bowls", "odi")] },
+    ],
+    goals: G({ kind: "margin", runs: 8 }, { kind: "ballsWon", n: 7 }),
+    intent: "SEMI-FINAL: two overs on aggregate (T20 then ODI); you hold a Review and a Powerplay, the rival a Powerplay of its own; one captain for the whole duel. Aha: Sangakkaara is the only card in both of your hands — captained, his T20 Average climbs from beating 3 of their cards to 5, and in the ODI over his Runs already top theirs, so the armband pays in both overs (Archer is the ODI-only alternative: Economy from 4 of 6 to all 6).",
+    mechanics: ["two-over aggregate", "captain bonus", "review", "rival powerplay", "T20 weights", "ODI weights"],
+  },
+  {
+    n: 60, chapter: 6, team: "Grand Series Champions", captain: "Big Boss Champ", role: "final", personality: "balanced", skill: 0.88, aim: 0.55, rules: R({ ...STANCE, weighted: true, captain: true, fog: true, wildcard: 1, carryPot: true, review: 1, mode: "bestOf" }),
+    overs: [
+      { format: "T20", you: [S(3, "bat"), S(3, "bowls")], rival: [S(3, "hitter"), S(3, "tight")] },
+      { format: "ODI", you: [S(3, "bat", "odi"), S(3, "bowls", "odi")], rival: [S(3, "bat", "odi"), S(3, "bowls", "odi")] },
+      { format: "TEST", you: [S(3, "test"), S(3, "test", "bowls")], rival: [S(3, "test", "legend"), S(3, "test", "bowls")] },
+    ],
+    goals: G({ kind: "margin", runs: 8 }, { kind: "noWickets" }),
+    intent: "FINAL: best of three overs — a T20 over, an ODI over and a Test over, each with its own hand; a tied over goes to a Super Over. Fog, Wildcard, Mega Pot, captain and one Review. Aha: you only need two overs — know which format your hand is weakest in and treat that over as the one you can afford to lose.",
+    mechanics: ["best-of-three overs", "super over", "format rotation", "fog of war", "wildcard swap", "mega pot", "captain bonus"],
+  },
+];
+
+/** The ladder's AI skill curve (GDD: 0.2 → 0.95). */
+export function ladderSkill(n: number): number {
+  return Math.round((0.2 + 0.75 * ((n - 1) / 59)) * 100) / 100;
+}

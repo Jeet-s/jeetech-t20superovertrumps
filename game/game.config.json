@@ -1,0 +1,9 @@
+{
+  "title": "T20 Super Over Trumps: Cricket Card Duels",
+  "package": "com.jeetech.t20superovertrumps",
+  "coreMechanic": "DUEL (about 2 min): both sides are dealt a hand from their deck of 12 cards, and the duel is one over of 6 balls. Each ball, the active batter's card is revealed face-up and the bowler's card is hidden. The active player taps one stat (e.g. strike rate, average, centuries, wickets, economy, catches). The higher value wins the ball, and the stat margin converts to runs (1, 2, 3, 4 or 6, from margin bands) for the winner. A tie sends the ball to a pot that is added to the next ball's winner. Before tapping, the player may swipe the card up to go AGGRESSIVE (runs x2 on a win, and a loss gives the opponent +2 extra runs and costs a "wicket") or swipe down to play SAFE (runs capped at 2, and a loss gives the opponent only 1). After 6 balls the higher run total wins. If the totals are tied, a 3-card sudden-death Super Over decides it. Power cards (Free Hit, Review, Powerplay) add one-use tactical swings. REWARD: coins, stars (1 to 3), a trophy bump, XP and pack progress. META: open earned packs, fill albums, upgrade cards with duplicate "form points", build a deck of 12, climb the ladder, do the daily chase, keep a streak, and duel friends. Then repeat.",
+  "screens": ["Home (level map)", "Game", "Win", "Fail", "Shop", "Settings"],
+  "monetization": { "rewardedAds": true, "interstitials": true, "removeAdsIap": true },
+  "analyticsEvents": ["level_start", "level_complete", "level_fail"],
+  "_note": "Filled by the Claude Code builder from the GDD + asset manifest."
+}

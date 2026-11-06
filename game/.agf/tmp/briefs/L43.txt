@@ -1,0 +1,23 @@
+UNIT L43 (playtest: casual 0.627, skilled 0.9, careless 0.253)
+CH5 TEACH · RIVAL Hall of Swaps (balanced AI, skill 0.60) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive only on an ace number (top 15% of the game for that stat), Safe on a weak one (bottom 35%), else Normal
+RULES: plain T20 (no weights) · stances · Wildcard x1/over · level totals after 6 balls → 3-ball Super Over · squad fixed
+OVER 1 [T20I]
+  RIVAL Veerender Sehwaag R394 A21.88 SR145.38 W0 E— C3
+  RIVAL Littoon Das R2490 A21.10 SR125.50 W0 E— C55
+  RIVAL MS Dhonni R1617 A37.60 SR126.13 W0 E— C57
+  RIVAL Mitchel Marsh R1785 A33.05 SR133.81 W13 E8.04 C23
+  RIVAL Glenn Maxwel R2754 A29.94 SR155.09 W47 E7.86 C51
+  RIVAL Jamess Anderson R1 A1.00 SR25.00 W18 E7.84 C3
+  YOU   Ibrahiim Zadran R1130 A29.00 SR112.40 W0 E— C12
+  YOU   Aadam Gilkrist R272 A22.66 SR141.66 W0 E— C17
+  YOU   Mahayla Jayavardene R1493 A31.76 SR133.18 W0 E— C14
+  YOU   Mitchel Starc R99 A9.00 SR104.21 W79 E7.74 C20
+  YOU   Keshav Maharaaj R103 A11.44 SR89.56 W38 E7.33 C14
+  YOU   Liam Livingstonee R1057 A24.58 SR145.39 W26 E8.26 C25
+COACH (on-screen hint): WILDCARD swaps one number between the card you play and a card in hand — it moves, it doesn't copy.
+STARS: 1 win · 2 win by 8+ · 3 also 2+ boundaries (4s/6s)
+REWARD: 298 coins, 106 XP · 3rd star: their star card Mitchel Marsh for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 26-12 and 11/12 re-deals; mid-skill bot wins 66%
+MECHANICS: wildcard swap
+CURRENT INTENT (may be STALE — written for an older deck): TEACH Wildcard: once per over, swap ONE stat between the card you play and another card in your hand. Aha: lend your ace's stat to a weaker card — the ace keeps its other stats for later, so one great number wins twice.

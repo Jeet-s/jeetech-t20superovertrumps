@@ -1,0 +1,161 @@
+{
+  "style": "Premium stadium-night cartoon-realism: chunky, semi-stylised cricketer avatars and objects rendered with soft cel-shaded volumes plus glossy painterly highlights, in the vein of EA FC Mobile card polish and Clash Royale toy-like materials. Thick deep-navy outer outlines (3-4px at 1080 wide) with thinner inner colour-keyed lines, rounded corners everywhere, and bevelled, embossed surfaces. Lighting is a warm golden-hour key from top-left with cool teal-blue rim light from stadium floodlights behind; floodlight bokeh, lens-flare streaks and a faint haze give depth. Materials: lacquered red cricket-ball leather with stitched cream seams, polished gold trims with specular streaks, brushed navy enamel card faces, frosted glass HUD plates, striped mown-grass velvet for the table. Foil holographic sheen sweeps across rare cards. Shading is three-tone with a soft ambient-occlusion gradient and drop shadows that lift cards off the pitch. Mood: electric, celebratory, competitive yet friendly (Everyone-rated, no violence); saturated but disciplined colour, one hero focal point per screen, generous negative space, high-contrast legible numerals, colour-blind-safe icon shapes paired with every colour cue.",
+  "palette": [
+    "#0B1F4B",
+    "#C8102E",
+    "#F5B82E",
+    "#1F9D55",
+    "#2E8BFF",
+    "#FFF4D6"
+  ],
+  "ui_palette": {
+    "primary": "#C8102E",
+    "primaryDark": "#8E0A20",
+    "secondary": "#2E8BFF",
+    "secondaryDark": "#1654B8",
+    "accent": "#F5B82E",
+    "accentDark": "#B87A0A",
+    "bgTop": "#12306E",
+    "bgBottom": "#0A1A12",
+    "ink": "#0B1F4B"
+  },
+  "assets": [
+    {
+      "id": "bg_stadium_dusk",
+      "kind": "background",
+      "file": "bg_stadium_dusk.png",
+      "usage": "Duel and home background",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": "bg_gully_golden",
+      "kind": "background",
+      "file": "bg_gully_golden.png",
+      "usage": "Splash, ladder chapter 1 and tutorial",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": "bg_trophy_night",
+      "kind": "background",
+      "file": "bg_trophy_night.png",
+      "usage": "Results, pack opening and season track",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": "card_face_frame",
+      "kind": "ui",
+      "file": "card_face_frame.png",
+      "usage": "Player card frame template",
+      "width": 359,
+      "height": 512
+    },
+    {
+      "id": "card_back",
+      "kind": "ui",
+      "file": "card_back.png",
+      "usage": "Hidden opponent card and deck piles",
+      "width": 363,
+      "height": 512
+    },
+    {
+      "id": "rarity_foil_overlay",
+      "kind": "fx",
+      "file": "rarity_foil_overlay.png",
+      "usage": "Platinum and gold holo overlay on rare cards",
+      "width": 497,
+      "height": 512
+    },
+    {
+      "id": "pitch_table_board",
+      "kind": "ui",
+      "file": "pitch_table_board.png",
+      "usage": "Duel board surface and tray",
+      "width": 512,
+      "height": 417
+    },
+    {
+      "id": "hud_scoreboard_plate",
+      "kind": "ui",
+      "file": "hud_scoreboard_plate.png",
+      "usage": "Top scoreboard strip",
+      "width": 512,
+      "height": 376
+    },
+    {
+      "id": "ball_pip_set",
+      "kind": "sprite",
+      "file": "ball_pip_set.png",
+      "usage": "Ball tracker states",
+      "width": 512,
+      "height": 140
+    },
+    {
+      "id": "btn_primary_red",
+      "kind": "ui",
+      "file": "btn_primary_red.png",
+      "usage": "Primary CTA button plate",
+      "width": 512,
+      "height": 289
+    },
+    {
+      "id": "btn_secondary_blue",
+      "kind": "ui",
+      "file": "btn_secondary_blue.png",
+      "usage": "Secondary button plate",
+      "width": 512,
+      "height": 341
+    },
+    {
+      "id": "icon_power_cards",
+      "kind": "ui",
+      "file": "icon_power_cards.png",
+      "usage": "Power card tray icons",
+      "width": 512,
+      "height": 253
+    },
+    {
+      "id": "icon_rewards",
+      "kind": "sprite",
+      "file": "icon_rewards.png",
+      "usage": "Reward icons",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "id": "fx_aggressive_flame",
+      "kind": "fx",
+      "file": "fx_aggressive_flame.png",
+      "usage": "Aggressive swipe trail",
+      "width": 368,
+      "height": 512
+    },
+    {
+      "id": "fx_safe_shield",
+      "kind": "fx",
+      "file": "fx_safe_shield.png",
+      "usage": "Safe swipe shimmer",
+      "width": 434,
+      "height": 512
+    },
+    {
+      "id": "hero_ballie_key_art",
+      "kind": "character",
+      "file": "hero_ballie_key_art.png",
+      "usage": "Title screen hero key art",
+      "width": 512,
+      "height": 445
+    },
+    {
+      "id": "logo",
+      "kind": "ui",
+      "file": "logo.png",
+      "usage": "the game logo — title/home screen and anywhere the name appears",
+      "width": 900,
+      "height": 467
+    }
+  ],
+  "legacy": []
+}

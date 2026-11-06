@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "Cricket Card Game",
+    "slug": "t20-super-over-trumps-cricket-card-duels",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "android": {
+      "package": "com.jeetech.t20superovertrumps",
+      "versionCode": 1,
+      "permissions": [
+        "android.permission.POST_NOTIFICATIONS"
+      ],
+      "blockedPermissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.SYSTEM_ALERT_WINDOW"
+      ],
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/store/adaptive-foreground.png",
+        "backgroundColor": "#fa4c01"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.jeetech.t20superovertrumps",
+      "supportsTablet": false,
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "scheme": "t20-super-over-trumps-cricket-card-duels",
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "color": "#4F46E5"
+        }
+      ]
+    ],
+    "icon": "./assets/store/icon.png"
+  }
+}

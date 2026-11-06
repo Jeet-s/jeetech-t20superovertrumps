@@ -1,0 +1,227 @@
+=== L2 Chowk Street Chums
+CH1 TEACH · RIVAL Chowk Street Chums (balanced AI, skill 0.21) · rival calls balls 1,3,5 · you call 2,4,6
+RULES: plain T20 (no weights) · dead-heat ball → 2-run pot for the next ball's winner · level totals after 6 balls → 3-ball Super Over · fixture squad fixed (teach unit)
+OVER 1 [T20I]
+  RIVAL Josh Inglys (AUS keeper, common) R935 A30.16 SR156.35 W0 E— C22
+  RIVAL Saim Ayuub (PAK opener, common) R498 A20.75 SR134.95 W7 E7.50 C12
+  RIVAL Imaad Waseem (PAK allrounder, rare) R554 A27.70 SR125.62 W73 E6.27 C23
+  RIVAL Hasaan Ali (PAK pacer, rare) R98 A10.88 SR124.05 W73 E8.70 C16
+  RIVAL Jamess Anderson (ENG pacer, epic) R1 A1.00 SR25.00 W18 E7.84 C3
+  RIVAL Patt Cummins (AUS pacer, common) R160 A13.33 SR123.07 W66 E7.26 C10
+  YOU   Martin Guptil (NZ opener, epic) R3531 A31.81 SR135.70 W0 E— C68
+  YOU   Mathew Haydenn (AUS opener, epic) R308 A51.33 SR143.92 W0 E— C1
+  YOU   Shaheen Afridy (PAK pacer, common) R95 A9.50 SR115.85 W98 E7.80 C18
+  YOU   Mitchel Starc (AUS pacer, rare) R99 A9.00 SR104.21 W79 E7.74 C20
+  YOU   Hardik Pandey (IND allrounder, rare) R1812 A27.87 SR141.67 W94 E8.18 C51
+  YOU   Jaason Holder (WI allrounder, rare) R524 A15.41 SR127.80 W66 E8.12 C27
+COACH (on-screen hint): They call first: see their card and stat, then answer with your CHEAPEST card that still wins.
+STARS: 1 win · 2 win by 8+ · 3 also win 5+ balls
+REWARD: 52 coins, 24 XP · 3rd star: their star card Imaad Waseem for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 19-3 and 12/12 re-deals; mid-skill bot wins 90%
+INTENT: TEACH answering a call. The Chums call first: you see their face-up card and stat, then choose your answer. Aha: answer with the CHEAPEST card that still wins — beat a 20-wicket card with your 30-wicket part-timer, not your 150-wicket spinner you need later.
+MEASURE L2: casual 0.940 skilled 0.993 | competent W16-8*2 W17-2*3 W18-0*3 W19-8*2 W17-2*3 W19-4*3 | stars(0/1/2/3) skilled 1%/8%/84%/8% casual 7%/30%/51%/13%
+=== L3 Rooftop Rovers
+CH1 TEACH · RIVAL Rooftop Rovers (balanced AI, skill 0.23) · you call balls 1,3,5 · rival calls 2,4,6
+RULES: plain T20 (no weights) · dead-heat ball → 2-run pot for the next ball's winner · level totals after 6 balls → 3-ball Super Over · fixture squad fixed (teach unit)
+OVER 1 [T20I]
+  RIVAL Rahmannullah Gurbaz (AFG keeper, common) R1770 A25.29 SR128.30 W0 E— C30
+  RIVAL Branndon King (WI opener, common) R1918 A29.06 SR131.10 W0 E— C20
+  RIVAL Devoon Conway (NZ opener, common) R1408 A38.05 SR127.76 W0 E— C32
+  RIVAL Najibullaah Zadran (AFG finisher, common) R1900 A25.33 SR136.40 W0 E— C55
+  RIVAL Lockiee Ferguson (NZ pacer, common) R29 A3.62 SR80.55 W64 E7.10 C13
+  RIVAL Naseem Shaah (PAK pacer, common) R58 A7.25 SR107.40 W33 E8.05 C4
+  YOU   Pathum Nissaanka (SL opener, common) R1900 A29.69 SR122.80 W0 E— C15
+  YOU   Shubmaan Gill (IND opener, rare) R578 A30.42 SR139.27 W0 E— C9
+  YOU   Joss Buttler (ENG keeper, epic) R3532 A35.32 SR147.30 W0 E— C86
+  YOU   Quinten De Kock (SA opener, epic) R2584 A31.51 SR138.32 W0 E— C84
+  YOU   Saim Ayuub (PAK opener, common) R498 A20.75 SR134.95 W7 E7.50 C12
+  YOU   Fakhar Zamaan (PAK opener, rare) R1866 A22.21 SR127.89 W0 E— C40
+COACH (on-screen hint): NO BOWLING v NO BOWLING on Wickets is a TIE: 2 runs go in the POT for whoever wins the next ball.
+STARS: 1 win · 2 win by 8+ · 3 also win 3+ balls
+REWARD: 58 coins, 26 XP, Gully Pack · 3rd star: their star card Najibullaah Zadran for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 20-6 and 12/12 re-deals; mid-skill bot wins 94%
+INTENT: TEACH the tie pot. Four of their six never bowl (only their two pacers have Wickets/Economy) and five of yours never bowl. Non-bowler v non-bowler on Wickets or Economy is a dead heat: 2 runs go in the pot for the next ball's winner. Aha: a tie beats a loss — call Wickets with a non-bowler once both their pacers are spent and it is a sure tie, then cash the pot with your best batting call.
+MEASURE L3: casual 0.927 skilled 0.993 | competent W14-4*3 W24-3*3 W19-5*3 W15-4*3 W20-3*3 W19-0*3 | stars(0/1/2/3) skilled 1%/13%/1%/86% casual 7%/25%/3%/66%
+=== L4 Bazaar Bashers
+CH1 PRACTISE · RIVAL Bazaar Bashers (balanced AI, skill 0.24) · you call balls 1,3,5 · rival calls 2,4,6
+RULES: plain T20 (no weights) · dead-heat ball → 2-run pot for the next ball's winner · level totals after 6 balls → 3-ball Super Over · fixture squad: swap up to 2 of YOUR cards for cards from your own deck (proof uses the squad shown)
+OVER 1 [T20I]
+  RIVAL Aandray Russell (WI finisher, common) R1022 A22.71 SR162.41 W61 E9.05 C34
+  RIVAL Saim Ayuub (PAK opener, common) R498 A20.75 SR134.95 W7 E7.50 C12
+  RIVAL Kemaar Roach (WI pacer, common) R5 A5.00 SR62.50 W8 E8.30 C2
+  RIVAL Lockiee Ferguson (NZ pacer, common) R29 A3.62 SR80.55 W64 E7.10 C13
+  RIVAL Mujeeeb Ur Rahman (AFG spinner, common) R60 A6.67 SR92.31 W59 E6.40 C8
+  RIVAL Anrich Norrtje (SA pacer, common) R17 A2.83 SR48.57 W53 E7.01 C10
+  YOU   Glenn Maxwel (AUS finisher, epic) R2754 A29.94 SR155.09 W47 E7.86 C51
+  YOU   Phill Salt (ENG opener, common) R1220 A35.88 SR165.20 W0 E— C14
+  YOU   Aiden Markkram (SA opener, rare) R1367 A30.37 SR143.89 W13 E8.54 C37
+  YOU   Tabraiz Shemsi (SA spinner, common) R10 A2.00 SR37.03 W89 E7.39 C12
+  YOU   Haaris Rauf (PAK pacer, common) R108 A9.00 SR105.88 W113 E8.30 C22
+  YOU   Azmatullah Omarzaii (AFG allrounder, common) R400 A17.39 SR128.60 W25 E8.30 C10
+STARS: 1 win · 2 win by 8+ · 3 also win 4+ balls
+REWARD: 64 coins, 28 XP · 3rd star: their star card Aandray Russell for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 20-4 and 12/12 re-deals; mid-skill bot wins 69%
+INTENT: PRACTISE card counting. Their deck preview shows two hitters among four tight spinners and pacers: a big hitter (SR 155) and a 135 opener. Your two big hitters (SR 158+) out-hit both, but your two mid hitters (134-145) lose to their slugger, and one loses to the opener too. Aha: while their hitters are in hand, call Strike Rate only with a big hitter; once both are spent (count them), every mid hitter's Strike Rate call is a free boundary against the bowlers left.
+MEASURE L4: casual 0.913 skilled 0.987 | competent W19-5*3 W17-5*3 W13-8*1 W22-7*3 W23-0*3 W23-1*3 | stars(0/1/2/3) skilled 1%/10%/3%/86% casual 10%/28%/10%/53%
+=== L5 Tie Lane Twins
+CH1 TEACH · RIVAL Tie Lane Twins (balanced AI, skill 0.25) · Super Over only: you call balls 1 and 3 · rival calls 2
+RULES: plain T20 (no weights) · dead-heat ball → 2-run pot for the next ball's winner · STARTS IN THE SUPER OVER: the 6-ball over is done, level 10-10; 3 balls, full hand back, you call 1 and 3; a level Super Over goes to more Super Over balls won · fixture squad fixed (teach unit)
+OVER 1 [T20I]
+  RIVAL Joss Buttler (ENG keeper, epic) R3532 A35.32 SR147.30 W0 E— C86
+  RIVAL Davvid Miller (SA finisher, rare) R2591 A33.21 SR140.66 W0 E— C82
+  RIVAL Kagisoo Rabada (SA pacer, common) R156 A17.33 SR110.63 W71 E8.30 C21
+  RIVAL Patt Cummins (AUS pacer, common) R160 A13.33 SR123.07 W66 E7.26 C10
+  RIVAL Martin Guptil (NZ opener, epic) R3531 A31.81 SR135.70 W0 E— C68
+  RIVAL Najibullaah Zadran (AFG finisher, common) R1900 A25.33 SR136.40 W0 E— C55
+  YOU   Traviss Head (AUS opener, rare) R1093 A31.22 SR158.17 W1 E8.16 C11
+  YOU   Aandray Russell (WI finisher, common) R1022 A22.71 SR162.41 W61 E9.05 C34
+  YOU   Mohammaad Nabi (AFG allrounder, rare) R2300 A22.00 SR138.10 W99 E7.20 C65
+  YOU   Haaris Rauf (PAK pacer, common) R108 A9.00 SR105.88 W113 E8.30 C22
+  YOU   Mahayla Jayavardene (SL anchor, legendary) R1493 A31.76 SR133.18 W0 E— C14
+  YOU   Joe Roott (ENG anchor, epic) R893 A35.72 SR126.30 W6 E8.79 C18
+COACH (on-screen hint): SUPER OVER! It's 10-10 after the over. Three balls, full hand back — play your best cards now.
+STARS: 1 win · 2 win 2+ balls · 3 also win 3+ balls
+REWARD: 70 coins, 30 XP · 3rd star: their star card Joss Buttler for your album, unlocks chalk-line ball trail
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 10-10, decided by the super over and 11/12 re-deals; mid-skill bot wins 91%
+INTENT: TEACH the Super Over, alone: the over is already in the books, level at 10-10, so this duel IS the 3-ball Super Over — your full six-card hand comes back, you call balls 1 and 3, they call ball 2. Aha: with three balls there is nothing to save — lead your best card on its best stat, answer their call with whatever wins, and know the tiebreak: if the Super Over is level too, more Super Over balls WON decides it, so a 1-run win on a ball beats a tie.
+MEASURE L5: casual 0.933 skilled 0.980 | competent W10-10*3 W10-10*3 W10-10*2 W10-10*2 W10-10*3 W10-10*2 | stars(0/1/2/3) skilled 3%/1%/8%/89% casual 16%/4%/30%/51%
+=== L6 Tiffin Town Tumblers
+CH1 COMBINE · RIVAL Tiffin Town Tumblers (balanced AI, skill 0.26) · rival calls balls 1,3,5 · you call 2,4,6
+RULES: plain T20 (no weights) · dead-heat ball → 2-run pot for the next ball's winner · level totals after 6 balls → 3-ball Super Over · fixture squad: swap up to 2 of YOUR cards for cards from your own deck (proof uses the squad shown)
+OVER 1 [T20I]
+  RIVAL Rashhid Khan (AFG spinner, epic) R520 A12.68 SR135.40 W161 E6.15 C20
+  RIVAL Daniel Vettoori (NZ spinner, epic) R205 A12.81 SR107.89 W38 E5.70 C9
+  RIVAL Jasprit Bumraah (IND pacer, common) R8 A2.66 SR57.14 W89 E6.27 C12
+  RIVAL Phill Salt (ENG opener, common) R1220 A35.88 SR165.20 W0 E— C14
+  RIVAL Branndon King (WI opener, common) R1918 A29.06 SR131.10 W0 E— C20
+  RIVAL Rishab Pant (IND keeper, rare) R1209 A23.25 SR127.17 W0 E— C44
+  YOU   Joe Roott (ENG anchor, epic) R893 A35.72 SR126.30 W6 E8.79 C18
+  YOU   Viraat Kohli (IND anchor, legendary) R4188 A48.69 SR137.04 W4 E8.05 C54
+  YOU   Mohammaad Nabi (AFG allrounder, rare) R2300 A22.00 SR138.10 W99 E7.20 C65
+  YOU   Tasskin Ahmed (BAN pacer, common) R100 A8.33 SR100.00 W80 E7.50 C12
+  YOU   Littoon Das (BAN keeper, common) R2490 A21.10 SR125.50 W0 E— C55
+  YOU   Mohammad Rizwaan (PAK keeper, epic) R3414 A47.41 SR125.37 W0 E— C71
+STARS: 1 win · 2 win by 6+ · 3 also collect a pot of 2+ runs
+REWARD: 76 coins, 32 XP, Gully Pack · 3rd star: their star card Rashhid Khan for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 24-6 and 12/12 re-deals; mid-skill bot wins 86%
+INTENT: COMBINE counting + the pot, on the back foot: the Tumblers call first with three of the game's meanest bowlers (Economy under 6.7) backed by three more bowlers who can barely bat. Aha: their Economy calls are unwinnable — lose them small with your cheapest card or tie them with a non-bowler (both blank = pot); then take the pot and the over on your calls with Average, where your two 30+ anchors crush them.
+MEASURE L6: casual 0.840 skilled 0.980 | competent W24-10*2 W20-7*2 W26-3*2 W36-0*2 W22-7*2 W24-7*2 | stars(0/1/2/3) skilled 1%/5%/92%/3% casual 10%/12%/74%/5%
+=== L7 Sunday Scramblers
+CH1 BREATHER · RIVAL Sunday Scramblers (balanced AI, skill 0.28) · you call balls 1,3,5 · rival calls 2,4,6
+RULES: plain T20 (no weights) · dead-heat ball → 2-run pot for the next ball's winner · level totals after 6 balls → 3-ball Super Over · fixture squad: swap up to 2 of YOUR cards for cards from your own deck (proof uses the squad shown)
+OVER 1 [T20I]
+  RIVAL Mitchel Starc (AUS pacer, rare) R99 A9.00 SR104.21 W79 E7.74 C20
+  RIVAL Littoon Das (BAN keeper, common) R2490 A21.10 SR125.50 W0 E— C55
+  RIVAL Gulbbadin Naib (AFG allrounder, common) R1000 A19.23 SR125.60 W25 E7.80 C20
+  RIVAL Kemaar Roach (WI pacer, common) R5 A5.00 SR62.50 W8 E8.30 C2
+  RIVAL Naveen Ul Haaq (AFG pacer, common) R80 A8.00 SR95.24 W67 E7.40 C10
+  RIVAL Mohammeed Shami (IND pacer, common) R0 A0.00 SR0.00 W27 E8.94 C3
+  YOU   Darryl Mitchell (NZ anchor, rare) R1473 A26.30 SR138.30 W9 E10.59 C38
+  YOU   Glennn Phillips (NZ allrounder, rare) R1929 A31.11 SR140.59 W6 E7.35 C51
+  YOU   Liam Livingstonee (ENG finisher, common) R1057 A24.58 SR145.39 W26 E8.26 C25
+  YOU   Dasun Shaanaka (SL finisher, common) R1456 A18.43 SR123.10 W33 E8.30 C40
+  YOU   Keeron Pollarrd (WI finisher, common) R1569 A25.30 SR135.14 W42 E8.36 C60
+  YOU   Rashhid Khan (AFG spinner, epic) R520 A12.68 SR135.40 W161 E6.15 C20
+STARS: 1 win · 2 win by 12+ · 3 also 4+ boundaries (4s/6s)
+REWARD: 97 coins, 34 XP · 3rd star: their star card Littoon Das for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 21-4 and 12/12 re-deals; mid-skill bot wins 96%
+INTENT: BREATHER score attack: a Sunday side of six soft cards (averages under 24, strike rates under 128, leaky or no bowling). The win is easy; the aim is spectacle — 3 stars for FOUR boundaries in six balls: hitters on Strike Rate, your miser on Economy, and pick your answers to win big, not just win.
+MEASURE L7: casual 0.940 skilled 0.993 | competent W20-7*2 W17-7*1 W24-4*3 W21-7*2 W25-4*3 W20-5*2 | stars(0/1/2/3) skilled 1%/16%/79%/4% casual 8%/41%/42%/10%
+=== L8 Monsoon Mavericks
+CH1 SPIKE · RIVAL Monsoon Mavericks (balanced AI, skill 0.29) · you call balls 1,3,5 · rival calls 2,4,6
+RULES: plain T20 (no weights) · dead-heat ball → 2-run pot for the next ball's winner · level totals after 6 balls → 3-ball Super Over · fixture squad: swap up to 2 of YOUR cards for cards from your own deck (proof uses the squad shown)
+OVER 1 [T20I]
+  RIVAL Dayvid Waarner (AUS opener, legendary) R3277 A33.43 SR142.47 W0 E— C62
+  RIVAL Dwayn Braavo (WI allrounder, rare) R1255 A22.01 SR115.36 W78 E8.29 C40
+  RIVAL Yuvraaj Singg (IND allrounder, rare) R1177 A28.02 SR136.38 W28 E7.29 C12
+  RIVAL AyBee de Villyers (SA finisher, legendary) R1672 A26.12 SR135.16 W0 E— C65
+  RIVAL Shimron Hetmyre (WI finisher, common) R912 A21.20 SR124.20 W0 E— C26
+  RIVAL KL Raahul (IND keeper, rare) R2265 A37.75 SR139.12 W0 E— C23
+  YOU   Babbar Azam (PAK anchor, epic) R4223 A39.83 SR129.22 W0 E— C45
+  YOU   Joe Roott (ENG anchor, epic) R893 A35.72 SR126.30 W6 E8.79 C18
+  YOU   Branndon King (WI opener, common) R1918 A29.06 SR131.10 W0 E— C20
+  YOU   Tasskin Ahmed (BAN pacer, common) R100 A8.33 SR100.00 W80 E7.50 C12
+  YOU   Imaad Waseem (PAK allrounder, rare) R554 A27.70 SR125.62 W73 E6.27 C23
+  YOU   Adiil Rashid (ENG spinner, common) R232 A10.54 SR107.40 W126 E7.38 C29
+STARS: 1 win · 2 win by 8+ · 3 also win 4+ balls
+REWARD: 148 coins, 36 XP, Club Pack · 3rd star: their star card Dayvid Waarner for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 24-12 and 10/12 re-deals; mid-skill bot wins 72%
+INTENT: SPIKE v an all-rounder XI: their Strike Rates (Miller 141, Pollarrd 135) and Shakiib's 149 wickets out-class your whole hand, and they call three balls with them. Your one edge is Average: Rizwaan 47.4 and Root 35.7 beat every card they hold. Aha: their calls are unwinnable, so answer them with your cheapest cards and lose small; make all three of your calls on Average — Root and Rizwaan are sure, and your third (Shanto 23.8) only wins once Miller and Pollarrd are spent, so count them first.
+MEASURE L8: casual 0.860 skilled 0.987 | competent W23-3*3 W22-12*3 L10-11*0 W20-6*3 W27-0*3 W25-4*3 | stars(0/1/2/3) skilled 3%/10%/5%/83% casual 16%/25%/7%/52%
+=== L9 Backyard Bowling Club
+CH1 TWIST · RIVAL Backyard Bowling Club (balanced AI, skill 0.30) · you call balls 1,3,5 · rival calls 2,4,6
+RULES: plain T20 (no weights) · dead-heat ball → 2-run pot for the next ball's winner · level totals after 6 balls → 3-ball Super Over · fixture squad: swap up to 2 of YOUR cards for cards from your own deck (proof uses the squad shown)
+OVER 1 [T20I]
+  RIVAL Mohammeed Shami (IND pacer, common) R0 A0.00 SR0.00 W27 E8.94 C3
+  RIVAL Joffra Archer (ENG pacer, common) R27 A6.75 SR96.42 W23 E7.59 C4
+  RIVAL Mustafizzur Rahman (BAN pacer, common) R66 A3.88 SR70.00 W136 E7.35 C18
+  RIVAL Trentt Boult (NZ pacer, rare) R58 A8.28 SR90.62 W83 E7.68 C22
+  RIVAL Lockiee Ferguson (NZ pacer, common) R29 A3.62 SR80.55 W64 E7.10 C13
+  RIVAL Mutti-ah Muraali-tharan (SL spinner, legendary) R1 A1.00 SR50.00 W13 E6.88 C1
+  YOU   Rahmannullah Gurbaz (AFG keeper, common) R1770 A25.29 SR128.30 W0 E— C30
+  YOU   Devoon Conway (NZ opener, common) R1408 A38.05 SR127.76 W0 E— C32
+  YOU   Branndon King (WI opener, common) R1918 A29.06 SR131.10 W0 E— C20
+  YOU   Saim Ayuub (PAK opener, common) R498 A20.75 SR134.95 W7 E7.50 C12
+  YOU   Glennn Phillips (NZ allrounder, rare) R1929 A31.11 SR140.59 W6 E7.35 C51
+  YOU   Mahmudullaah (BAN finisher, rare) R2444 A23.50 SR117.75 W40 E7.36 C55
+STARS: 1 win · 2 win by 8+ · 3 also win 3+ balls
+REWARD: 114 coins, 38 XP, Gully Pack · 3rd star: their star card Mustafizzur Rahman for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 21-12 and 8/12 re-deals; mid-skill bot wins 69%
+INTENT: TWIST batters v bowlers: six specialist bowlers call Wickets/Economy on their three balls and none of your batters reaches 35 wickets. But Suryakumaar is a hidden bowler: Economy 6.25 beats five of their six (all but Rashhid). Aha: your best batter is also your only answer — spend him answering an Economy call (not Rashhid's), throw your blanks at their Wickets calls to lose small, and win your own three calls on Runs/Average, where every batter you hold beats their tail.
+MEASURE L9: casual 0.873 skilled 0.960 | competent W16-11*1 W20-5*3 W25-1*3 W19-7*3 W28-4*3 W24-6*3 | stars(0/1/2/3) skilled 7%/80%/0%/14% casual 15%/58%/0%/28%
+=== L10 Gullyvale Bosses
+CH1 BOSS · RIVAL Gullyvale Bosses (balanced AI, skill 0.31) · you call balls 1,3,5 · rival calls 2,4,6
+RULES: plain T20 (no weights) · dead-heat ball → 2-run pot for the next ball's winner · 2 overs on aggregate, level totals → 3-ball Super Over · fixture squad: swap up to 2 of YOUR cards for cards from your own deck (proof uses the squad shown)
+OVER 1 [T20I]
+  RIVAL Jaason Holder (WI allrounder, rare) R524 A15.41 SR127.80 W66 E8.12 C27
+  RIVAL Hasaan Ali (PAK pacer, rare) R98 A10.88 SR124.05 W73 E8.70 C16
+  RIVAL Kemaar Roach (WI pacer, common) R5 A5.00 SR62.50 W8 E8.30 C2
+  RIVAL Shimron Hetmyre (WI finisher, common) R912 A21.20 SR124.20 W0 E— C26
+  RIVAL Kagisoo Rabada (SA pacer, common) R156 A17.33 SR110.63 W71 E8.30 C21
+  RIVAL Mohammad Amirr (PAK pacer, common) R96 A9.60 SR106.66 W71 E7.03 C9
+  YOU   Pathum Nissaanka (SL opener, common) R1900 A29.69 SR122.80 W0 E— C15
+  YOU   AyBee de Villyers (SA finisher, legendary) R1672 A26.12 SR135.16 W0 E— C65
+  YOU   Quinten De Kock (SA opener, epic) R2584 A31.51 SR138.32 W0 E— C84
+  YOU   Akeall Hosein (WI spinner, common) R302 A15.10 SR118.90 W71 E6.92 C18
+  YOU   Mutti-ah Muraali-tharan (SL spinner, legendary) R1 A1.00 SR50.00 W13 E6.88 C1
+  YOU   Mohammeed Shami (IND pacer, common) R0 A0.00 SR0.00 W27 E8.94 C3
+OVER 2 [T20I]
+  RIVAL KL Raahul (IND keeper, rare) R2265 A37.75 SR139.12 W0 E— C23
+  RIVAL Babbar Azam (PAK anchor, epic) R4223 A39.83 SR129.22 W0 E— C45
+  RIVAL Akeall Hosein (WI spinner, common) R302 A15.10 SR118.90 W71 E6.92 C18
+  RIVAL Adaam Zampa (AUS spinner, common) R52 A7.42 SR104.00 W127 E6.99 C19
+  RIVAL Glennn Phillips (NZ allrounder, rare) R1929 A31.11 SR140.59 W6 E7.35 C51
+  RIVAL Imaad Waseem (PAK allrounder, rare) R554 A27.70 SR125.62 W73 E6.27 C23
+  YOU   Davvid Miller (SA finisher, rare) R2591 A33.21 SR140.66 W0 E— C82
+  YOU   Joe Roott (ENG anchor, epic) R893 A35.72 SR126.30 W6 E8.79 C18
+  YOU   Haaris Rauf (PAK pacer, common) R108 A9.00 SR105.88 W113 E8.30 C22
+  YOU   Mujeeeb Ur Rahman (AFG spinner, common) R60 A6.67 SR92.31 W59 E6.40 C8
+  YOU   Jaason Holder (WI allrounder, rare) R524 A15.41 SR127.80 W66 E8.12 C27
+  YOU   Rachiin Ravindra (NZ allrounder, common) R309 A17.16 SR127.68 W13 E6.58 C12
+COACH (on-screen hint): Over 2 brings the Boss's stars. The score carries — bank a big lead in over 1, then lose small.
+STARS: 1 win · 2 win by 8+ · 3 also win 7+ balls
+REWARD: 200 coins, 40 XP, Club Pack, the rival captain-card Jaason Holder, unlocks Aggro Alley pitch + card back + 'Wow' emote
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 29-20 and 12/12 re-deals; mid-skill bot wins 78%
+INTENT: BOSS: two overs on aggregate with a fresh hand each over, and a Super Over if the 12 balls finish level. Aha: the totals carry, so a 6-run lead after over one lets you play the second over for small safe wins instead of chasing.
+MEASURE L10: casual 0.860 skilled 0.993 | competent W36-9*3 W33-15*3 W27-21*1 W42-8*3 W37-11*3 W39-8*3 | stars(0/1/2/3) skilled 2%/11%/3%/85% casual 12%/28%/7%/54%
+=== L11 Neon Nets Ninjas
+CH2 TEACH · RIVAL Neon Nets Ninjas (balanced AI, skill 0.33) · you call balls 1,3,5 · rival calls 2,4,6
+RULES: plain T20 (no weights) · stances: Aggressive (win x2 / loss +2 & wicket) · Safe (win cap 2 / loss 1) · dead-heat ball → 2-run pot for the next ball's winner · all out at 2 wickets · level totals after 6 balls → 3-ball Super Over · fixture squad fixed (teach unit)
+OVER 1 [T20I]
+  RIVAL Lockiee Ferguson (NZ pacer, common) R29 A3.62 SR80.55 W64 E7.10 C13
+  RIVAL Haaris Rauf (PAK pacer, common) R108 A9.00 SR105.88 W113 E8.30 C22
+  RIVAL Keshav Maharaaj (SA spinner, common) R103 A11.44 SR89.56 W38 E7.33 C14
+  RIVAL Sachinn Tendulkaar (IND opener, epic) R10 A10.00 SR83.33 W1 E8.00 C1
+  RIVAL Joffra Archer (ENG pacer, common) R27 A6.75 SR96.42 W23 E7.59 C4
+  RIVAL Mustafizzur Rahman (BAN pacer, common) R66 A3.88 SR70.00 W136 E7.35 C18
+  YOU   Kumaar Sangakkaara (SL keeper, legendary) R1382 A31.40 SR119.55 W0 E— C25
+  YOU   Mohammad Rizwaan (PAK keeper, epic) R3414 A47.41 SR125.37 W0 E— C71
+  YOU   Joe Roott (ENG anchor, epic) R893 A35.72 SR126.30 W6 E8.79 C18
+  YOU   Glenn Maxwel (AUS finisher, epic) R2754 A29.94 SR155.09 W47 E7.86 C51
+  YOU   Aadam Gilkrist (AUS keeper, legendary) R272 A22.66 SR141.66 W0 E— C17
+  YOU   Mohammaad Nabi (AFG allrounder, rare) R2300 A22.00 SR138.10 W99 E7.20 C65
+STARS: 1 win · 2 win by 8+ · 3 also 2+ aggressive wins
+REWARD: 106 coins, 42 XP · 3rd star: their star card Haaris Rauf for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 32-20 and 12/12 re-deals; mid-skill bot wins 75%
+INTENT: TEACH Aggressive (swipe up): a win pays DOUBLE, a loss gives them +2 and costs a wicket — and two wickets is all out. Every Ninja strikes under 115. Aha: go aggressive only on a stat you cannot lose; Strike Rate against this deck is a locked double.
+MEASURE L11: casual 0.953 skilled 0.987 | competent W38-12*3 W39-7*3 W40-12*3 W36-20*3 W38-1*3 W36-20*3 | stars(0/1/2/3) skilled 1%/3%/0%/97% casual 7%/12%/4%/77%

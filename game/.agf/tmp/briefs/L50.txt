@@ -1,0 +1,36 @@
+UNIT L50 (playtest: casual 0.593, skilled 0.933, careless 0.167)
+CH5 BOSS · RIVAL Ringmaster's Ring (gambler AI, skill 0.60) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive on any number above the game's median, else Normal (honest: loud = strong)
+RULES: plain T20 (no weights) · stances · Wildcard x1/over · MEGA POT: dead-heat balls stack 2 runs each, up to 8, and carry across overs · 2 overs on aggregate, level totals → 3-ball Super Over · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL Shimron Hetmyre R912 A21.20 SR124.20 W0 E— C26
+  RIVAL Joss Buttler R3532 A35.32 SR147.30 W0 E— C86
+  RIVAL Devoon Conway R1408 A38.05 SR127.76 W0 E— C32
+  RIVAL Timm Southee R303 A11.22 SR138.99 W164 E8.00 C65
+  RIVAL Trentt Boult R58 A8.28 SR90.62 W83 E7.68 C22
+  RIVAL Benn Stokes R585 A23.40 SR136.29 W26 E8.76 C20
+  YOU   Charrith Asalanka R1230 A25.63 SR125.00 W8 E8.00 C25
+  YOU   AyBee de Villyers R1672 A26.12 SR135.16 W0 E— C65
+  YOU   Mahayla Jayavardene R1493 A31.76 SR133.18 W0 E— C14
+  YOU   Kriss Gayl R1899 A27.92 SR137.50 W20 E7.12 C20
+  YOU   Matheesha Pathirane R6 A2.00 SR40.00 W24 E8.90 C3
+  YOU   Jaason Holder R524 A15.41 SR127.80 W66 E8.12 C27
+OVER 2 [T20I]
+  RIVAL Tamiim Iqbal R1758 A24.08 SR116.96 W0 E— C18
+  RIVAL MS Dhonni R1617 A37.60 SR126.13 W0 E— C57
+  RIVAL Mehidyy Hasan Miraz R450 A20.45 SR110.00 W22 E7.00 C10
+  RIVAL Wanindu Hasarange R803 A14.09 SR124.49 W125 E6.91 C20
+  RIVAL Benn Stokes R585 A23.40 SR136.29 W26 E8.76 C20
+  RIVAL Mitchel Marsh R1785 A33.05 SR133.81 W13 E8.04 C23
+  YOU   Mahayla Jayavardene R1493 A31.76 SR133.18 W0 E— C14
+  YOU   Pathum Nissaanka R1900 A29.69 SR122.80 W0 E— C15
+  YOU   Adaam Zampa R52 A7.42 SR104.00 W127 E6.99 C19
+  YOU   Tasskin Ahmed R100 A8.33 SR100.00 W80 E7.50 C12
+  YOU   Dwayn Braavo R1255 A22.01 SR115.36 W78 E8.29 C40
+  YOU   Jaason Holder R524 A15.41 SR127.80 W66 E8.12 C27
+COACH (on-screen hint): A pot left at the end of over 1 goes to the winner of ball 1 of over 2 — and that's your call.
+STARS: 1 win · 2 win by 8+ · 3 also no wickets lost
+REWARD: 440 coins, 120 XP, Pro Pack, the rival captain-card Joss Buttler · 3rd star: their star card Trentt Boult for your album, unlocks Grand Super Series pitch + card back + 'Cheer' emote
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 63-38 and 11/12 re-deals; mid-skill bot wins 64%
+MECHANICS: wildcard swap, mega pot, two-over aggregate
+CURRENT INTENT (may be STALE — written for an older deck): BOSS: two overs on aggregate with a Wildcard each over and a Mega Pot that CARRIES from over one into over two — fog is off, so the pot is the one headline. Over 1 they hold Buttler (Runs 3532, SR 147), Conway (Average 38.1) and Southee (164 wickets); over 2 Dhonni (Average 37.6), Marsh and Hasarange (125 wickets, Economy 6.91). Aha: ties come from non-bowler v non-bowler Wickets/Economy calls (de Villyers or Jayavardene v Hetmyre, Buttler, Conway; Jayavardene or Nissaanka v Tamiim, Dhonni). A pot left at the end of over one goes to whoever wins ball one of over two — YOUR call — so stack it late in over one and lead over two with Zampa's 127 wickets, which beat all six.

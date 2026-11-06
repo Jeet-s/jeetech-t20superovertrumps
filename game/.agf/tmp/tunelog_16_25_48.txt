@@ -1,0 +1,3 @@
+L16 target 0.82 → casual 0.85 skilled 0.99 det true (15s)
+L25 target 0.80 → casual 0.83 skilled 0.95 det true (15s)
+L48 target 0.68 → casual 0.67 skilled 0.95 det true (13s)

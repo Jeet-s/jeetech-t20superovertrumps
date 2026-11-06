@@ -1,0 +1,22 @@
+UNIT L18 (playtest: casual 0.78, skilled 0.98, careless 0.44)
+CH2 SPIKE · RIVAL Backstreet Bandits (baiter AI, skill 0.20) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): sandbags: Safe on a weak number (bottom 60%), Aggressive on a strong one; leads with its weakest card
+RULES: plain T20 (no weights) · stances · level totals after 6 balls → 3-ball Super Over · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL Shai Hoppe R1150 A28.75 SR129.50 W0 E— C18
+  RIVAL Rahmannullah Gurbaz R1770 A25.29 SR128.30 W0 E— C30
+  RIVAL Veerender Sehwaag R394 A21.88 SR145.38 W0 E— C3
+  RIVAL Mitchel Marsh R1785 A33.05 SR133.81 W13 E8.04 C23
+  RIVAL Shadaab Khan R735 A17.09 SR137.00 W112 E7.30 C45
+  RIVAL Rachiin Ravindra R309 A17.16 SR127.68 W13 E6.58 C12
+  YOU   Towhidd Hridoy R750 A26.00 SR120.00 W0 E— C15
+  YOU   Kriss Gayl R1899 A27.92 SR137.50 W20 E7.12 C20
+  YOU   Kevin Peeter-sen R1176 A37.93 SR141.51 W1 E8.15 C14
+  YOU   Joshh Hazlewood R24 A6.00 SR85.71 W76 E7.32 C15
+  YOU   Arshdeep Singhh R70 A8.75 SR106.06 W99 E8.29 C15
+  YOU   Shoayb Akhtar R25 A8.33 SR147.05 W19 E7.13 C2
+STARS: 1 win · 2 win by 8+ · 3 also win 4+ balls
+REWARD: 153 coins, 56 XP, Club Pack · 3rd star: their star card Shadaab Khan for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 35-14 and 12/12 re-deals; mid-skill bot wins 79%
+MECHANICS: sandbagging rival, safe stance, card counting
+CURRENT INTENT (may be STALE — written for an older deck): SPIKE: the Bandits SANDBAG. They lead their calls with their weakest cards swiped Safe, so beating them earns you a single, and keep every ace to answer YOUR calls. Aha: don't spend an ace on a 1-run Safe ball — answer with your cheapest winner or concede it, count their aces out, and play Safe on your own calls while those aces are still in hand.

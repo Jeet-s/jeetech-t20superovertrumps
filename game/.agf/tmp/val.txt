@@ -1,0 +1,65 @@
+
+> game-runtime-rn@1.0.0 validate
+> tsx scripts/validate.ts
+
+L1 Lanepur Lancers          competent W 31-0 (12/12) · mid-skill win 100%
+L2 Chowk Street Chums       competent W 16-8 (12/12) · mid-skill win 96%
+L3 Rooftop Rovers           competent W 14-4 (12/12) · mid-skill win 93%
+L4 Bazaar Bashers           competent W 19-5 (12/12) · mid-skill win 90%
+L5 Tie Lane Twins           competent W 10-10 (12/12) · mid-skill win 82%
+L6 Tiffin Town Tumblers     competent W 16-4 (12/12) · mid-skill win 92%
+L7 Sunday Scramblers        competent W 27-3 (12/12) · mid-skill win 99%
+L8 Monsoon Mavericks        competent W 23-3 (11/12) · mid-skill win 89%
+L9 Backyard Bowling Club    competent W 16-11 (12/12) · mid-skill win 87%
+L10 Gullyvale Bosses         competent W 36-9 (12/12) · mid-skill win 88%
+L11 Neon Nets Ninjas         competent W 43-0 (12/12) · mid-skill win 97%
+L12 Flashpoint Foxes         competent W 41-14 (12/12) · mid-skill win 88%
+L13 Shieldwall Sentinels     competent W 35-12 (12/12) · mid-skill win 83%
+L14 Pace Alley Panthers      competent W 34-8 (12/12) · mid-skill win 84%
+L15 Spinwheel Syndicate      competent W 27-12 (12/12) · mid-skill win 78%
+L16 Sudden Swing Strollers   competent W 12-12 (12/12) · mid-skill win 85%
+L17 Night Lounge Loungers    competent W 36-12 (12/12) · mid-skill win 89%
+L18 Backstreet Bandits       competent W 35-14 (12/12) · mid-skill win 79%
+L19 Run Rush Rascals         competent W 24-6 (12/12) · mid-skill win 90%
+L20 Inferno Express          competent W 48-41 (11/12) · mid-skill win 66%
+L21 Pavilion Patrons         competent W 36-22 (12/12) · mid-skill win 79%
+L22 Golden Hour Guild        competent W 36-26 (12/12) · mid-skill win 71%
+L23 Long Room Lords          competent W 26-10 (12/12) · mid-skill win 69%
+L24 Third Eye Club           competent W 27-12 (12/12) · mid-skill win 79%
+L25 Replay Rangers           competent W 14-14 (12/12) · mid-skill win 83%
+L26 Chase Chamber            competent W 30-24 (12/12) · mid-skill win 73%
+L27 Teatime Tinkers          competent W 37-6 (12/12) · mid-skill win 93%
+L28 Circle Force             competent W 32-12 (12/12) · mid-skill win 64%
+L29 Double Rush Dragons      competent W 34-24 (11/12) · mid-skill win 65%
+L30 Grand Pavilion Guard     competent W 78-23 (12/12) · mid-skill win 72%
+L31 Gatehouse Gallopers      competent W 28-8 (12/12) · mid-skill win 74%
+L32 Rampart Regiment         competent W 22-9 (12/12) · mid-skill win 75%
+L33 Citadel Stoics           competent W 26-10 (12/12) · mid-skill win 70%
+L34 Captain's Keep           competent W 32-12 (12/12) · mid-skill win 68%
+L35 Old Guard Garrison       competent W 14-11 (12/12) · mid-skill win 75%
+L36 Drawbridge Dashers       competent W 18-12 (12/12) · mid-skill win 76%
+L37 Courtyard Casuals        competent W 28-10 (12/12) · mid-skill win 91%
+L38 Turret Turners           competent W 47-10 (11/12) · mid-skill win 73%
+L39 Twin Tower Watch         competent W 55-31 (12/12) · mid-skill win 77%
+L40 Fortress Marshals        competent W 82-40 (12/12) · mid-skill win 70%
+L41 Mist Carnival            competent W 27-17 (12/12) · mid-skill win 63%
+L42 Mirror Maze Circus       competent W 29-14 (12/12) · mid-skill win 57%
+L43 Hall of Swaps            competent W 26-12 (11/12) · mid-skill win 66%
+L44 Carousel Switchers       competent W 32-16 (12/12) · mid-skill win 78%
+L45 Jackpot Jugglers         competent W 24-18 (11/12) · mid-skill win 68%
+L46 Fog & Swap Fair          competent W 19-4 (12/12) · mid-skill win 77%
+L47 Candyfloss Crew          competent W 18-12 (12/12) · mid-skill win 71%
+L48 Midnight Mist Parade     competent W 28-11 (11/12) · mid-skill win 76%
+L49 Topsy Turvy Troupe       competent W 36-16 (12/12) · mid-skill win 56%
+L50 Ringmaster's Ring        competent W 63-38 (11/12) · mid-skill win 64%
+L51 Harbour City Hawks       competent W 38-22 (11/12) · mid-skill win 67%
+L52 Hilltop Comets           competent W 32-16 (12/12) · mid-skill win 67%
+L53 Riverside Regents        competent W 21-0 (11/12) · mid-skill win 76%
+L54 Summit Smashers          competent W 36-17 (12/12) · mid-skill win 60%
+L55 Lantern Lane Lads        competent W 26-8 (12/12) · mid-skill win 85%
+L56 Skyline Chasers          competent W 27-12 (12/12) · mid-skill win 61%
+L57 Dune Runners             competent W 27-26 (12/12) · mid-skill win 67%
+L58 Coastline Climbers       competent W 24-24 (11/12) · mid-skill win 61%
+L59 Floodlight Phantoms      competent W 108-48 (12/12) · mid-skill win 63%
+L60 Grand Series Champions   competent W 96-57 (12/12) · mid-skill win 49%
+{"levels":60,"solvable":60,"difficulty":[0,0.04,0.07,0.1,0.18,0.08,0.01,0.11,0.13,0.12,0.03,0.12,0.17,0.16,0.22,0.15,0.11,0.21,0.1,0.34,0.21,0.29,0.31,0.21,0.17,0.27,0.07,0.36,0.35,0.28,0.26,0.25,0.3,0.32,0.25,0.24,0.09,0.27,0.23,0.3,0.37,0.43,0.34,0.22,0.32,0.23,0.29,0.24,0.44,0.36,0.33,0.33,0.24,0.4,0.15,0.39,0.33,0.39,0.37,0.51]}

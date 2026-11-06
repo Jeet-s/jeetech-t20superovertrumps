@@ -1,0 +1,22 @@
+UNIT L33 (playtest: casual 0.727, skilled 0.92, careless 0.4)
+CH4 TEACH · RIVAL Citadel Stoics (balanced AI, skill 0.40) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive only on an ace number (top 15% of the game for that stat), Safe on a weak one (bottom 35%), else Normal
+RULES: format weights ON · stances · level totals after 6 balls → 3-ball Super Over · squad fixed
+OVER 1 [Test]
+  RIVAL Shakiib Al Hasan R4609 A37.78 SR59.00 W246 E3.09 C30
+  RIVAL Jamess Anderson R1353 A9.47 SR39.98 W704 E2.79 C112
+  RIVAL Ricki Ponting R13378 A51.85 SR58.72 W5 E2.81 C196
+  RIVAL Brendan MacCalum R6453 A38.64 SR64.60 W1 E3.01 C198
+  RIVAL Taijull Islam R1000 A13.00 SR40.00 W225 E2.90 C20
+  RIVAL Naseem Shaah R144 A7.57 SR40.33 W60 E3.71 C5
+  YOU   Mitchel Santner R1066 A26.00 SR46.96 W74 E2.83 C22
+  YOU   Harry Brookk R2281 A58.48 SR87.70 W1 E3.25 C18
+  YOU   Kuldeep Yaadav R248 A15.50 SR42.50 W56 E3.38 C4
+  YOU   Mahmudullaah R2914 A33.49 SR49.00 W43 E3.40 C38
+  YOU   Tamiim Iqbal R5134 A38.89 SR55.81 W0 E— C18
+  YOU   Dayvid Waarner R8786 A44.59 SR70.19 W4 E4.61 C91
+STARS: 1 win · 2 win by 8+ · 3 also win 4+ balls
+REWARD: 238 coins, 86 XP, Gully Pack · 3rd star: their star card Brendan MacCalum for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 26-10 and 12/12 re-deals; mid-skill bot wins 70%
+MECHANICS: Test weights
+CURRENT INTENT (may be STALE — written for an older deck): TEACH Test format: Test careers, Runs and Average pay x1.5 and Strike Rate is half-price. The Stoics are Test legends with mountains of runs. Aha: their Runs calls are unbeatable, so make yours on Average and Wickets, and never waste an ace on a Strike Rate ball.

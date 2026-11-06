@@ -1,0 +1,22 @@
+UNIT L7 (playtest: casual 1, skilled 1, careless 0.967)
+CH1 BREATHER · RIVAL Sunday Scramblers (balanced AI, skill 0.28) · you call balls 1,3,5 · rival calls 2,4,6
+RULES: plain T20 (no weights) · level totals after 6 balls → 3-ball Super Over · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL Mitchel Starc R99 A9.00 SR104.21 W79 E7.74 C20
+  RIVAL Littoon Das R2490 A21.10 SR125.50 W0 E— C55
+  RIVAL Naseem Shaah R58 A7.25 SR107.40 W33 E8.05 C4
+  RIVAL Kemaar Roach R5 A5.00 SR62.50 W8 E8.30 C2
+  RIVAL Naveen Ul Haaq R80 A8.00 SR95.24 W67 E7.40 C10
+  RIVAL Mohammeed Shami R0 A0.00 SR0.00 W27 E8.94 C3
+  YOU   Darryl Mitchell R1473 A26.30 SR138.30 W9 E10.59 C38
+  YOU   Glennn Phillips R1929 A31.11 SR140.59 W6 E7.35 C51
+  YOU   Liam Livingstonee R1057 A24.58 SR145.39 W26 E8.26 C25
+  YOU   Dasun Shaanaka R1456 A18.43 SR123.10 W33 E8.30 C40
+  YOU   Keeron Pollarrd R1569 A25.30 SR135.14 W42 E8.36 C60
+  YOU   Rashhid Khan R520 A12.68 SR135.40 W161 E6.15 C20
+COACH (on-screen hint): 3 stars: three boundaries, each on a DIFFERENT stat. Which card should call which stat?
+STARS: 1 win · 2 win by 12+ · 3 also 3+ boundaries, each on a DIFFERENT stat
+REWARD: 82 coins, 34 XP · 3rd star: their star card Mitchel Starc for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 27-3 and 12/12 re-deals; mid-skill bot wins 99%
+MECHANICS: margin bands, stat pick
+CURRENT INTENT (may be STALE — written for an older deck): BREATHER score attack: a Sunday side of tail-enders with one trap, Littoon Das (Runs 2490, Catches 55). Winning is easy; 3 stars need THREE boundaries in six balls (any route); the cleanest: call Strike Rate with Livingstonee or Phillips and Catches with Pollarrd (a boundary against all but Das), and save Rashhid's 161 Wickets to answer their pacers' Wickets calls for a six.

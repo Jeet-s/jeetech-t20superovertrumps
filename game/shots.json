@@ -1,0 +1,11 @@
+{
+  "_note": "Store screenshot scenes. Each id is opened with <scheme>://shot/<id> and captured on an emulator (src/screenshots.tsx renders the real screens). 'home' is the title screen.",
+  "scenes": [
+    { "id": "home", "caption": "Cricket trump cards, 2-minute duels" },
+    { "id": "pick", "caption": "Pick the stat that wins" },
+    { "id": "aggressive", "caption": "Swipe up for double runs" },
+    { "id": "superover", "caption": "Win it in the Super Over" },
+    { "id": "packs", "caption": "Earn packs, never buy them" },
+    { "id": "ladder", "caption": "60 rivals across 6 chapters" }
+  ]
+}

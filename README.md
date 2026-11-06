@@ -1,7 +1,9 @@
-# JeeTech t20superovertrumps
+# Cricket Card Game
 
-Play package `com.jeetech.t20superovertrumps`. Built and maintained by the AI Game Factory.
+Cricket card game with 2-minute trump duels. Pick the best stat, win the over!
 
-- `docs/` — GitHub Pages: landing page, privacy policy, terms
-- `game/` — game source as shipped
-- `store/` — store listing + graphics
+- Google Play: https://play.google.com/store/apps/details?id=com.jeetech.t20superovertrumps
+- Privacy policy: https://jeet-s.github.io/jeetech-t20superovertrumps/privacy.html
+- Current version: 1.0.0
+
+`game/` is the Expo (React Native) source as shipped; `store/` holds the listing and graphics.

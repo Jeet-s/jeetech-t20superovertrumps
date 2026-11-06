@@ -1,0 +1,8 @@
+setf(55,'overs','one([S(2, "bigHitter"), S(1, "hitter"), S(3, "bowls")], [S(3, "soft"), S(3, "bowls")])')
+setf(55,'intent','"BREATHER before the run chases: a side of soft batters and ordinary bowlers, and a Free Hit + Powerplay to show off with — your big hitter\'s Strike Rate beats all six of them, so stack Powerplay + Free Hit + Aggressive on it for the chapter-3 quadruple and enjoy the fireworks."')
+setf(47,'overs','one([S(3, "hitter"), S(2, "bowls"), S(1, "bat", "noBowl")], [S(3, "soft"), S(1, "bat", "noBowl"), S(2, "bowls")])')
+setf(53,'rules','...STANCE, fog: true, review: 1, rivalPowerplay: true')
+setf(53,'intent','"MIXED: the sandbaggers are back, now in the fog with a Powerplay — and in the fog they BLUFF: weak cards swiped Aggressive to draw out your aces, strong cards played quietly (and Powerplayed). Aha: invert the read — a loud fogged call is a cheap card to beat with a cheap card; a quiet Powerplayed one is an ace worth your best answer, and your Review."')
+setf(53,'mechanics','["bluffing rival", "fog of war", "review", "rival powerplay"]')
+setf(58,'rules','...STANCE, target: 30, maxWickets: 2, powerplay: 1, review: 1')
+setf(58,'intent','"SPIKE — HARD CHASE 3: 30 off 6, two wickets, Powerplay + Review. Aha: Powerplay + aggressive on two sure balls is 4x the band twice; Review is your third wicket — swipe on the brave ball because a lost wicket can come back."')

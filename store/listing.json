@@ -1,0 +1,39 @@
+{
+  "aso": {
+    "primary": "cricket card game",
+    "problems": [
+      "full_description uses the primary keyword \"cricket card game\" only 2× (aim for 3–5, naturally)"
+    ],
+    "secondary": [
+      "cricket card battle",
+      "trump cards game",
+      "t20 cricket card game",
+      "cricket cards online",
+      "cricket trump cards"
+    ]
+  },
+  "title": "Cricket Card Game",
+  "category": "Card",
+  "keywords": [
+    "cricket card game",
+    "cricket card games",
+    "cricket trump card game",
+    "cricket trump cards",
+    "trump cards game",
+    "cricket card battle",
+    "cricket cards online",
+    "t20 cricket card game"
+  ],
+  "release_notes": "First release: 60 handcrafted rival duels across 6 chapters, 121 cricketer cards, Super Over tiebreaks, Aggressive and Safe stances, power cards, earned packs with visible odds, daily challenge, leaderboards and online play with friends.",
+  "content_rating": "Everyone",
+  "full_description": "Settle every cricket argument with this cricket card game built around quick stat duels. Read the card, pick the stat you trust, and win the over in about two minutes.\n\nHOW A DUEL WORKS\nEach duel is one over of 6 balls. Choose a stat on your cricketer card: Runs, Average, Strike Rate, Wickets, Economy or Catches. The higher value wins the ball, and the margin decides whether you score 1, 2, 3, 4 or 6. Tied stats go into a pot for the next ball. If the over ends level, a 3-ball Super Over decides it.\n\nRISK OR REWARD\n• Go Aggressive: win double runs, but a loss hands your rival extra runs and costs you a wicket\n• Play Safe: cap your gains, but limit the damage\n• Power cards: Free Hit, Review and Powerplay, one use each per duel\n• Wildcard stat swap to turn a lost ball around\n\n60 LEVELS ACROSS 6 CHAPTERS\nClimb a ladder of 60 handcrafted rival duels, from sunlit Gully Greens to the Grand Super Series. Every chapter adds new rules: stances, power cards, T20, ODI and Test format weights, Captain bonus, Fog of War, Mega Pots and boss duels. Earn up to 3 stars on every level.\n\nCOLLECT CRICKETER CARDS\n• 121 cartoon cricketer cards with career stats from T20I, ODI and Test cricket\n• Every card shows a \"stats as of\" date\n• Earn packs by playing, with the odds shown openly\n• Build your deck and pick your captain\n\nPLAY ONLINE OR OFFLINE\nChallenge friends in private rooms or play live against other players in this online cricket card game. Prefer solo? The ladder works offline. No account or login is needed, and your progress is saved on your device.\n\nKEEP COMING BACK\n• Daily challenge and streaks\n• Leaderboards\n• Coins to spend on cosmetic themes\n• Hints, colour-blind mode, sound and haptics settings\n• Rewarded ads only when you choose to watch them, and a Remove Ads purchase\n\nOne-hand touch controls make every duel easy to learn and hard to master. If you like a cricket trump card game with real tactics, tap a stat and play your first over today.\n\nStats are compiled from public records. This game is not affiliated with any league, board or team, and uses cartoon avatars with altered names.",
+  "screenshots_plan": [
+    "Pick the best stat, win",
+    "Swipe up to go aggressive",
+    "Survive the Super Over",
+    "Collect 121 cricketer cards",
+    "Climb 60 rival duels",
+    "Challenge friends online"
+  ],
+  "short_description": "Cricket card game with 2-minute trump duels. Pick the best stat, win the over!"
+}

@@ -1,0 +1,22 @@
+UNIT L19 (playtest: casual 0.813, skilled 0.993, careless 0.573)
+CH2 TWIST · RIVAL Run Rush Rascals (balanced AI, skill 0.50) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive only on an ace number (top 15% of the game for that stat), Safe on a weak one (bottom 35%), else Normal
+RULES: plain T20 (no weights) · stances · CHASE 16 runs (rival runs don't count) · all out at 2 wickets · squad swaps ≤2
+OVER 1 [T20I]
+  RIVAL Shai Hoppe R1150 A28.75 SR129.50 W0 E— C18
+  RIVAL KL Raahul R2265 A37.75 SR139.12 W0 E— C23
+  RIVAL Brendan MacCalum R2140 A35.66 SR136.21 W0 E— C36
+  RIVAL Mustafizzur Rahman R66 A3.88 SR70.00 W136 E7.35 C18
+  RIVAL Mitchel Starc R99 A9.00 SR104.21 W79 E7.74 C20
+  RIVAL Haaris Rauf R108 A9.00 SR105.88 W113 E8.30 C22
+  YOU   Glennn Phillips R1929 A31.11 SR140.59 W6 E7.35 C51
+  YOU   Phill Salt R1220 A35.88 SR165.20 W0 E— C14
+  YOU   Aiden Markkram R1367 A30.37 SR143.89 W13 E8.54 C37
+  YOU   Shoayb Akhtar R25 A8.33 SR147.05 W19 E7.13 C2
+  YOU   Darren Sammi R587 A15.44 SR120.53 W44 E7.25 C38
+  YOU   Liam Livingstonee R1057 A24.58 SR145.39 W26 E8.26 C25
+STARS: 1 win · 2 win by 4+ · 3 also no wickets lost
+REWARD: 154 coins, 58 XP · 3rd star: their star card KL Raahul for your album
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 24-6 (target 16) and 12/12 re-deals; mid-skill bot wins 90%
+MECHANICS: target chase, aggressive stance, wicket limit
+CURRENT INTENT (may be STALE — written for an older deck): TWIST: a target chase — 18 runs in 6 balls with two wickets in hand; their runs don't count. Aha: Safe is useless in a chase and aggressive doubles are the only way to 18, but two aggressive losses end it — pick the two or three balls you are sure of and double them.

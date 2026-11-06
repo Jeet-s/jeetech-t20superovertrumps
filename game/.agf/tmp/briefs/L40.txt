@@ -1,0 +1,35 @@
+UNIT L40 (playtest: casual 0.673, skilled 0.933, careless 0.227)
+CH4 BOSS · RIVAL Fortress Marshals (balanced AI, skill 0.70) · you call balls 1,3,5 · rival calls 2,4,6
+RIVAL SWIPE RULE (public, on the pre-duel card): Aggressive only on an ace number (top 15% of the game for that stat), Safe on a weak one (bottom 35%), else Normal
+RULES: format weights ON · stances · captains (+15% signature stat) · 2 overs on aggregate, level totals → 3-ball Super Over · squad swaps ≤2
+OVER 1 [ODI]
+  RIVAL Kumaar Sangakkaara R14234 A41.98 SR78.86 W0 E— C402
+  RIVAL Ricki Ponting R13704 A42.03 SR80.39 W3 E5.20 C160
+  RIVAL MS Dhonni R10773 A50.57 SR87.56 W1 E5.17 C321
+  RIVAL Darren Sammi R1871 A24.94 SR102.39 W81 E4.94 C70
+  RIVAL Shakiib Al Hasan R7570 A37.29 SR82.00 W317 E4.48 C58
+  RIVAL Kagisoo Rabada R401 A14.85 SR79.09 W168 E5.08 C41
+  YOU   Tamiim Iqbal R8357 A36.65 SR78.52 W0 E— C68
+  YOU   Najibullaah Zadran R1800 A29.03 SR90.50 W0 E— C30
+  YOU   Martin Guptil R7346 A41.73 SR87.29 W4 E5.39 C104
+  YOU   Joffra Archer R107 A10.70 SR85.60 W48 E5.21 C8
+  YOU   Azmatullah Omarzaii R1000 A38.46 SR98.00 W45 E5.40 C10
+  YOU   Daniel Vettoori R2253 A17.33 SR82.98 W305 E4.12 C88
+OVER 2 [Test]
+  RIVAL Traviss Head R3797 A41.27 SR64.00 W17 E4.47 C37
+  RIVAL AyBee de Villyers R8765 A50.66 SR54.51 W2 E3.05 C222
+  RIVAL Andrew Flintof R3845 A31.77 SR62.04 W226 E2.97 C52
+  RIVAL Aadam Gilkrist R5570 A47.60 SR81.95 W0 E— C379
+  RIVAL Joffra Archer R155 A9.68 SR45.20 W42 E3.08 C2
+  RIVAL Dwayn Braavo R2200 A31.42 SR43.16 W86 E3.31 C41
+  YOU   Mitchel Starc R2385 A21.68 SR69.40 W384 E3.40 C42
+  YOU   Mahayla Jayavardene R11814 A49.84 SR51.45 W6 E3.40 C205
+  YOU   Kanne Williamson R9276 A54.88 SR51.78 W30 E3.36 C90
+  YOU   Sachinn Tendulkaar R15921 A53.78 SR54.08 W46 E3.52 C115
+  YOU   Mohammad Amirr R751 A13.41 SR40.97 W119 E2.98 C5
+  YOU   Mutti-ah Muraali-tharan R1261 A11.67 SR70.21 W800 E2.47 C72
+STARS: 1 win · 2 win by 8+ · 3 also no wickets lost
+REWARD: 380 coins, 100 XP, Pro Pack, the rival captain-card Shakiib Al Hasan · 3rd star: their star card MS Dhonni for your album, unlocks Twist Town pitch + card back + 'Oops' emote
+PROOF (npm run validate, real engine): competent fair-information bot wins the first deal 82-40 and 12/12 re-deals; mid-skill bot wins 70%
+MECHANICS: ODI weights, Test weights, captain bonus, two-over aggregate
+CURRENT INTENT (may be STALE — written for an older deck): BOSS: two overs where the format changes EVERY ball (T20-ODI-Test, then reversed), with captains on both sides. Aha: your captain's boost only fires on its signature stat in the ball's format — captain a card whose best stat is the same in all three formats (a bowler's Wickets, an anchor's Average) and plan which ball each card plays.
